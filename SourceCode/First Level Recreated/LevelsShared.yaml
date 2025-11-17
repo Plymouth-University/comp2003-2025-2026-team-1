@@ -1,0 +1,193 @@
+fileProperties:
+  creatorName: Your name here.
+
+sceneName: EmptyWorld
+
+grid:
+
+gridObjects:
+  gm: [ gm, delay ]
+
+objectDefinitions:
+
+  # Old style players.  These are part of the base system but no longer used by the base game.
+  # Use them to see old flip-book versions of the players.
+  #p1: { mapObject: Player 1, mods: [ Move, Act, Throw ] }
+  #p2: { mapObject: Player 2, mods: [ Move, Act, Throw ] }
+  #p3: { mapObject: Player 3, mods: [ Move, Act, Throw ] }
+  #p4: { mapObject: Player 4, mods: [ Move, Act, Throw ] }
+
+  # Players.
+  # You can use any GLB, Asset Bundle prefab, 2D texture for your players.
+  # At the time of writing, the only requirement is the correct tags.
+  playerBase3D:
+    mapObject: Custom # N.b. can only use "Custom" here as yet (e.g. not Light)
+    mods: [ Move, Act, Throw, ]
+    tags:
+      - animated
+      - player
+      - blocksThrow
+      - blocksMove
+      - cameraTarget
+      - carrier # Need to make this optional
+      - thrower # Need to make this optional
+      - catcher # Need to make this optional
+    data:
+      CameraTargetRadius: 1.5
+    animationMappings:
+      - topic: 'state.player'
+        data: 'Idle'
+        animations: [ !Animation { animationDefinitionName: 'player_shared_idle' } ]
+      - topic: 'state.player'
+        data: 'Run'
+        animations: [ !Animation { animationDefinitionName: 'player_shared_run' } ]
+    animationDefinitions:
+      player_shared_idle: !GLBAnimation { animationName: 'Unanimated' }
+      player_shared_run:  !GLBAnimation { animationName: 'Hop' } # movement between squares happens for 0.8 seconds so that's the length of the move animation
+      move: !TweenAnimation # Workaround: default move animation expects a 'Walk' sound.
+        soundOnStart: ''
+        anims:
+          - duration: 0.8
+            endWithDestinationPos: true
+      collide: !TweenAnimation # Workaround: default 'collide' animation expects a 'ThrowPatient' sound so redefine without it.
+        soundOnStart: ''
+        # A three-phase animation of moving forward, bouncing off and settling back.
+        anims:
+          - duration: 0.3
+            endWithDestinationPos: false
+            curvePoints:
+            - {x: 0, y: 0, z: 0}
+            - {x: 1, y: 0, z: 0}
+            # 3 scale values which look good for 2D chars
+            # Disabled (tweenScale:false) since unneeded with animated 3D chars.
+            tweenScale: false
+            multiplyScale: false
+            scale: { x: 0.7, y: 1, z: 1 }
+
+          - duration: 0.4
+            endWithDestinationPos: false
+            # A little hop up and back in an arc
+            curvePoints:
+            - { x: -0.2, y: 0.9, z: 0 }
+            - { x: -0.4, y: 1.28, z: 0 }
+            - { x: -0.65, y: 1.36, z: 0 }
+            tweenScale: false
+            multiplyScale: false
+            scale: { x: 1.3, y: 1, z: 1 }
+
+          - duration: 0.3
+            endWithDestinationPos: false
+            # Finish the arc back to starting pos
+            curvePoints:
+            - { x: -0.07, y: -0.16, z: 0 }
+            - { x: -0.18, y: -0.52, z: 0 }
+            - { x: -0.25, y: -1.36, z: 0 }
+            tweenScale: false
+            multiplyScale: false
+            scale: { x: 1, y: 1, z: 1 }
+
+  p1:
+    base: [ playerBase3D ]
+    art3d:
+      - model: "Art/3D/Player.glb" # Change to individual player models and potentially move animation definitions here
+        scale: {x: 0.5, y: 0.5, z: 0.5}
+        rot: { y: 180 }
+
+  p2:
+    base: [ playerBase3D ]
+    art3d:
+      - model: "Art/3D/Player.glb"
+        scale: { x: 0.5, y: 0.5, z: 0.5 }
+        rot: { y: 180 }
+
+  p3:
+    base: [ playerBase3D ]
+    art3d:
+      - model: "Art/3D/Player.glb"
+        scale: { x: 0.5, y: 0.5, z: 0.5 }
+        rot: { y: 180 }
+
+  p4:
+    base: [ playerBase3D ]
+    art3d:
+      - model: "Art/3D/Player.glb"
+        scale: { x: 0.5, y: 0.5, z: 0.5 }
+        rot: { y: 180 }
+
+  # Game manager etc
+  gm: { mapObject: BlankStatic, mods: [ GameManager ] }
+  delay: { mapObject: BlankStatic, mods: [ { name: DelayPerTurn, data: { id: delayPerTurn, delayPerTurn: 1000 } } ] }
+
+  # Basic scenery for user customisation
+  f: { mapObject: Custom, dir: north, art3d: [ { model: "Art/3D/Floor.glb", pos: {x: 0, y: -0.27, z: 0}, rot: {x: 0, y: 0, z: 0}, scale: {x: 1, y: 1, z: 1} } ], tags: [ "floor", "static" ] }
+  wall_s: { mapObject: Custom, dir: east, art3d: [ { model: "Art/3D/Wall.glb", pos: {x: -1, y: -0.1, z: 0}, rot: {x: 0, y: 90, z: 0},scale: {x: 1, y: 1, z: 1} } ], tags: [ "blocksMove", "blocksThrow", "static" ] }
+  wall_e: { mapObject: Custom, dir: east, art3d: [ { model: "Art/3D/Wall.glb", pos: {x: 0, y: -0.1, z: -1}, rot: {x: 0, y: 0, z: 0},scale: {x: 1, y: 1, z: 1} } ], tags: [ "blocksMove", "blocksThrow", "static" ] }
+  # Floor plane (useful with EmptyWorld)
+  fp: { mapObject: Custom, dir: north, art3d: [ { model: "Art/3D/FloorPlane.glb", pos: { x: 0, y: -0.27, z: 0 }, } ], tags: [ "static" ] }
+  # Fake floor to force static camera slightly higher (unneeded with dynamic when working properly)
+  ff: { mapObject: Custom, tags: [ "floor", "static" ] }
+
+  lightBig:
+    mapObject: Light
+    dir: east
+    tags: [ "static", "PointLight" ]
+    data:
+      PointLightRange: 20
+      PointLightIntensity: 30
+      PointLightPos: { y: 5 }
+      PointLightColourText: 0xFFFFFF
+
+  # Prefabs
+
+  # 2D decal posters
+  poster_s: { mapObject: Custom, dir: north, art2d: [ { texture: "MakeYourOwnWithThisTemplate.png", displayType: decal, projectionDistance: 0.2, pos: { x: 0.85, y: -0.1, z: 0 }, scale: { x: 1.5, y: 1.5 } } ], tags: [ "decal", "static" ] }
+  poster_e: { mapObject: Custom, dir: west, art2d: [ { texture: "MakeYourOwnWithThisTemplate.png", displayType: decal, projectionDistance: 0.2, pos: { x: 0, y: -0.1, z: 0.85 }, scale: { x: 1.5, y: 1.5 } } ], tags: [ "decal", "static" ] }
+  # 2D decal rug
+  rugWriting: { mapObject: Custom, art2d: [ { texture: "MakeYourOwnWithThisTemplate.png", displayType: decal, projectionDistance: 0.1, pos: { x: 0.8, y: -1, z: 0.5 }, rot: { x: 90, y: 180, z: 0 }, scale: { x: 4, y: 4, z: 0 } } ], tags: [ "decal", "static" ] }
+
+  # Non-decal (flat 2D quad) floating in space
+  poster_s_2d: { mapObject: Custom, dir: south, art2d: [ { texture: "MakeYourOwnWithThisTemplate.png", pos: { x: 0, y: 1, z: 0 }, scale: { x: 2, y: 2 }, rot: { y: -45 } } ], tags: [ "static" ] }
+  
+  lever:
+    mapObject: Custom
+    art3d:
+    - model: "Art/3D/Lever-sample.glb"
+      scale: {x: 0.25, y: 0.25, z: 0.25}
+    tags: [ animated, blocksMove ]
+    mods: [ lever ]
+    animationMappings:
+      # topic is the message sent on the bus (by Lua).  See `Lever.lua` for the message.
+    - topic: 'p1-p2'
+      # the `animationDefinitionName` is the key in the `animationDefinitions` below
+      animations: [ !Animation { animationDefinitionName: "pos1-pos2" } ]
+    - topic: 'p2-p3'
+      animations: [ !Animation { animationDefinitionName: "pos2-pos3" } ]
+    - topic: 'p3-p2'
+      animations: [ !Animation { animationDefinitionName: "pos3-pos2" } ]
+    - topic: 'p2-p1'
+      animations: [ !Animation { animationDefinitionName: "pos2-pos1" } ]
+    animationDefinitions:
+      # the key is the `animationDefinitionName` above
+      # the `animationName` is the name of the animation in the GLB file
+      # set optional `wrapMode` to 'Once' for one-shot animations (or 'Loop' for looping)
+      pos1-pos2: !GLBAnimation { animationName: 'Pos1-Pos2', wrapMode: 'Once' }
+      pos2-pos3: !GLBAnimation { animationName: 'Pos2-Pos3', wrapMode: 'Once' }
+      pos3-pos2: !GLBAnimation { animationName: 'Pos3-Pos2', wrapMode: 'Once' }
+      pos2-pos1: !GLBAnimation { animationName: 'Pos2-Pos1', wrapMode: 'Once' }
+
+  # Can be defined here or, if you wish, in individual level files.
+  # Or set-up base values in LevelsShared.yaml and override here.
+  carryableBox:
+    mapObject: BlankMobile
+    art3d:
+      - model: "Art/3D/Cube.glb"
+        pos: { y: 1 }
+        scale: { x: 0.5, y: 0.5, z: 0.5 }
+    mods:
+      - name: Carryable
+    tags:
+      - carryable # This places a tag on the object which tells the system to make the thing carryable by built-in logic
+      - throwable # same but allows throwing
+      - blocksMove # This stops players moving through the object
+
+sounds:

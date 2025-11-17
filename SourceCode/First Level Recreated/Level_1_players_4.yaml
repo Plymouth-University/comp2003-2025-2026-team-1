@@ -1,0 +1,47 @@
+# For up-to-date documentation, see:
+# - https://www.mindfeastgames.com/MultiTurn/Docs/ModdersGuide.html
+# - https://www.mindfeastgames.com/MultiTurn/Docs/API.html
+# For more in-file docs, check Level_1_players_2.yaml
+
+include: [LevelsShared.yaml]
+
+fileProperties:
+  creatorName: Your name here!
+
+sceneName: PracticeWorld
+
+cameraSettings:
+  type: static
+  postProcessing:
+    depthOfField: { enabled: false }
+
+grid: |
+  XX,--,--,--,__,__,
+  //,A1,B1,C1,__,__,
+  //,A2,B2,C2,D2,__,
+  //,A3,B3,__,D3,__,
+  __,__,__,C5,__,__
+
+gridObjects:
+  XX: [ff, gm, fp]
+  --: [wall_s]
+  //: [wall_e]
+  A1: [f]
+  B1: [f]
+  C1: [f, p4]
+  D1:
+  A2: [f]
+  B2: [f, p3]
+  C2: [f]
+  D2: [f, carryableBox]
+  A3: [f, p1]
+  B3: [f]
+  C3:
+  D3: [f, p2]
+  C5: [lightBig]
+
+objectDefinitions:
+
+sounds:
+
+globalData:
