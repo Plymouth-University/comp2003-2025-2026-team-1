@@ -1,15 +1,14 @@
 fileProperties:
-  creatorName: Your name here.
+  creatorName: OscarK
 
 sceneName: EmptyWorld
 
 grid:
 
 gridObjects:
-  gm: [ gm, delay ]
+  gm: [gm, delay]
 
 objectDefinitions:
-
   # Old style players.  These are part of the base system but no longer used by the base game.
   # Use them to see old flip-book versions of the players.
   #p1: { mapObject: Player 1, mods: [ Move, Act, Throw ] }
@@ -20,160 +19,664 @@ objectDefinitions:
   # Players.
   # You can use any GLB, Asset Bundle prefab, 2D texture for your players.
   # At the time of writing, the only requirement is the correct tags.
-  playerBase3D:
-    mapObject: Custom # N.b. can only use "Custom" here as yet (e.g. not Light)
-    mods: [ Move, Act, Throw, ]
+  playerCharacterBase:
+    mapObject: Custom
+    dir: east
+    mods:
+      [
+        GridMoveMod-DirectCallingBased,
+        CoOpActMod-DirectCallingBased,
+        GridThrowMod-DirectCallingBased,
+        PlayerSquashAndRespawn,
+      ]
+    data: { specialWaitRandomChance: 0.2, CameraTargetRadius: 1 }
     tags:
-      - animated
-      - player
-      - blocksThrow
-      - blocksMove
-      - cameraTarget
-      - carrier # Need to make this optional
-      - thrower # Need to make this optional
-      - catcher # Need to make this optional
-    data:
-      CameraTargetRadius: 1.5
+      [
+        "player",
+        "animated",
+        "carrier",
+        "thrower",
+        "catcher",
+        "blocksThrow",
+        "blocksMove",
+        "knockbackTarget",
+        "cameraTarget",
+      ]
     animationMappings:
-      - topic: 'state.player'
-        data: 'Idle'
-        animations: [ !Animation { animationDefinitionName: 'player_shared_idle' } ]
-      - topic: 'state.player'
-        data: 'Run'
-        animations: [ !Animation { animationDefinitionName: 'player_shared_run' } ]
-    animationDefinitions:
-      player_shared_idle: !GLBAnimation { animationName: 'Unanimated' }
-      player_shared_run:  !GLBAnimation { animationName: 'Hop' } # movement between squares happens for 0.8 seconds so that's the length of the move animation
-      move: !TweenAnimation # Workaround: default move animation expects a 'Walk' sound.
-        soundOnStart: ''
-        anims:
-          - duration: 0.8
-            endWithDestinationPos: true
-      collide: !TweenAnimation # Workaround: default 'collide' animation expects a 'ThrowPatient' sound so redefine without it.
-        soundOnStart: ''
-        # A three-phase animation of moving forward, bouncing off and settling back.
-        anims:
-          - duration: 0.3
-            endWithDestinationPos: false
-            curvePoints:
-            - {x: 0, y: 0, z: 0}
-            - {x: 1, y: 0, z: 0}
-            # 3 scale values which look good for 2D chars
-            # Disabled (tweenScale:false) since unneeded with animated 3D chars.
-            tweenScale: false
-            multiplyScale: false
-            scale: { x: 0.7, y: 1, z: 1 }
+      - topic: "state.player"
+        data: "Idle"
+        animations:
+          [!Animation { animationDefinitionName: "player_shared_idle" }]
+      - topic: "state.player"
+        data: "IdleCarry"
+        animations:
+          [!Animation { animationDefinitionName: "player_shared_idleCarry" }]
+      - topic: "state.player"
+        data: "Run"
+        animations:
+          [!Animation { animationDefinitionName: "player_shared_run" }]
+      - topic: "state.player"
+        data: "RunCarry"
+        animations:
+          [!Animation { animationDefinitionName: "player_shared_runCarry" }]
+      - topic: "state.player"
+        data: "Bump"
+        animations:
+          [!Animation { animationDefinitionName: "player_shared_bump" }]
+      - topic: "state.player"
+        data: "BumpCarry"
+        animations:
+          [!Animation { animationDefinitionName: "player_shared_bumpCarry" }]
+      - topic: "state.player"
+        data: "Knocked"
+        animations:
+          [!Animation { animationDefinitionName: "player_shared_knocked" }]
+      - topic: "state.player"
+        data: "KnockedCarry"
+        animations:
+          [!Animation { animationDefinitionName: "player_shared_knockedCarry" }]
+      - topic: "player.stopCarryingWhileActing"
+        animations:
+          [
+            !Animation {
+              animationDefinitionName: "player_shared_idle",
+              initialDelayMin: 0.45,
+            },
+          ]
+      - topic: "carrier.carryStart"
+        animations:
+          [!Animation { animationDefinitionName: "player_shared_idleCarry" }]
+      - topic: "carrier.carryStop"
+        animations:
+          [!Animation { animationDefinitionName: "player_shared_idle" }]
+      - topic: "thrower.throw"
+        animations:
+          [!Animation { animationDefinitionName: "player_shared_throw" }]
+      - topic: "throwRebound"
+        animations:
+          [!Animation { animationDefinitionName: "player_shared_throw" }]
+      # Wait (normal)
+      - topic: "state.player"
+        data: "WaitNormal1"
+        animations:
+          [!Animation { animationDefinitionName: "player_shared_waitNormal1" }]
+      - topic: "state.player"
+        data: "WaitNormal2"
+        animations:
+          [!Animation { animationDefinitionName: "player_shared_waitNormal2" }]
+      - topic: "state.player"
+        data: "WaitNormal3"
+        animations:
+          [!Animation { animationDefinitionName: "player_shared_waitNormal3" }]
+      - topic: "state.player"
+        data: "WaitNormal4"
+        animations:
+          [!Animation { animationDefinitionName: "player_shared_waitNormal4" }]
+      - topic: "state.player"
+        data: "WaitNormal5"
+        animations:
+          [!Animation { animationDefinitionName: "player_shared_waitNormal5" }]
+      # Knockback tweens
+      - topic: "knockback.knockedAndBlocked"
+        animations:
+          [!Animation { animationDefinitionName: "tween_knockCollide" }]
+      - topic: "knockback.knockedChained"
+        animations:
+          [!Animation { animationDefinitionName: "tween_knockCollide" }]
 
-          - duration: 0.4
-            endWithDestinationPos: false
-            # A little hop up and back in an arc
-            curvePoints:
-            - { x: -0.2, y: 0.9, z: 0 }
-            - { x: -0.4, y: 1.28, z: 0 }
-            - { x: -0.65, y: 1.36, z: 0 }
-            tweenScale: false
-            multiplyScale: false
-            scale: { x: 1.3, y: 1, z: 1 }
-
-          - duration: 0.3
-            endWithDestinationPos: false
-            # Finish the arc back to starting pos
-            curvePoints:
-            - { x: -0.07, y: -0.16, z: 0 }
-            - { x: -0.18, y: -0.52, z: 0 }
-            - { x: -0.25, y: -1.36, z: 0 }
-            tweenScale: false
-            multiplyScale: false
-            scale: { x: 1, y: 1, z: 1 }
-
+  # Player Character 1 (Athlete)
   p1:
-    base: [ playerBase3D ]
-    art3d:
-      - model: "Art/3D/Player.glb" # Change to individual player models and potentially move animation definitions here
-        scale: {x: 0.5, y: 0.5, z: 0.5}
-        rot: { y: 180 }
+    base: ["playerCharacterBase"]
+    mods: [AthleteNarrativeConditions, NarrativeCharacter]
+    art2d:
+      - displayType: "spineAnimation"
+        textures: ["Athlete.png"]
+        normalMapTextures: ["Athlete_NormalMap.png"]
+        spineAtlas: "Athlete.atlas.txt"
+        spineSkeletonJSON: "Athlete.json"
+        scale: { x: 0.33, y: 0.33 }
+    animationMappings:
+      - topic: "state.player"
+        data: "WaitSpecial"
+        animations:
+          [!Animation { animationDefinitionName: "player_athlete_wait" }]
+      - topic: "state.player"
+        data: "IdleCarry"
+        animations:
+          [!Animation { animationDefinitionName: "player_athlete_idleCarry" }]
+      - topic: "carrier.carryStart"
+        animations:
+          [!Animation { animationDefinitionName: "player_athlete_idleCarry" }]
+      - topic: "state.player"
+        data: "RunCarry"
+        animations:
+          [!Animation { animationDefinitionName: "player_athlete_runCarry" }]
+      - topic: "state.player"
+        data: "BumpCarry"
+        animations:
+          [!Animation { animationDefinitionName: "player_athlete_bumpCarry" }]
+      - topic: "state.player"
+        data: "KnockedCarry"
+        animations:
+          [
+            !Animation {
+              animationDefinitionName: "player_athlete_knockedCarry",
+            },
+          ]
 
+  # Player Character 2 (Footballer)
   p2:
-    base: [ playerBase3D ]
-    art3d:
-      - model: "Art/3D/Player.glb"
-        scale: { x: 0.5, y: 0.5, z: 0.5 }
-        rot: { y: 180 }
+    base: ["playerCharacterBase"]
+    mods: [FootballerNarrativeConditions, NarrativeCharacter]
+    art2d:
+      - displayType: "spineAnimation"
+        textures: ["Footballer.png"]
+        normalMapTextures: ["Footballer_NormalMap.png"]
+        spineAtlas: "Footballer.atlas.txt"
+        spineSkeletonJSON: "Footballer.json"
+        scale: { x: 0.33, y: 0.33 }
+    animationMappings:
+      - topic: "state.player"
+        data: "WaitSpecial"
+        animations:
+          [!Animation { animationDefinitionName: "player_footballer_wait" }]
 
+  # Player Character 3 (Clown)
   p3:
-    base: [ playerBase3D ]
-    art3d:
-      - model: "Art/3D/Player.glb"
-        scale: { x: 0.5, y: 0.5, z: 0.5 }
-        rot: { y: 180 }
+    base: ["playerCharacterBase"]
+    mods: [ClownNarrativeConditions, NarrativeCharacter]
+    art2d:
+      - displayType: "spineAnimation"
+        textures: ["Clown.png"]
+        normalMapTextures: ["Clown_NormalMap.png"]
+        spineAtlas: "Clown.atlas.txt"
+        spineSkeletonJSON: "Clown.json"
+        scale: { x: 0.39, y: 0.39 }
+    animationMappings:
+      - topic: "state.player"
+        data: "WaitSpecial"
+        animations:
+          [!Animation { animationDefinitionName: "player_clown_wait" }]
+      - topic: "state.player"
+        data: "Bump"
+        animations:
+          [!Animation { animationDefinitionName: "player_clown_bump" }]
+      - topic: "state.player"
+        data: "Knocked"
+        animations:
+          [!Animation { animationDefinitionName: "player_clown_knocked" }]
+      # Clown only has 4 'normal wait' animations, so 'WaitNormal5' state plays the first one
+      - topic: "state.player"
+        data: "WaitNormal5"
+        animations:
+          [!Animation { animationDefinitionName: "player_shared_waitNormal1" }]
 
+  # Player Character 4 (Chef)
   p4:
-    base: [ playerBase3D ]
-    art3d:
-      - model: "Art/3D/Player.glb"
-        scale: { x: 0.5, y: 0.5, z: 0.5 }
-        rot: { y: 180 }
+    base: ["playerCharacterBase"]
+    mods: [ChefNarrativeConditions, NarrativeCharacter]
+    art2d:
+      - displayType: "spineAnimation"
+        textures: ["Chef.png"]
+        normalMapTextures: ["Chef_NormalMap.png"]
+        spineAtlas: "Chef.atlas.txt"
+        spineSkeletonJSON: "Chef.json"
+        scale: { x: 0.36, y: 0.36 }
+    animationMappings:
+      - topic: "state.player"
+        data: "WaitSpecial"
+        animations: [!Animation { animationDefinitionName: "player_chef_wait" }]
+      - topic: "state.player"
+        data: "IdleCarry"
+        animations:
+          [!Animation { animationDefinitionName: "player_chef_idleCarry" }]
+      - topic: "carrier.carryStart"
+        animations:
+          [!Animation { animationDefinitionName: "player_chef_idleCarry" }]
+
+  #NEW ADDED BELOW
+
+  bed_standard_base:
+    mapObject: Bed
+    mods: [Bed-DirectCallingBased, Shrinkable]
+    data:
+      stayShrunkRounds: 2
+      acceptsPatientTagged: "adultPatient"
+      CameraTargetRadius: 1
+    tags:
+      [
+        "bed",
+        "blocksMove",
+        "wobbleWhenBumped",
+        "animated",
+        "carryable",
+        "throwable",
+        "shrinkable",
+        "objectCountdown",
+        "cameraTarget",
+      ]
+  b_n: { base: ["bed_standard_base"], dir: north }
+  b_e: { base: ["bed_standard_base"], dir: east }
+  b_s: { base: ["bed_standard_base"], dir: south }
+  b_w: { base: ["bed_standard_base"], dir: west }
+
+  #Patient features and assets
+  # === Adult human patients ===
+
+  spinePatientBase:
+    mapObject: Custom
+    mods: [PatientHealth-DirectCallingBased]
+    data:
+      health: 5
+      need: syringe
+      displaySpawnTimerRounds: 2
+      CameraTargetRadius: 1
+    tags:
+      [
+        "patient",
+        "animated",
+        "carryable",
+        "throwable",
+        "knockbackTarget",
+        "objectCountdown",
+        "cameraTarget",
+      ]
+    animationMappings:
+      - topic: "state.patient"
+        data: "IdleWaitingForDoctor"
+        animations:
+          [!Animation { animationDefinitionName: "patient_shared_idle" }]
+      - topic: "state.patient"
+        data: "BeingCarried"
+        animations:
+          [!Animation { animationDefinitionName: "patient_shared_carried" }]
+      - topic: "state.patient"
+        data: "BeingThrown"
+        animations:
+          [!Animation { animationDefinitionName: "patient_shared_thrown" }]
+      - topic: "patient.falling"
+        animations:
+          [!Animation { animationDefinitionName: "patient_shared_falling" }]
+      - topic: "patient.bedFacing"
+        data: "North"
+        animations:
+          [
+            !Animation {
+              animationDefinitionName: "patient_shared_inBed_backView",
+            },
+          ]
+      - topic: "patient.bedFacing"
+        data: "East"
+        animations:
+          [
+            !Animation {
+              animationDefinitionName: "patient_shared_inBed_frontView",
+            },
+          ]
+      - topic: "patient.bedFacing"
+        data: "South"
+        animations:
+          [
+            !Animation {
+              animationDefinitionName: "patient_shared_inBed_frontView",
+            },
+          ]
+      - topic: "patient.bedFacing"
+        data: "West"
+        animations:
+          [
+            !Animation {
+              animationDefinitionName: "patient_shared_inBed_backView",
+            },
+          ]
+      - topic: "state.patient"
+        data: "CuringInProgress"
+        animations:
+          [
+            !Animation {
+              animationDefinitionName: "patient_shared_idle",
+              initialDelayMin: 0.7,
+            },
+          ]
+      - topic: "state.patient"
+        data: "Cured"
+        animations:
+          [!Animation { animationDefinitionName: "patient_shared_cured" }]
+      - topic: "state.patient"
+        data: "Dead"
+        animations:
+          [!Animation { animationDefinitionName: "patient_shared_dead" }]
+      # Knockback tweens
+      - topic: "knockback.knockedAndBlocked"
+        animations:
+          [!Animation { animationDefinitionName: "tween_knockCollide" }]
+      - topic: "knockback.knockedChained"
+        animations:
+          [!Animation { animationDefinitionName: "tween_knockCollide" }]
+
+  patient_edBanger_base:
+    base: ["spinePatientBase"]
+    data: { healthDisplayOffset: 0.2, healthDisplayCarryOffset: 1.0 }
+    tags: ["adultPatient"]
+    animationMappings:
+      - topic: "state.patient"
+        data: "BeingCarried"
+        animations:
+          [!Animation { animationDefinitionName: "patient_edBanger_carried" }]
+      - topic: "state.patient"
+        data: "BeingThrown"
+        animations:
+          [!Animation { animationDefinitionName: "patient_edBanger_carried" }]
+
+  patient_edBanger:
+    base: ["patient_edBanger_base"]
+    mods: [EdBangerNarrativeConditions, NarrativeCharacter]
+    art2d:
+      - displayType: "spineAnimation"
+        textures: ["Ed_Banger.png"]
+        normalMapTextures: ["Ed_Banger_NormalMap.png"]
+        spineAtlas: "Ed_Banger.atlas.txt"
+        spineSkeletonJSON: "Ed_Banger.json"
+        pos: { x: -0.3, y: 0.1, z: -0.3 }
+        scale: { x: 0.26, y: 0.26 }
+
+  patient_edBanger_alt1:
+    base: ["patient_edBanger_base"]
+    art2d:
+      - displayType: "spineAnimation"
+        textures: ["Ed_Banger.png"]
+        normalMapTextures: ["Ed_Banger_NormalMap.png"]
+        spineAtlas: "Ed_Banger.atlas.txt"
+        spineSkeletonJSON: "Ed_Banger_Alt1.json"
+        pos: { x: -0.3, y: 0.1, z: -0.3 }
+        scale: { x: 0.26, y: 0.26 }
+
+  patient_chris_base:
+    base: ["spinePatientBase"]
+    data: { healthDisplayOffset: 0.2, healthDisplayCarryOffset: 1.0 }
+    tags: ["adultPatient"]
+    animationMappings:
+      - topic: "state.patient"
+        data: "BeingCarried"
+        animations:
+          [!Animation { animationDefinitionName: "patient_chris_carried" }]
+      - topic: "state.patient"
+        data: "BeingThrown"
+        animations:
+          [!Animation { animationDefinitionName: "patient_chris_carried" }]
+
+  patient_chris:
+    base: ["patient_chris_base"]
+    mods: [ChrisNarrativeConditions, NarrativeCharacter]
+    art2d:
+      - displayType: "spineAnimation"
+        textures: ["Chris.png"]
+        normalMapTextures: ["Chris_NormalMap.png"]
+        spineAtlas: "Chris.atlas.txt"
+        spineSkeletonJSON: "Chris.json"
+        pos: { x: -0.3, y: 0.1, z: -0.3 }
+        scale: { x: 0.26, y: 0.26 }
+
+  patient_chris_alt1:
+    base: ["patient_chris_base"]
+    art2d:
+      - displayType: "spineAnimation"
+        textures: ["Chris.png"]
+        normalMapTextures: ["Chris_NormalMap.png"]
+        spineAtlas: "Chris.atlas.txt"
+        spineSkeletonJSON: "Chris_Alt1.json"
+        pos: { x: -0.3, y: 0.1, z: -0.3 }
+        scale: { x: 0.26, y: 0.26 }
+
+  patient_chris_alt2:
+    base: ["patient_chris_base"]
+    art2d:
+      - displayType: "spineAnimation"
+        textures: ["Chris.png"]
+        normalMapTextures: ["Chris_NormalMap.png"]
+        spineAtlas: "Chris.atlas.txt"
+        spineSkeletonJSON: "Chris_Alt2.json"
+        pos: { x: -0.3, y: 0.1, z: -0.3 }
+        scale: { x: 0.26, y: 0.26 }
+
+  #NEW ADDED ABOVE
 
   # Game manager etc
-  gm: { mapObject: BlankStatic, mods: [ GameManager ] }
-  delay: { mapObject: BlankStatic, mods: [ { name: DelayPerTurn, data: { id: delayPerTurn, delayPerTurn: 1000 } } ] }
+  gm: { mapObject: BlankStatic, mods: [GameManager] }
+  delay:
+    {
+      mapObject: BlankStatic,
+      mods:
+        [
+          {
+            name: DelayPerTurn,
+            data: { id: delayPerTurn, delayPerTurn: 1000 },
+          },
+        ],
+    }
 
   # Basic scenery for user customisation
-  f: { mapObject: Custom, dir: north, art3d: [ { model: "Art/3D/Floor.glb", pos: {x: 0, y: -0.27, z: 0}, rot: {x: 0, y: 0, z: 0}, scale: {x: 1, y: 1, z: 1} } ], tags: [ "floor", "static" ] }
-  wall_s: { mapObject: Custom, dir: east, art3d: [ { model: "Art/3D/Wall.glb", pos: {x: -1, y: -0.1, z: 0}, rot: {x: 0, y: 90, z: 0},scale: {x: 1, y: 1, z: 1} } ], tags: [ "blocksMove", "blocksThrow", "static" ] }
-  wall_e: { mapObject: Custom, dir: east, art3d: [ { model: "Art/3D/Wall.glb", pos: {x: 0, y: -0.1, z: -1}, rot: {x: 0, y: 0, z: 0},scale: {x: 1, y: 1, z: 1} } ], tags: [ "blocksMove", "blocksThrow", "static" ] }
+
+  #REPLACED BELOW
+  #The original assets here where just white tiles I've replaced them with their actual in game counterpart
+
+  f:
+    {
+      mapObject: Custom,
+      dir: north,
+      art3d:
+        [
+          {
+            model: "Art/3D/FloorTile.glb",
+            pos: { x: -1, y: -0.27, z: -1 },
+            rot: { x: 0, y: 180, z: 0 },
+            scale: { x: 1, y: 1, z: 1 },
+          },
+        ],
+      tags: ["floor", "static"],
+    }
+
+  wall_s:
+    {
+      mapObject: Custom,
+      dir: south,
+      art3d:
+        [
+          {
+            model: "Art/3D/Wall_Straight.glb",
+            pos: { x: -1, y: 0, z: -1 },
+            rot: { x: 0, y: 180, z: 0 },
+            scale: { x: 1, y: 1, z: 1 },
+          },
+        ],
+      tags: ["blocksMove", "blocksThrow", "static"],
+    }
+
+  wall_e:
+    {
+      mapObject: Custom,
+      dir: east,
+      art3d:
+        [
+          {
+            model: "Art/3D/Wall_Straight.glb",
+            pos: { x: 1, y: 0, z: -1 },
+            rot: { x: 0, y: 180, z: 0 },
+            scale: { x: 1, y: 1, z: 1 },
+          },
+        ],
+      tags: ["blocksMove", "blocksThrow", "static"],
+    }
+
+  #REPLACED ABOVE
+
   # Floor plane (useful with EmptyWorld)
-  fp: { mapObject: Custom, dir: north, art3d: [ { model: "Art/3D/FloorPlane.glb", pos: { x: 0, y: -0.27, z: 0 }, } ], tags: [ "static" ] }
+  fp:
+    {
+      mapObject: Custom,
+      dir: north,
+      art3d:
+        [{ model: "Art/3D/FloorPlane.glb", pos: { x: 0, y: -0.27, z: 0 } }],
+      tags: ["static"],
+    }
   # Fake floor to force static camera slightly higher (unneeded with dynamic when working properly)
-  ff: { mapObject: Custom, tags: [ "floor", "static" ] }
+  ff: { mapObject: Custom, tags: ["floor", "static"] }
 
   lightBig:
     mapObject: Light
     dir: east
-    tags: [ "static", "PointLight" ]
+    tags: ["static", "PointLight"]
     data:
       PointLightRange: 20
       PointLightIntensity: 30
       PointLightPos: { y: 5 }
       PointLightColourText: 0xFFFFFF
 
+  #NEW ADDED BELOW
+
+  #Asset taken  from level 1 wall corner. Had to add assets to files
+  wall_corner_se:
+    {
+      mapObject: Custom,
+      dir: south,
+      art3d:
+        [
+          {
+            model: "Art/3D/Wall_Corner_I_1.glb",
+            pos: { x: -1, y: 0, z: -1 },
+            rot: { x: 0, y: 180, z: 0 },
+            scale: { x: 1, y: 1, z: 1 },
+          },
+        ],
+      tags: ["blocksMove", "blocksThrow", "static"],
+    }
+  #Taken from level 1 seems to work without adding asset to files
+  lightbulb_e: { mapObject: LightBulb, dir: east, tags: ["static"] }
+  lightbulb_s: { mapObject: LightBulb, dir: south, tags: ["static"] }
+  window2_s:
+    {
+      mapObject: Custom,
+      dir: south,
+      art3d:
+        [
+          {
+            model: "Art/3D/Window_Wall_L.glb",
+            pos: { x: -1, y: 0, z: -1 },
+            rot: { x: 0, y: 180, z: 0 },
+            scale: { x: 1, y: 1, z: 1 },
+          },
+        ],
+      tags: ["blocksMove", "static"],
+    }
+
+  # Scrolling tickers
+  ticker_n: { mapObject: Ticker, dir: north, mods: [Ticker], tags: ["static"] }
+  ticker_w: { mapObject: Ticker, dir: west, mods: [Ticker], tags: ["static"] }
+
+  blankCameraTarget:
+    mapObject: BlankStatic
+    data:
+      CameraTargetRadius: 0.5
+    tags: ["cameraTarget", "blankCameraTarget"]
+
+  #NEW ADDED ABOVE
+
   # Prefabs
 
   # 2D decal posters
-  poster_s: { mapObject: Custom, dir: north, art2d: [ { texture: "MakeYourOwnWithThisTemplate.png", displayType: decal, projectionDistance: 0.2, pos: { x: 0.85, y: -0.1, z: 0 }, scale: { x: 1.5, y: 1.5 } } ], tags: [ "decal", "static" ] }
-  poster_e: { mapObject: Custom, dir: west, art2d: [ { texture: "MakeYourOwnWithThisTemplate.png", displayType: decal, projectionDistance: 0.2, pos: { x: 0, y: -0.1, z: 0.85 }, scale: { x: 1.5, y: 1.5 } } ], tags: [ "decal", "static" ] }
+  poster_s:
+    {
+      mapObject: Custom,
+      dir: north,
+      art2d:
+        [
+          {
+            texture: "MakeYourOwnWithThisTemplate.png",
+            displayType: decal,
+            projectionDistance: 0.2,
+            pos: { x: 0.85, y: -0.1, z: 0 },
+            scale: { x: 1.5, y: 1.5 },
+          },
+        ],
+      tags: ["decal", "static"],
+    }
+  poster_e:
+    {
+      mapObject: Custom,
+      dir: west,
+      art2d:
+        [
+          {
+            texture: "MakeYourOwnWithThisTemplate.png",
+            displayType: decal,
+            projectionDistance: 0.2,
+            pos: { x: 0, y: -0.1, z: 0.85 },
+            scale: { x: 1.5, y: 1.5 },
+          },
+        ],
+      tags: ["decal", "static"],
+    }
   # 2D decal rug
-  rugWriting: { mapObject: Custom, art2d: [ { texture: "MakeYourOwnWithThisTemplate.png", displayType: decal, projectionDistance: 0.1, pos: { x: 0.8, y: -1, z: 0.5 }, rot: { x: 90, y: 180, z: 0 }, scale: { x: 4, y: 4, z: 0 } } ], tags: [ "decal", "static" ] }
+  rugWriting:
+    {
+      mapObject: Custom,
+      art2d:
+        [
+          {
+            texture: "MakeYourOwnWithThisTemplate.png",
+            displayType: decal,
+            projectionDistance: 0.1,
+            pos: { x: 0.8, y: -1, z: 0.5 },
+            rot: { x: 90, y: 180, z: 0 },
+            scale: { x: 4, y: 4, z: 0 },
+          },
+        ],
+      tags: ["decal", "static"],
+    }
 
   # Non-decal (flat 2D quad) floating in space
-  poster_s_2d: { mapObject: Custom, dir: south, art2d: [ { texture: "MakeYourOwnWithThisTemplate.png", pos: { x: 0, y: 1, z: 0 }, scale: { x: 2, y: 2 }, rot: { y: -45 } } ], tags: [ "static" ] }
-  
+  poster_s_2d:
+    {
+      mapObject: Custom,
+      dir: south,
+      art2d:
+        [
+          {
+            texture: "MakeYourOwnWithThisTemplate.png",
+            pos: { x: 0, y: 1, z: 0 },
+            scale: { x: 2, y: 2 },
+            rot: { y: -45 },
+          },
+        ],
+      tags: ["static"],
+    }
+
   lever:
     mapObject: Custom
     art3d:
-    - model: "Art/3D/Lever-sample.glb"
-      scale: {x: 0.25, y: 0.25, z: 0.25}
-    tags: [ animated, blocksMove ]
-    mods: [ lever ]
+      - model: "Art/3D/Lever-sample.glb"
+        scale: { x: 0.25, y: 0.25, z: 0.25 }
+    tags: [animated, blocksMove]
+    mods: [lever]
     animationMappings:
       # topic is the message sent on the bus (by Lua).  See `Lever.lua` for the message.
-    - topic: 'p1-p2'
-      # the `animationDefinitionName` is the key in the `animationDefinitions` below
-      animations: [ !Animation { animationDefinitionName: "pos1-pos2" } ]
-    - topic: 'p2-p3'
-      animations: [ !Animation { animationDefinitionName: "pos2-pos3" } ]
-    - topic: 'p3-p2'
-      animations: [ !Animation { animationDefinitionName: "pos3-pos2" } ]
-    - topic: 'p2-p1'
-      animations: [ !Animation { animationDefinitionName: "pos2-pos1" } ]
+      - topic: "p1-p2"
+        # the `animationDefinitionName` is the key in the `animationDefinitions` below
+        animations: [!Animation { animationDefinitionName: "pos1-pos2" }]
+      - topic: "p2-p3"
+        animations: [!Animation { animationDefinitionName: "pos2-pos3" }]
+      - topic: "p3-p2"
+        animations: [!Animation { animationDefinitionName: "pos3-pos2" }]
+      - topic: "p2-p1"
+        animations: [!Animation { animationDefinitionName: "pos2-pos1" }]
     animationDefinitions:
       # the key is the `animationDefinitionName` above
       # the `animationName` is the name of the animation in the GLB file
       # set optional `wrapMode` to 'Once' for one-shot animations (or 'Loop' for looping)
-      pos1-pos2: !GLBAnimation { animationName: 'Pos1-Pos2', wrapMode: 'Once' }
-      pos2-pos3: !GLBAnimation { animationName: 'Pos2-Pos3', wrapMode: 'Once' }
-      pos3-pos2: !GLBAnimation { animationName: 'Pos3-Pos2', wrapMode: 'Once' }
-      pos2-pos1: !GLBAnimation { animationName: 'Pos2-Pos1', wrapMode: 'Once' }
+      pos1-pos2: !GLBAnimation { animationName: "Pos1-Pos2", wrapMode: "Once" }
+      pos2-pos3: !GLBAnimation { animationName: "Pos2-Pos3", wrapMode: "Once" }
+      pos3-pos2: !GLBAnimation { animationName: "Pos3-Pos2", wrapMode: "Once" }
+      pos2-pos1: !GLBAnimation { animationName: "Pos2-Pos1", wrapMode: "Once" }
 
   # Can be defined here or, if you wish, in individual level files.
   # Or set-up base values in LevelsShared.yaml and override here.

@@ -3,12 +3,12 @@
 # - https://www.mindfeastgames.com/MultiTurn/Docs/API.html
 # For more in-file docs, check Level_1_players_2.yaml
 
-include: [ LevelsShared.yaml ]
+include: [LevelsShared.yaml]
 
 fileProperties:
-  creatorName: Your name here!
+  creatorName: OscarK
 
-sceneName: EmptyWorld
+sceneName: PracticeWorld
 
 cameraSettings:
   type: static
@@ -16,32 +16,147 @@ cameraSettings:
     depthOfField: { enabled: false }
 
 grid: |
-  XX,--,--,--,__,__,
-  //,A1,B1,C1,__,__,
-  //,A2,B2,C2,D2,__,
-  //,A3,B3,__,D3,__,
-  __,__,__,C5,__,__
+  XX,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+
+  __,__,__,__,__,__,__,__, __,c1,d1,e1,f1,g1,h1,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,c2,d2,e2,f2,g2,h2,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, b3,c3,d3,e3,f3,g3,h3,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, b4,c4,d4,e4,f4,g4,h4,i4,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, b5,c5,d5,e5,f5,g5,h5,i5,j5, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, b6,c6,d6,e6,f6,g6,h6,i6,j6, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, b7,c7,d7,e7,f7,g7,h7,i7,j7, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, b8,c8,d8,e8,f8,g8,h8,i8,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__
 
 gridObjects:
-  XX: [ ff, gm, fp ]
-  --: [ wall_s ]
-  //: [ wall_e ]
-  A1: [ f, ]
-  B1: [ f ]
-  C1: [ f ]
-  D1:
-  A2: [ f,  ]
-  B2: [ f, p3 ]
-  C2: [ f,  ]
-  D2: [ f, carryableBox ]
-  A3: [ f, p1 ]
-  B3: [ f ]
-  C3:
-  D3: [ f, p2 ]
-  C5: [ lightBig ]
+  XX: [ff, gm, fp]
+
+  c1: [wall_corner_se, lightbulb_s]
+  d1: [window2_s]
+  e1: [wall_s, lightbulb_s]
+  f1: [wall_s, lightbulb_s]
+  g1: [window2_s]
+  h1: [wall_s, lightbulb_s]
+
+  #Removed decorations. This made it easier to make the level, less stuff to make directories for.
+
+  c2: [f]
+  d2: [f]
+  e2: [f]
+  f2: [f]
+  g2: [f]
+  h2: [f, b_s, { id: patient_edBanger, data: { id: pt1 } }]
+
+  b3: [wall_e, lightbulb_e]
+  c3: [f, b_s, { id: patient_chris, data: { id: pt2 } }]
+  d3: [f, lightBig]
+  e3: [f]
+  f3: [f]
+  g3: [f, lightBig]
+  h3: [f]
+
+  b4: [wall_e, lightbulb_e]
+  c4: [f]
+  d4: [f]
+  e4: [f]
+  f4: [f]
+  g4: [f]
+  h4: [f]
+  i4: [f]
+
+  b5: [wall_e, lightbulb_e, ticker_w]
+  c5: [f]
+  d5: [f]
+  e5: [f]
+  f5: [f]
+  g5: [f]
+  h5: [f]
+  i5: [f]
+  j5: [f]
+
+  b6: [wall_e, lightbulb_e]
+  c6: [f]
+  d6: [f]
+  e6: [f]
+  f6: [f]
+  g6: [f]
+  h6: [f, p3]
+  i6: [f]
+  j6: [f]
+
+  b7: [wall_e]
+  c7: [f]
+  d7: [f]
+  e7: [f, p1, lightBig]
+  f7: [f]
+  g7: [f, p2]
+  h7: [f, lightBig]
+  i7: [f]
+  j7: [f]
+
+  b8: [wall_e, lightbulb_e]
+  c8: [f]
+  d8: [f]
+  e8: [f]
+  f8: [f]
+  g8: [f]
+  h8: [f]
+  i8: [f, blankCameraTarget]
+
+  #Need to add background
 
 objectDefinitions:
+  # Can be defined here or, more likely, both here _and_ in LevelsShared.yaml
+  # Set-up base values in LevelsShared.yaml and override here.
+  power1:
+    mapObject: BlankMobile
+    art3d:
+      - model: "Art/3D/Sphere.glb"
+        pos: { y: 1 }
+        scale: { x: 0.5, y: 0.5, z: 0.6 }
+    art2d:
+      - texture: "MakeYourOwnWithThisTemplate.png"
+        displayType: decal
+        projectionDistance: 1
+        pos: { x: -0.5, y: 0.6, z: -0.5 }
+        rot: { x: 45, y: 135, z: 0 }
+        scale: { x: 0.7, y: 0.7, z: 1 }
+    mods:
+      - name: DestroyOwnerWhenPlayerEntersSquare
+
+  light_1:
+    mapObject: Light
+    dir: east
+    tags: ["static", "PointLight"]
+    data:
+      PointLightRange: 8
+      PointLightIntensity: 8
+      PointLightPos: { y: 1.5 }
+      # Format as specified in https://docs.unity3d.com/ScriptReference/ColorUtility.TryParseHtmlString.html
+      # Addition: Instead of starting with a '#', you can use 0x followed by the hex value (e.g. 0x00ff00 for green)
+      # If you do use the '#' format, ensure to enclose in quotation marks to prevent the '#' being interpreted as a comment.
+      # PointLightColourText: "#00ff00"
+      # PointLightColourText: green
+      PointLightColourText: 0x008000
 
 sounds:
+  # See CoOperation for examples using sound
 
 globalData:
+  pt1: { health: 8, need: pill }
+  pt2: { health: 8, need: pill }
