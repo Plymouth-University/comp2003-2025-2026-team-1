@@ -1,6 +1,6 @@
-# Meeting Minutes
+# Meeting log (in Minutes)
 
-| Date     | Description                           | Members      | Duration (minutes) |
+| Date     | Description                           | Members      | Duration (Minutes) |
 |----------|---------------------------------------|--------------|--------------------|
 | 13/11/25 | Initial requirements                  | All          | 75                 |
 | 17/11/25 | Debrief from client meeting           | All          | 135                |

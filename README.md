@@ -5,18 +5,19 @@ Authors: @davtheconquerer, @merv300, @horsepie, @birdsky24
 
 ## Proposed folder structure (Might not reflect the current stage of development)
 ```
-assets/                 # Contains images used in the repo (e.g. Trello screenshot)
-docs/                   # Documentation
-+-- README.md           # Overview and outline of documentation
-+-- meetingLogs.md      # Records of our meetings (in Minutes)
-+-- designDocument.md   # Contains details on our final design plan
-levels/                 # Level files
-+-- README.md           # Details on individual level files
-+-- generated/          # Output directory for algorithmically generated levels
-+-- final/              # Curated level files we have tested which match our requirements
-scripts/                # Python scripts used in the project (like validating YAML files)
-logs/                   # Chat logs and decleration of any AI usage
-AGENTS.md               # inital prompt provided to OpenCode agent
+assets/                     # Contains images used in the repo (e.g. Trello screenshots)
+docs/                       # Documentation
++-- README.md               # Overview and outline of documentation
++-- designDocument.md       # Contains details on our final design plan
++-- meetingLog.md           # Records of our meetings (in Minutes)
++-- trelloScreenshots.md    # Screenshots of our Trello plan
+levels/                     # Level files
++-- README.md               # Details on individual level files
++-- generated/              # Output directory for algorithmically generated levels
++-- final/                  # Curated level files we have tested which match our requirements
+scripts/                    # Python scripts used in the project (like validating YAML files)
+logs/                       # Chat logs and decleration of any AI usage
+AGENTS.md                   # inital prompt provided to OpenCode agent
 ```
 
 ## Proposed tools used
