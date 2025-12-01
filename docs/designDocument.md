@@ -7,7 +7,7 @@ This is a document detailing our plans and ideas for our COMP2003 project, focus
 To create an AI-assisted tool in order to create new levels which will in turn be manually selected by the team to include them in a later update for the game.
 
 ## Use of AI
-We have identfied two potential pathways for this project: 
+We have identified this as a potential pathway for this project:
 
 - AI Chatbot directly used to generate levels using hand-made levels as training/input. Generated levels could then be vetted and curated in order to find the most 'fun' ([Ollama](https://ollama.com/) could be used for local LLMs, eliminating reliance on cloud-based services).
 
