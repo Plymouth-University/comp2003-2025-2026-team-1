@@ -1,0 +1,129 @@
+fileProperties:
+  creatorName: Mind Feast Games
+
+sceneName: "UNUSED"
+
+grid: "UNUSED"
+
+gridObjects:
+  "UNUSED": "UNUSED"
+
+objectDefinitions:
+  # buyableBase is a base object which other buyable things 'inherit' from.
+  buyableBase:
+    mapObject: BlankMobile
+    mods: [ Buyable ]
+    data:
+    tags: [ "buyable" ]
+
+  # buyable items
+
+  buyable_flowers_white:
+    mapObject: Custom
+    data: { boughtItem: "flowers_white" }
+
+  buyable_shrinkRay_dispenser:
+    base: [ buyableBase ]
+    data: { boughtItem: "shrinkRay_dispenser", linkObjectsTagged: "displayWithShrinkRay" }
+
+  buyable_paintPot_blue:
+    base: [ buyableBase ]
+    data: { boughtItem: "paintPot_blue" }
+
+  buyable_paintPot_purple:
+    base: [ buyableBase ]
+    data: { boughtItem: "paintPot_purple" }
+
+  buyable_paintPot_red:
+    base: [ buyableBase ]
+    data: { boughtItem: "paintPot_red" }
+
+  buyable_paintPot_green:
+    base: [ buyableBase ]
+    data: { boughtItem: "paintPot_green" }
+
+  buyable_bed_upgrade1:
+    base: [ buyableBase ]
+    data: { boughtItem: "bed_upgrade1" }
+  buyable_bed_upgrade2:
+    base: [ buyableBase ]
+    data: { boughtItem: "bed_upgrade2", displayPriority: 2 }
+
+  buyable_bed_child_upgrade1:
+    base: [ buyableBase ]
+    data: { boughtItem: "bed_child_sw_upgrade1" }
+  buyable_bed_child_upgrade2:
+    base: [ buyableBase ]
+    data: { boughtItem: "bed_child_sw_upgrade2", displayPriority: 2 }
+
+  buyable_bed_pet_upgrade1:
+    base: [ buyableBase ]
+    data: { boughtItem: "bed_pet_upgrade1" }
+  buyable_bed_pet_upgrade2:
+    base: [ buyableBase ]
+    data: { boughtItem: "bed_pet_upgrade2", displayPriority: 2 }
+
+  buyable_pillcab_upgrade:
+    base: [ buyableBase ]
+    data: { boughtItem: "pillcab_closed_upgrade_s" }
+
+  buyable_applecab_upgrade:
+    base: [ buyableBase ]
+    data: { boughtItem: "applecab_upgrade_s" }
+
+  buyable_syringecab_upgrade:
+    base: [ buyableBase ]
+    data: { boughtItem: "syringecab_upgrade_s" }
+
+  # items that are spawned by above buyable items
+
+  shrinkRay_dispenser:
+    mapObject: Custom
+    dir: south
+    tags: [ "blocksMove", "animated", "bounceIn", "shrinkable", "carryable", "throwable", "objectCountdown" ]
+    mods:
+      - name: Shrinkable
+        data:
+          stayShrunkRounds: 2
+      - name: DispenseAutomatically
+        data:
+          spawnItemsOnStart: 0
+          items: [ "shrinkRay" ]
+          # logLevel: 9 # custom logging level
+    art3d:
+      - model: "Art/3D/ShrinkRayDispenser.glb"
+        rot: { y: 90 }
+
+  flowers_white:
+    base: [ buyableBase ]
+    art3d:
+      - model: "Art/3D/FloorPlant_5_D.glb"
+        scale: { x: 2, y: 2, z: 2 }
+
+  paintPot_blue:
+    mapObject: Custom
+    art3d:
+      - model: "PaintPot-blue.glb"
+        scale: { x: 2, y: 2, z: 2 }
+        rot: { y: 90 }
+
+  paintPot_purple:
+    mapObject: Custom
+    art3d:
+      - model: "PaintPot-purple.glb"
+        scale: { x: 2, y: 2, z: 2 }
+        rot: { y: 90 }
+
+  paintPot_red:
+    mapObject: Custom
+    art3d:
+      - model: "PaintPot-red.glb"
+        scale: { x: 2, y: 2, z: 2 }
+        rot: { y: 90 }
+
+  paintPot_green:
+    mapObject: Custom
+    art3d:
+      - model: "PaintPot-green.glb"
+        scale: { x: 2, y: 2, z: 2 }
+        rot: { y: 90 }
