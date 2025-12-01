@@ -6,7 +6,7 @@
 
 ## Sprint 2
 
-
+![Sprint 2 Image](../assets/sprint2trello.png)
 
 ## Sprint 3
 
