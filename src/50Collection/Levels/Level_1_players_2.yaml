@@ -1,0 +1,161 @@
+include: [LevelsShared.yaml]
+
+# Properties about the file like its creator
+fileProperties:
+  creatorName: OscarK
+
+# The Unity scene that will be loaded as background.  Leave this unmodified for now.
+sceneName: EmptyWorld
+
+cameraSettings:
+  postProcessing:
+    depthOfField:
+      { enabled: true, focusDistance: 69, focalLength: 300, aperture: 1 }
+  target:
+    screenTargetX: 0.6
+    screenTargetY: 0.6
+    deadZoneWidth: 1.0
+    deadZoneHeight: 1.0
+    frameProportion: 1.0
+    mininmumFOV: 12
+  position:
+    offset: { x: -45, y: 32, z: -45 }
+
+# For the dynamic camera, the settings you can adjust are
+#   for 'target':
+# screenTargetX: Horizontal screen position for camera target. 0.5 = centre. Higher value = further right on screen. Default = 0.5.
+# screenTargetY: Vertical screen position for camera target. 0.5 = centre. Higher value = lower on screen. Default = 0.5.
+# deadZoneWidth: Width of the area of the frame that the target will be kept inside. Default = 1.
+# deadZoneHeight: Height of the area of the frame that the target will be kept inside. Default = 1.
+# frameProportion: How much of the camera target should fill the screen. 0.5 = fill half screen, 1 = fill whole screen, etc. Default = 0.5.
+# mininmumFOV and maximumFOV:  Camera's field of view won't go below/above these values. Default = min 3, max 60.
+#   for 'position':
+# offset: For adjusting the position of the camera.
+
+grid: |
+  gm,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, 2b,__,__,__,2b,__,__,__,2b, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, 4c,__,__,__,__,__,__,4c,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,3h, __,__,__,__,3h,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,1b,__,__,__, __,__,__,__,__,__,__,__,__, __,__,3j,__,__,
+  __,__,__,__,__,__,__,7d, __,__,__,__,__,7a,7a,7g,7a, 7g,__,__,__,__,
+
+  __,__,__,__,__,__,__,7b, __,c1,d1,e1,f1,g1,h1,__,__, __,__,3j,__,__,
+  __,__,__,1b,__,__,__,7b, __,c2,d2,e2,f2,g2,h2,__,__, __,__,__,__,__,
+  __,__,__,__,__,4b,__,7b, b3,c3,d3,e3,f3,g3,h3,__,__, __,__,3j,__,__,
+  __,__,__,__,__,4a,__,7b, b4,c4,d4,e4,f4,g4,h4,i4,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,7b, b5,c5,d5,e5,f5,g5,h5,i5,j5, k5,__,3n,__,__,
+  __,__,__,__,__,__,__,7b, b6,c6,d6,e6,f6,g6,h6,i6,j6, k6,__,__,__,__,
+  __,__,__,__,__,__,__,7b, b7,c7,d7,e7,f7,g7,h7,i7,j7, k7,__,3j,__,__,
+  __,__,__,__,__,__,3h,7b, b8,c8,d8,e8,f8,g8,h8,i8,__, __,__,__,__,__,
+  1g,__,__,__,__,__,__,7b, __,__,__,__,__,__,__,__,__, 4b,__,3j,__,__,
+  __,__,__,__,__,__,__,7h, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+
+  __,__,__,__,__,__,__,7c, 7a,7g,7a,7a,7a,7a,7a,7a,7a, 7g,__,3i,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,4f,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,2b,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__
+
+gridObjects:
+  c1: [wall_corner_se, lightbulb_s]
+  d1: [window2_s]
+  e1: [wall_s, lightbulb_s]
+  f1: [wall_s, lightbulb_s]
+  g1: [window2_s]
+  h1: [wall_s, lightbulb_s]
+
+  #Removed decorations. This made it easier to make the level, less stuff to make directories for.
+
+  c2: [f]
+  d2: [f]
+  e2: [f]
+  f2: [f]
+  g2: [f]
+  h2: [f, b_s, { id: patient_edBanger, data: { id: pt1 } }]
+
+  b3: [wall_e, lightbulb_e]
+  c3: [f, b_s, { id: patient_chris, data: { id: pt2 } }]
+  d3: [f]
+  e3: [f]
+  f3: [f]
+  g3: [f]
+  h3: [f]
+
+  b4: [wall_e, lightbulb_e]
+  c4: [f]
+  d4: [f]
+  e4: [f]
+  f4: [f]
+  g4: [f]
+  h4: [f]
+  i4: [f]
+
+  b5: [wall_e, lightbulb_e, ticker_w]
+  c5: [f]
+  d5: [f]
+  e5: [f]
+  f5: [f]
+  g5: [f]
+  h5: [f]
+  i5: [f]
+  j5: [f]
+
+  b6: [wall_e, lightbulb_e]
+  c6: [f]
+  d6: [f]
+  e6: [f]
+  f6: [f]
+  g6: [f]
+  h6: [f]
+  i6: [f]
+  j6: [f]
+
+  b7: [wall_e]
+  c7: [f]
+  d7: [f]
+  e7: [f, p1]
+  f7: [f]
+  g7: [f, p2]
+  h7: [f]
+  i7: [f]
+  j7: [f]
+
+  b8: [wall_e, lightbulb_e]
+  c8: [f]
+  d8: [f]
+  e8: [f]
+  f8: [f]
+  g8: [f]
+  h8: [f]
+  i8: [f, blankCameraTarget]
+
+  #Foundations (background)
+  b9: []
+  c9: [foundation_Original_WallCorner_s]
+  d9: [foundation_Original_FullTile_s]
+  e9: [foundation_Original_FullTile_s]
+  f9: [foundation_Original_FullTile_s]
+  g9: [foundation_Original_FullTile_s]
+  h9: [foundation_Original_FullTile_s]
+  i9: [foundation_Original_Corner_s]
+
+  i2: [foundation_Original_WallCorner_e]
+  i3: [foundation_Original_FullTile_e]
+  j4: [foundation_Original_Corner_SR_e]
+  k5: [foundation_Original_Corner_SR_e]
+  k6: [foundation_Original_FullTile_e]
+  k7: [foundation_Original_Corner_SL_s]
+  j8: [foundation_Original_FullTile_e]
+
+objectDefinitions:
+# override the definitions in LevelsShared for level specific adjustments
+
+sounds:
+
+globalData:
+  pt1: { health: 8, need: pill }
+  pt2: { health: 8, need: pill }
