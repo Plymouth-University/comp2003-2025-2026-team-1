@@ -8,3 +8,4 @@
 | 24/11/25 | Debrief from client meeting           | All           | 85                 |
 | 30/11/25 | Distributing work tasks among members | All           | 115                |
 | 30/11/25 | Brainstorming repository structure    | Harry, Mervin | 100                |
+| 11/12/25 | Client meeting with Shaz              | All           | 35                 |
