@@ -59,7 +59,7 @@ class Level:
         objects (List[Dict]): All placed objects
         metadata (Dict): include, fileProperties, sceneName, cameraSettings
     """
-    def __init__(self, metadata: Dict, grid: List[List[str]], objects: List[Dict]):
+    def __init__(self, metadata: Dict, grid: str, objects: List[Dict]):
         self.metadata = metadata
         self.grid = grid
         self.objects = objects
@@ -67,6 +67,45 @@ class Level:
         self.sounds = {} # Usually left blank unless defining custom sound cues for this level
         self.globalData = {} # Usually left blank unless defining custom global variables for this level
 
+    def set_object_definitions(self, definitions: Dict) -> None:
+        self.objectDefinitions = definitions
+    
+    def set_sounds(self, sounds: Dict) -> None:
+        self.sounds = sounds
+    
+    def set_global_data(self, global_data: Dict) -> None:
+        self.globalData = global_data
+    
+    def __str__(self) -> str:
+        rep = f"""
+
+        include: {self.metadata.get('include', [])}
+        fileProperties: {self.metadata.get('fileProperties', {})}
+        sceneName: {self.metadata.get('sceneName', '')}
+        cameraSettings: {self.metadata.get('cameraSettings', {})}
+
+        grid:
+        {self.grid}
+
+        """
+        if self.objects:
+            rep += "gridObjects:\n"
+            for obj in self.objects:
+                rep += f" {obj}\n"
+        
+        if self.objectDefinitions:
+            rep += "objectDefinitions:\n"
+            for key, value in self.objectDefinitions.items():
+                rep += f"  {key}: {value}\n"
+        if self.sounds:
+            rep += "sounds:\n"
+            for key, value in self.sounds.items():
+                rep += f"  {key}: {value}\n"
+        if self.globalData:
+            rep += "globalData:\n"
+            for key, value in self.globalData.items():
+                rep += f"  {key}: {value}\n"
+        return rep
 
 # ============================================================
 # CHUNK LIBRARY MANAGEMENT
@@ -124,8 +163,7 @@ def initialize_empty_level() -> Level:
     Returns:
         Level object
     """
-    empty_grid = """
-        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+    empty_grid = """__,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
         __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
         __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
         __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
