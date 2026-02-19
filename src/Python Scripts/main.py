@@ -24,9 +24,6 @@ from typing import List, Dict, Tuple
 # CONFIGURATION SECTION
 # ============================================================
 
-# these values need to be redefined OR left to be dynamic based on chunk sizes and level design rules
-LEVEL_WIDTH = 30
-LEVEL_HEIGHT = 30
 CHUNK_WIDTH = 5
 CHUNK_HEIGHT = 5
 
@@ -60,10 +57,15 @@ class Level:
     Attributes:
         grid (List[List[str]]): Complete level grid
         objects (List[Dict]): All placed objects
+        metadata (Dict): include, fileProperties, sceneName, cameraSettings
     """
-    def __init__(self):
-        self.grid = []
-        self.objects = []
+    def __init__(self, metadata: Dict, grid: List[List[str]], objects: List[Dict]):
+        self.metadata = metadata
+        self.grid = grid
+        self.objects = objects
+        self.objectDefinitions = {} # Usually left blank unless overriding defaults in LevelsShared.yaml
+        self.sounds = {} # Usually left blank unless defining custom sound cues for this level
+        self.globalData = {} # Usually left blank unless defining custom global variables for this level
 
 
 # ============================================================
@@ -115,14 +117,47 @@ def validate_chunk(chunk: Chunk) -> bool:
 # LEVEL ASSEMBLY SYSTEM
 # ============================================================
 
-def initialize_empty_level(width: int, height: int) -> Level:
+def initialize_empty_level() -> Level:
     """
     Creates a blank level grid filled with default tiles.
 
     Returns:
         Level object
     """
-    pass
+    empty_grid = """
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__
+        __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__"""
+    metadata = {
+        "include": ["LevelsShared.yaml"],
+        "fileProperties": {"creatorName": "Algorithm"},
+        "sceneName": "EmptyWorld",
+        "cameraSettings": {"type": "static", "postProcessing": {"depthOfField": {"enabled": False}}}
+    }
+    return Level(metadata=metadata, grid=empty_grid, objects=[])
 
 
 def place_chunk(level: Level, chunk: Chunk, x: int, y: int) -> None:
