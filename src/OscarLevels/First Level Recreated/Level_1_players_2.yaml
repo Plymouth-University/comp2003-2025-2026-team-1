@@ -1,0 +1,216 @@
+# For up-to-date documentation, see:
+# - https://www.mindfeastgames.com/MultiTurn/Docs/ModdersGuide.html
+# - https://www.mindfeastgames.com/MultiTurn/Docs/API.html
+# This file has lots of in-file explanation comments.
+# If you want a clearer view, take a glance at one of the others like Level_2_players_3.yaml)
+
+# Included files will be loaded and their contents referenced here.
+# In the event of any clashes, the _including_ file 'wins'.
+include: [LevelsShared.yaml]
+
+# Properties about the file like its creator
+fileProperties:
+  creatorName: OscarK
+
+# The Unity scene that will be loaded as background.  Leave this unmodified for now.
+sceneName: EmptyWorld
+
+# Settings for configuring the level camera and post-processing effects
+cameraSettings:
+  type: static
+  postProcessing:
+    depthOfField: { enabled: false }
+
+# The next 3 sections describe the map layout including what is what and where.
+#
+# 1. `grid`
+# The `grid` describes overall layout.
+# Each cell of `grid` has a code (e.g. A1, 02) that is looked-up in `gridObjects`.
+#
+# 2. `gridObjects`
+# Each code in `gridObjects` (e.g. A1, 02) provides a list of objects in this grid position.
+# Each object is one of 3 things:
+#  a. a code (e.g. B, Pt) which appears in `objectDefinitions`.
+#  b. a full object definition (see `objectDefinitions`).
+#  c. a combination of both -- a code _and_ customisations that are overlaid on the described object.
+#
+# Example:
+#  By default, you've set beds to face south (you chose code `B` and set the direction in `objectDefinitions`).
+#  While that's fine in most places you've used it, you want a few to face east.
+#  To make some face east, you can put a customisation which takes priority over the default.
+#  Note: another (just as valid) way to achieve the same thing would be to have 2 different `objectDefinition`s -- one facing south, one east.
+#
+# 3. `objectDefinitions`
+# Each code from `gridObjects` (e.g. B, Pt) references one (and only one) object definition.
+# An object definition is *at least* a 'known' MapObject.  These are defined by the game and can be found on [[TODO WEBSITE]]!
+# Usually an object definition will include more information -- see below.
+#
+# Object definition:
+# Both `gridObjects` and `objectDefinitions` allow describing a MapObject.
+# At minimum, that is a code defined when the game was built.  See [[TODO WEBSITE]]
+# In addition, the object definition can include:
+# - `dir`  : a direction it faces.
+# - `mods` : a list of mods (which can optionally include `data` for just this mod).
+# - `data` : data that will be provided to *all mods on this MapObject*.
+#
+# Mods:
+# A mod consists of *at least* a mod filename (within the general mods area).
+# It can also include `data` for just this mod.
+
+# The map/grid.  A rectangular list of references to `gridObjects` below
+# We find it handy to use column-row coordinate naming.
+# You can name however you prefer -- as long as it has a value in `gridObjects` below.
+grid: |
+  XX,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+
+  __,__,__,__,__,__,__,__, __,c1,d1,e1,f1,g1,h1,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,c2,d2,e2,f2,g2,h2,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, b3,c3,d3,e3,f3,g3,h3,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, b4,c4,d4,e4,f4,g4,h4,i4,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, b5,c5,d5,e5,f5,g5,h5,i5,j5, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, b6,c6,d6,e6,f6,g6,h6,i6,j6, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, b7,c7,d7,e7,f7,g7,h7,i7,j7, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, b8,c8,d8,e8,f8,g8,h8,i8,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__
+# __ = Empty space on the map
+# Any 2 character txt = a tile with or without game objects
+
+# Explanation:
+# The grid contains numbers as references to objects on the map.
+# You can use whatever reference system you prefer.
+# Just change the `gridObjects` to match your new reference system (e.g. row+column like A1, A2, B1, B2).
+
+# Mappings from `grid` above (e.g. "A1") to a list of LevelObjects each *at least* including a reference to an `objectDefinitions` member (below)
+gridObjects:
+  XX: [ff, gm, fp]
+
+  c1: [wall_corner_se, lightbulb_s]
+  d1: [window2_s]
+  e1: [wall_s, lightbulb_s]
+  f1: [wall_s, lightbulb_s]
+  g1: [window2_s]
+  h1: [wall_s, lightbulb_s]
+
+  #Removed decorations. This made it easier to make the level, less stuff to make directories for.
+
+  c2: [f]
+  d2: [f]
+  e2: [f]
+  f2: [f]
+  g2: [f]
+  h2: [f, b_s, { id: patient_edBanger, data: { id: pt1 } }]
+
+  b3: [wall_e, lightbulb_e]
+  c3: [f, b_s, { id: patient_chris, data: { id: pt2 } }]
+  d3: [f, lightBig]
+  e3: [f]
+  f3: [f]
+  g3: [f, lightBig]
+  h3: [f]
+
+  b4: [wall_e, lightbulb_e]
+  c4: [f]
+  d4: [f]
+  e4: [f]
+  f4: [f]
+  g4: [f]
+  h4: [f]
+  i4: [f]
+
+  b5: [wall_e, lightbulb_e, ticker_w]
+  c5: [f]
+  d5: [f]
+  e5: [f]
+  f5: [f]
+  g5: [f]
+  h5: [f]
+  i5: [f]
+  j5: [f]
+
+  b6: [wall_e, lightbulb_e]
+  c6: [f]
+  d6: [f]
+  e6: [f]
+  f6: [f]
+  g6: [f]
+  h6: [f]
+  i6: [f]
+  j6: [f]
+
+  b7: [wall_e]
+  c7: [f]
+  d7: [f]
+  e7: [f, p1, lightBig]
+  f7: [f]
+  g7: [f, p2]
+  h7: [f, lightBig]
+  i7: [f]
+  j7: [f]
+
+  b8: [wall_e, lightbulb_e]
+  c8: [f]
+  d8: [f]
+  e8: [f]
+  f8: [f]
+  g8: [f]
+  h8: [f]
+  i8: [f, blankCameraTarget]
+
+  #Need to add background
+
+objectDefinitions:
+  # Can be defined here or, more likely, both here _and_ in LevelsShared.yaml
+  # Set-up base values in LevelsShared.yaml and override here.
+  power1:
+    mapObject: BlankMobile
+    art3d:
+      - model: "Art/3D/Sphere.glb"
+        pos: { y: 1 }
+        scale: { x: 0.5, y: 0.5, z: 0.6 }
+    art2d:
+      - texture: "MakeYourOwnWithThisTemplate.png"
+        displayType: decal
+        projectionDistance: 1
+        pos: { x: -0.5, y: 0.6, z: -0.5 }
+        rot: { x: 45, y: 135, z: 0 }
+        scale: { x: 0.7, y: 0.7, z: 1 }
+    mods:
+      - name: DestroyOwnerWhenPlayerEntersSquare
+
+  light_1:
+    mapObject: Light
+    dir: east
+    tags: ["static", "PointLight"]
+    data:
+      PointLightRange: 8
+      PointLightIntensity: 8
+      PointLightPos: { y: 1.5 }
+      # Format as specified in https://docs.unity3d.com/ScriptReference/ColorUtility.TryParseHtmlString.html
+      # Addition: Instead of starting with a '#', you can use 0x followed by the hex value (e.g. 0x00ff00 for green)
+      # If you do use the '#' format, ensure to enclose in quotation marks to prevent the '#' being interpreted as a comment.
+      # PointLightColourText: "#00ff00"
+      # PointLightColourText: green
+      PointLightColourText: 0x008000
+
+sounds:
+  # See CoOperation for examples using sound
+
+globalData:
+  # Set global data and overrides.  See https://www.mindfeastgames.com/MultiTurn/Docs/API.html#mod-data
+  pt1: { health: 8, need: pill }
+  pt2: { health: 8, need: pill }
