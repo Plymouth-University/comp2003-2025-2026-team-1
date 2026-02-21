@@ -47,11 +47,11 @@ grid: |
 
 gridObjects:
 
-  e4: [ f, p1, floordeco21 ]
-  f4: [ f, p2, floordeco21 ]
+  e4: [ f_Grey_LightWood, p1, floordeco21 ]
+  f4: [ f_Grey_LightWood, p2, floordeco21 ]
 
-  e5: [ f, p3, floordeco21 ]
-  f5: [ f, p4, floordeco21 ]
+  e5: [ f_Blue_HardCarpet, p3, floordeco21 ]
+  f5: [ f_Blue_HardCarpet, p4, floordeco21 ]
 
   #Foundations (background)
 
