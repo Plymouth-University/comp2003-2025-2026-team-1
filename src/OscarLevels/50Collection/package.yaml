@@ -104,6 +104,17 @@ levels:
       hintsText:
         - "loadingHint_level1_1"
 
+  - levelId: level2
+    levelName: Level 2 of 50
+    levelFiles:
+      - { playerCount: 2, fileName: "Level_2_players_2" }
+      - { playerCount: 3, fileName: "Level_2_players_3" }
+      - { playerCount: 4, fileName: "Level_2_players_4" }
+    loadingHints:
+      includeGlobalHints: false
+      hintsText:
+        - "loadingHint_level1_1"
+
   # Results/shop level - always keep this at the end of this list of levels
   - levelId: levelResults
     levelName: package_mainPackage_levelResults
