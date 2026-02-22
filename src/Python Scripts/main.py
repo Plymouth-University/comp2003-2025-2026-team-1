@@ -76,6 +76,60 @@ class Level:
     def set_global_data(self, global_data: Dict) -> None:
         self.globalData = global_data
     
+    def insert_object_reference(self, ref: int, obj_ref: str) -> None: # NOT TESTED
+        """
+        Inserts an object reference into the level's grid and updates the objects list.
+
+        Parameters:
+            ref (int): Location index in the grid (e.g. 32)
+            obj_ref (str): Object reference 2-character string (e.g. "c3")
+        
+        """
+        # Ensure coordinates are within bounds
+        try:
+            if 0 <= ref < len(self.grid):
+                if len(obj_ref) == 2: # Validate object reference format (2-character string)
+                    # Insertion case for when cell is empty
+                    if self.grid[ref] == "":
+                        self.grid[ref] = obj_ref
+                        self.objects.append({"ref": ref, "object": obj_ref})
+                    # Insertion case for when cell is occupied by a different object reference
+                    elif self.grid[ref] != obj_ref:
+                        current_obj_ref = self.grid[ref] # Store the current object reference before overwriting
+                        self.objects.remove({"ref": ref, "object": current_obj_ref}) # Remove the old object reference from the objects list
+                        self.grid[ref] = obj_ref # Update the grid cell with the new object reference
+                        self.objects.append({"ref": ref, "object": obj_ref}) # Add the new object reference to the objects list
+                else:
+                    raise ValueError(f"Invalid object reference format: {obj_ref}. Expected 2-character string.")
+            else:
+                raise IndexError
+        except IndexError:
+            print(f"[Insertion Error] Warning: Attempted to insert object reference {obj_ref} at invalid location {ref}. Skipping.")
+        except ValueError as ve:
+            print(f"[Insertion Error] Warning: {ve} Skipping insertion of object reference {obj_ref} at location {ref}.")
+    
+    def remove_object_reference(self, ref: int) -> None: # NOT TESTED
+        """
+        Removes an object reference from the level's grid and objects list.
+
+        Parameters:
+            ref (int): Location index in the grid (e.g. 32)
+        """
+        try:
+            if 0 <= ref < len(self.grid):
+                if self.grid[ref] != "": # Check if there is an object reference to remove
+                    current_obj_ref = self.grid[ref] # Store the current object reference before removing
+                    self.grid[ref] = "" # Clear the grid cell
+                    self.objects.remove({"ref": ref, "object": current_obj_ref}) # Remove the object reference from the objects list
+                else:
+                    raise ValueError(f"No object reference found at location {ref} to remove.")
+            else:
+                raise IndexError
+        except IndexError:
+            print(f"[Removal Error] Warning: Attempted to remove object reference at invalid location {ref}. Skipping.")
+        except ValueError as ve:
+            print(f"[Removal Error] Warning: {ve} Skipping removal of object reference at location {ref}.")
+
     def __str__(self) -> str:
         string = f"""
 
