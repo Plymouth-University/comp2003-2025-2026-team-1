@@ -1,0 +1,145 @@
+include: [ LevelsShared.yaml ]
+
+# Properties about the file like its creator
+fileProperties:
+  creatorName: OscarK
+
+# The Unity scene that will be loaded as background
+sceneName: OriginalWorld
+
+cameraSettings:
+  postProcessing:
+    depthOfField: { enabled: true, focusDistance: 68, focalLength: 300, aperture: 1 }
+
+#Add more spaces around the level were the walls will go.
+grid: |
+  gm,__,__,__,__,__,__,__,__,__,__,__,  2b,__,__,__,__,__,__,__,__,  __,3j,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,2b,__,__,__,4r,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,  __,3j,__,__,__,__,__,__,__,__,__,
+  
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,g3,__,__,  __,3j,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,__,f4,g4,__,__,  __,__,__,3h,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,1e,__,  __,__,__,__,e5,f5,g5,h5,__,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,e6,f6,g6,h6,__,  __,3j,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,c7,d7,e7,f7,g7,h7,__,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,b8,c8,d8,e8,f8,g8,h8,__,  __,__,__,3h,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,b9,c9,d9,e9,f9,g9,h9,__,  __,3j,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,1b,__,  __,__,cA,dA,eA,fA,gA,hA,__,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,eB,fB,gB,hB,__,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,eC,fC,gC,hC,__,  __,3j,__,3h,__,__,__,__,__,__,1h,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,eD,fD,gD,hD,__,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,3h,  __,__,__,__,__,fE,gE,__,__,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,1b,__,__,  __,__,__,__,__,__,__,__,__,  __,3j,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,  __,__,__,3h,__,__,__,__,__,__,__,
+  
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,7c,7a,7a,7a,7a,7a,7a,7a,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,  __,3j,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,2b,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,__,__,
+
+gridObjects:
+
+  # Floors, Players, Patients, Items and Decorations
+  #I've added more floor tiles to make the level look connected. In order for the level to play the same I also added glass barriers on these floor tiles.
+
+  g4: [f, wedge_s, syringecab_s]
+
+  f5: [f, b_s]
+  g5: [f, p3, floordeco21]
+  h5: [f, b_s]
+
+  f6: [f, glass1_n]
+  g6: [f, glass1_n]
+  h6: [f, glasswithpost_s]
+
+  f7: [f, glass1_n]
+  g7: [f, glass1_n]
+  h7: [f, glasswithpost_s]
+
+  c8: [f, b_e]
+  d8: [f, glass1_e]
+  e8: [f, glass1_e]
+  f8: [f]
+  g8: [f, { id: patient, data: { id: pt2 } }, { id: patient_childOliviaAndAvo, data: { id: pt5 } }, { id: patient, data: { id: pt8 } }]
+  h8: [f]
+
+  #Add wedges under the walls on the end, to make the walls look like they're not floating.
+  b9: [f, wedge_e, pillcab_closed_e]
+  c9: [f, p1, floordeco21]
+  d9: [f, glass1_e]
+  e9: [f, glass1_e]
+  f9: [f, { id: patient_edBanger, data: { id: pt1 } }, { id: patient_chris_alt1, data: { id: pt4 } }, { id: patient_chris_alt2, data: { id: pt7 } }]
+  g9: [f, watercooler]
+  h9: [f, p2, floordeco21]
+
+  cA: [f, b_e]
+  dA: [f, glasswithpost_e]
+  eA: [f, glasswithpost_e]
+  fA: [f]
+  gA: [f, { id: patient_chris, data: { id: pt3 } }, { id: patient_edBanger_alt1, data: { id: pt6 } }, { id: patient, data: { id: pt9 } }]
+  hA: [f]
+
+  fB: [f, glass1_n]
+  gB: [f, glass1_n]
+  hB: [f, glasswithpost_s]
+
+  fC: [f, glass1_n]
+  gC: [f, glass1_n]
+  hC: [f, glasswithpost_s]
+
+  fD: [f, b_n]
+  gD: [f, p4, floordeco21]
+  hD: [f, b_n]
+
+  #Add wedges under the walls on the end, to make the walls look like they're not floating.
+  gE: [f, wedge_e, applecab_s]
+
+  #Foundations (background)
+  #Add walls around the North and West sides of the map. Can use walls with curved corners to make the edges look nicer.
+  #Make Sure you don't add walls that obscure the view of level.
+
+  g3: [wall_corner_IR_se]
+
+  f4: [wall_corner_se]
+
+  e5: [wall_e]
+
+  e6: [wall_e]
+
+  c7: [wall_corner_se]
+  d7: [wall_s]
+  e7: [wall_corner_inside_se]
+
+  b8: [wall_corner_IL_se]
+
+  eB: [wall_e]
+
+  eC: [wall_e]
+
+  eD: [wall_corner_ne]
+
+  fE: [wall_e_lc]
+
+
+objectDefinitions:
+
+  
+sounds:
+
+globalData:
+  #Starting patients
+  pt1: { health: 8, need: apple} #Ed
+  pt2: { health: 8, need: pill, character: grace}
+  pt3: { health: 8, need: syringe} #Chris
+
+  # Spawning patients
+  pt4: { health: 8, appearOnTurn: 3, need: syringe} #Chris alt 1
+  pt5: { health: 8, appearOnTurn: 3, need: apple} #childOliviaAndAvo
+  pt6: { health: 8, appearOnTurn: 3, need: pill} #Ed alt 1
+
+  pt7: { health: 8, appearOnTurn: 6, need: pill} #chris alt 2
+  pt8: { health: 8, appearOnTurn: 6, need: syringe, character: sammi}
+  pt9: { health: 8, appearOnTurn: 6, need: apple}

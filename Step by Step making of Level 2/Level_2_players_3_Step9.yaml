@@ -1,0 +1,163 @@
+include: [ LevelsShared.yaml ]
+
+# Properties about the file like its creator
+fileProperties:
+  creatorName: OscarK
+
+# The Unity scene that will be loaded as background
+sceneName: OriginalWorld
+
+cameraSettings:
+  postProcessing:
+    depthOfField: { enabled: true, focusDistance: 68, focalLength: 300, aperture: 1 }
+
+grid: |
+  gm,__,__,__,__,__,__,__,__,__,__,__,  2b,__,__,__,__,__,__,__,__,  __,3j,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,2b,__,__,__,4r,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,  __,3j,__,__,__,__,__,__,__,__,__,
+  
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,3h,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,3h,__,__,__,g3,__,__,  __,3j,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,__,f4,g4,h4,4a,  __,__,__,3h,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,1e,__,  __,3h,4a,__,e5,f5,g5,h5,i5,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,e6,f6,g6,h6,i6,  __,3j,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,c7,d7,e7,f7,g7,h7,i7,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,b8,c8,d8,e8,f8,g8,h8,i8,  __,__,__,3h,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,b9,c9,d9,e9,f9,g9,h9,i9,  __,3j,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,1b,__,  __,bA,cA,dA,eA,fA,gA,hA,iA,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  7e,__,cB,dB,eB,fB,gB,hB,iB,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  7b,__,__,__,eC,fC,gC,hC,iC,  __,3j,__,3h,__,__,__,__,__,__,1h,
+  __,__,__,__,__,__,__,__,__,__,__,__,  7h,__,3h,__,eD,fD,gD,hD,iD,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,3h,  7b,__,__,4a,__,fE,gE,hE,__,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,1b,__,__,  7b,__,__,__,__,__,gF,__,__,  __,3j,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  7h,__,__,__,__,3h,__,4a,__,  __,__,__,3h,__,__,__,__,__,__,__,
+  
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,7c,7a,7a,7a,7a,7a,7a,7a,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,  __,3j,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,2b,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,__,__,
+
+gridObjects:
+  #Remove p4 from gridobjects.
+  #Reduce difficulty because there are now only 3 players.
+  #For this I removed the patients that require apples.
+
+  # Floors, Players, Patients, Items and Decorations
+
+  g4: [f, wedge_s, syringecab_s]
+
+  f5: [f, b_s]
+  g5: [f, p3, floordeco21]
+  h5: [f, b_s]
+
+  f6: [f, glass1_n]
+  g6: [f, glass1_n]
+  h6: [f, glasswithpost_s]
+
+  f7: [f, glass1_n]
+  g7: [f, glass1_n]
+  h7: [f, glasswithpost_s]
+
+  c8: [f, b_e]
+  d8: [f, glass1_e]
+  e8: [f, glass1_e]
+  f8: [f]
+  g8: [f, { id: patient, data: { id: pt2 } }, { id: patient, data: { id: pt8 } }]
+  h8: [f]
+
+  b9: [f, wedge_e, pillcab_closed_e]
+  c9: [f, p1, floordeco21]
+  d9: [f, glass1_e]
+  e9: [f, glass1_e]
+  f9: [f, { id: patient_chris_alt1, data: { id: pt4 } }, { id: patient_chris_alt2, data: { id: pt7 } }]
+  g9: [f, watercooler]
+  h9: [f, p2, floordeco21]
+
+  cA: [f, b_e]
+  dA: [f, glasswithpost_e]
+  eA: [f, glasswithpost_e]
+  fA: [f]
+  gA: [f, { id: patient_chris, data: { id: pt3 } }, { id: patient_edBanger_alt1, data: { id: pt6 } }]
+  hA: [f]
+
+  #Made the glass barriers two high to make it so players can't softlock themselves by throwing a patient over there.
+  fB: [f, barrierglass2]
+  gB: [f, barrierglass2]
+  hB: [f, barrierglass2]
+
+  fC: [f, barrierglass2]
+  gC: [f, barrierglass2]
+  hC: [f, barrierglass2]
+
+  fD: [f, b_n]
+  gD: [f, watercooler]
+  hD: [f, b_n]
+
+  gE: [f, wedge_e, applecab_s]
+
+  gF: [foundation_Original_WallCorner_s]
+
+  #Foundations (background)
+
+  g3: [wall_corner_IR_se]
+
+  f4: [wall_corner_se]
+  h4: [foundation_Original_WallCorner_e]
+
+  e5: [wall_e]
+  i5: [foundation_Original_Corner_SR_e]
+
+  e6: [wall_e]
+  i6: [foundation_Original_FullTile_e]
+
+  c7: [wall_corner_se]
+  d7: [wall_s]
+  e7: [wall_corner_inside_se]
+  i7: [foundation_Original_FullTile_e]
+
+  b8: [wall_corner_IL_se]
+  i8: [foundation_Original_FullTile_e]
+
+  i9: [foundation_Original_FullTile_e]
+
+  bA: [foundation_Original_WallCorner_s]
+  iA: [foundation_Original_FullTile_e]
+
+  cB: [foundation_Original_Corner_SL_w]
+  dB: [foundation_Original_FullTile_s]
+  eB: [wall_e]
+  iB: [foundation_Original_FullTile_e]
+
+  eC: [wall_e]
+  iC: [foundation_Original_FullTile_e]
+
+  eD: [wall_corner_ne]
+  iD: [foundation_Original_Corner_SL_s]
+
+  hE: [ foundation_Original_Corner_SL_s]
+  fE: [wall_e_lc, foundation_Original_WallCorners_s]
+
+
+objectDefinitions:
+
+  
+sounds:
+
+globalData:
+  #Remove patients that require apples since there are only 3 players now.
+
+  #Starting patients
+  #pt1: { health: 8, need: apple} #Ed
+  pt2: { health: 8, need: pill, character: grace}
+  pt3: { health: 8, need: syringe} #Chris
+
+  # Spawning patients
+  pt4: { health: 8, appearOnTurn: 3, need: syringe} #Chris alt 1
+  #pt5: { health: 8, appearOnTurn: 3, need: apple} #childOliviaAndAvo
+  pt6: { health: 8, appearOnTurn: 3, need: pill} #Ed alt 1
+
+  pt7: { health: 8, appearOnTurn: 6, need: pill} #chris alt 2
+  pt8: { health: 8, appearOnTurn: 6, need: syringe, character: sammi}
+  #pt9: { health: 8, appearOnTurn: 6, need: apple}

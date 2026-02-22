@@ -1,0 +1,183 @@
+# Properties about the file like its creator
+fileProperties:
+  creatorName: Mind Feast Games Edited by OscarK
+
+# Package Info
+# Name and description will be displayed in the user interface
+packageName: 50Collection
+packageDescription: Collection of 50 levels
+packageVersion: "1.0.0"
+
+maxSaveSlots: 10
+
+setupStages:
+  # Display data for level selection
+  - id: "levelSelect"
+    displayTitle: "menu_levelSelect_title"
+    selection: !CarouselSelection
+      sharedUnlockRequirements:
+        # 1-based selected item index (i.e. level number) gets appended to variable name
+        unlockIfVariableSet: "levelStat_levelUnlocked_level"
+        lockedTextFromVariable: "levelRankRequirementText_level"
+      sharedDisplayInfo:
+        - !InfoStat # 1-based selected item index (i.e. level number) gets appended to variable name
+          statTextFromVariable: "levelStat_curedPatientText_2players_level"
+          statText: "<color=#ffffff33>--</color>"
+          statIcon: "Art/2D/UI/Icon_FaceSmile.png"
+          labelIcon: "Art/2D/UI/Icon_NumPlayers2.png"
+        - !InfoStat
+          statTextFromVariable: "levelStat_curedPatientText_3players_level"
+          statText: "<color=#ffffff33>--</color>"
+          statIcon: "Art/2D/UI/Icon_FaceSmile.png"
+          labelIcon: "Art/2D/UI/Icon_NumPlayers3.png"
+        - !InfoStat
+          statTextFromVariable: "levelStat_curedPatientText_4players_level"
+          statText: "<color=#ffffff33>--</color>"
+          statIcon: "Art/2D/UI/Icon_FaceSmile.png"
+          labelIcon: "Art/2D/UI/Icon_NumPlayers4.png"
+    # 'Select a Game Mode' (Turns per Round)
+  - id: "gameModeSelect"
+    displayTitle: "menu_gameModeSelect_title"
+    selection: !CarouselSelection
+      selectionVariable: "turnsPerRound"
+      items:
+        # 'Thinky': 4 turns per round
+        - selectionValue: 4
+          thumbnailImage: "gameMode1_thumbnail.png"
+          displayName: "menu_gameModeSelect_option_1_title"
+          displayInfo:
+            - !InfoText
+              text: "menu_gameModeSelect_option_1_info"
+        # 'Chilled': 2 turns per round
+        - selectionValue: 2
+          thumbnailImage: "gameMode2_thumbnail.png"
+          displayName: "menu_gameModeSelect_option_2_title"
+          displayInfo:
+            - !InfoText
+              text: "menu_gameModeSelect_option_2_info"
+        # 'Step-by-Step': 1 turn per round
+        - selectionValue: 1
+          thumbnailImage: "gameMode3_thumbnail.png"
+          displayName: "menu_gameModeSelect_option_3_title"
+          displayInfo:
+            - !InfoText
+              text: "menu_gameModeSelect_option_3_info"
+
+globalLoadingHints:
+  backgroundImage: "Art/2D/UI/Background_LoadingHintClipboard.png"
+  textColour: "#002F46"
+  hintsText:
+    - "loadingHint_global_1"
+    - "loadingHint_global_2"
+    - "loadingHint_global_3"
+    - "loadingHint_global_4"
+    - "loadingHint_global_5"
+    - "loadingHint_global_6"
+    - "loadingHint_global_7"
+    - "loadingHint_global_8"
+    - "loadingHint_global_9"
+    - "loadingHint_global_10"
+    - "loadingHint_global_11"
+    - "loadingHint_global_12"
+    # - 'loadingHint_global_13' -- Enable this when the game timer has been added!
+    - "loadingHint_global_14"
+
+# Levels
+# All of the levels contained within this package
+# Each level has the following properties:
+#   - levelId: Unique id for the level.
+#   - levelName: The name that will displayed in the user interface.
+#   - showInSelector: Whether the level should be selectable in the UI when setting up a game. Optional, defaults to true.
+#   - levelFiles: List of yaml files that define this level, along with their player counts.
+#       -- playerCount: If this many people are playing, the level file will be used.
+#       -- fileName: Name of the yaml file to be loaded.
+
+levels:
+  - levelId: level1
+    levelName: Level 1 of 50
+    levelFiles:
+      - { playerCount: 2, fileName: "Level_1_players_2" }
+      - { playerCount: 3, fileName: "Level_1_players_3" }
+      - { playerCount: 4, fileName: "Level_1_players_4" }
+    loadingHints:
+      includeGlobalHints: false
+      hintsText:
+        - "loadingHint_level1_1"
+
+  #Add Level 2 here so the level can appear in the game.
+  - levelId: level2
+    levelName: Level 2 of 50
+    levelFiles:
+      - { playerCount: 2, fileName: "Level_2_players_2" }
+      - { playerCount: 3, fileName: "Level_2_players_3" }
+      - { playerCount: 4, fileName: "Level_2_players_4" }
+    loadingHints:
+      includeGlobalHints: false
+      hintsText:
+        - "loadingHint_level1_1"
+
+  # Results/shop level - always keep this at the end of this list of levels
+  - levelId: levelResults
+    levelName: package_mainPackage_levelResults
+    showInSelector: false
+    levelFiles:
+      - { playerCount: 2, fileName: "LevelResults_players_2" }
+      - { playerCount: 3, fileName: "LevelResults_players_3" }
+      - { playerCount: 4, fileName: "LevelResults_players_4" }
+    loadingHints:
+      includeGlobalHints: true
+
+  # Unlock shop level in selector for testing:
+  # levelStat_levelUnlocked_level17: 1
+
+defaultSaveDataValues:
+  # Total number of patients in 2/3/4 player versions of all levels:
+  levelStat_totalPatients_2players: 65
+  levelStat_totalPatients_3players: 76
+  levelStat_totalPatients_4players: 85
+
+  # Number of unique cures required to unlock each rank:
+  # The current system is additive: the total unique patients you have healed minus any patients used to unlock past ranks:
+  # e.g. patients healed in levels 1-8 minus your rank cost for rank 2 will count to you unlocking rank 3. This means players might unlocks ranks sooner than is ideal.
+  # 13 patients in 2-player levels 1-4. Level 1: 2, Level 2: 3, Level 3: 4, Level 4: 4
+  # 18 patients in 2-player levels 5-8. Level 5: 4, Level 6: 4, Level 7: 5, Level 8: 5
+  # 12 patients in 2 player levels 9-12. Level 9: 3, Level 10: 2, Level 11: 3, Level 12: 4
+  # 22 patients in 2-player levels 12-16. Level 13: 4, Level 14: 5, Level 15: 6, Level 16: 7
+  levelStat_uniqueCuresRankRequirement_rank2: 11
+  levelStat_uniqueCuresRankRequirement_rank3: 15
+  levelStat_uniqueCuresRankRequirement_rank4: 11
+
+  # Levels 1-4 unlocked by default:
+  levelStat_levelUnlocked_level1: 1
+  levelStat_levelUnlocked_level2: 1
+  levelStat_levelUnlocked_level3: 1
+  levelStat_levelUnlocked_level4: 1
+
+  # Required ranks for each level - values & text:
+  levelStat_rankRequirement_level5: 2
+  levelRankRequirementText_level5: "levelStats_carouselItem_requiresRank2"
+  levelStat_rankRequirement_level6: 2
+  levelRankRequirementText_level6: "levelStats_carouselItem_requiresRank2"
+  levelStat_rankRequirement_level7: 2
+  levelRankRequirementText_level7: "levelStats_carouselItem_requiresRank2"
+  levelStat_rankRequirement_level8: 2
+  levelRankRequirementText_level8: "levelStats_carouselItem_requiresRank2"
+  levelStat_rankRequirement_level9: 3
+  levelRankRequirementText_level9: "levelStats_carouselItem_requiresRank3"
+  levelStat_rankRequirement_level10: 3
+  levelRankRequirementText_level10: "levelStats_carouselItem_requiresRank3"
+  levelStat_rankRequirement_level11: 3
+  levelRankRequirementText_level11: "levelStats_carouselItem_requiresRank3"
+  levelStat_rankRequirement_level12: 3
+  levelRankRequirementText_level12: "levelStats_carouselItem_requiresRank3"
+  levelStat_rankRequirement_level13: 4
+  levelRankRequirementText_level13: "levelStats_carouselItem_requiresRank4"
+  levelStat_rankRequirement_level14: 4
+  levelRankRequirementText_level14: "levelStats_carouselItem_requiresRank4"
+  levelStat_rankRequirement_level15: 4
+  levelRankRequirementText_level15: "levelStats_carouselItem_requiresRank4"
+  levelStat_rankRequirement_level16: 4
+  levelRankRequirementText_level16: "levelStats_carouselItem_requiresRank4"
+
+  # Starting rank = 1:
+  levelStat_rank: 1
