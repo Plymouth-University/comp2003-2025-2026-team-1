@@ -1,9 +1,9 @@
 include: [ CoOpAnimationDefinitions.yaml, BuyableItems.yaml ]
 
 fileProperties:
-  creatorName: Mind Feast Games Edited by OscarK
+  creatorName: Mind Feast Games
 
-sceneName: 50Collection
+sceneName: World1Dev
 
 cameraSettings:
   target:
@@ -1061,6 +1061,10 @@ objectDefinitions:
   #wall corner pieces
   wall_corner_se: { mapObject: Custom, dir: south, art3d: [ { model: "Art/3D/Wall_Corner_I_1.glb", pos: {x: -1, y: 0, z: -1}, rot: {x: 0, y: 180, z: 0},scale: {x: 1, y: 1, z: 1} } ], tags: [ "blocksMove", "blocksThrow", "static" ] }
   wall_corner_ne: { mapObject: Custom, dir: east, art3d: [ { model: "Art/3D/Wall_Corner_I_1.glb", pos: {x: 1, y: 0, z: -1}, rot: {x: 0, y: 180, z: 0},scale: {x: 1, y: 1, z: 1} } ], tags: [ "blocksMove", "blocksThrow", "static" ] }
+  wall_corner_IR_se: { mapObject: Custom, dir: south, art3d: [ { model: "Art/3D/Wall_Corner_IR.glb", pos: {x: -1, y: 0, z: -1}, rot: {x: 0, y: 180, z: 0},scale: {x: 1, y: 1, z: 1} } ], tags: [ "blocksMove", "blocksThrow", "static" ] }
+  wall_corner_IR_ne: { mapObject: Custom, dir: east, art3d: [ { model: "Art/3D/Wall_Corner_IR.glb", pos: {x: 1, y: 0, z: -1}, rot: {x: 0, y: 180, z: 0},scale: {x: 1, y: 1, z: 1} } ], tags: [ "blocksMove", "blocksThrow", "static" ] }
+  wall_corner_IL_se: { mapObject: Custom, dir: south, art3d: [ { model: "Art/3D/Wall_Corner_IL.glb", pos: {x: -1, y: 0, z: -1}, rot: {x: 0, y: 180, z: 0},scale: {x: 1, y: 1, z: 1} } ], tags: [ "blocksMove", "blocksThrow", "static" ] }
+  wall_corner_IL_ne: { mapObject: Custom, dir: east, art3d: [ { model: "Art/3D/Wall_Corner_IL.glb", pos: {x: 1, y: 0, z: -1}, rot: {x: 0, y: 180, z: 0},scale: {x: 1, y: 1, z: 1} } ], tags: [ "blocksMove", "blocksThrow", "static" ] }
   wall_corner_inside_se: { mapObject: Custom, dir: south, art3d: [ { model: "Art/3D/Wall_Corner_O_1.glb", pos: {x: -0.5, y: 0, z: 1}, rot: {x: 0, y: 0, z: 0},scale: {x: 1, y: 1, z: 1} } ], tags: [ "blocksMove", "blocksThrow", "static" ] }
   wall_corner_inside_ne: { mapObject: Custom, dir: east, art3d: [ { model: "Art/3D/Wall_Corner_O_1.glb", pos: {x: -1, y: 0, z: -0.5}, rot: {x: 0, y: 0, z: 0},scale: {x: 1, y: 1, z: 1} } ], tags: [ "blocksMove", "blocksThrow", "static" ] }
   wall_corner_se_curved: { mapObject: Custom, dir: south, art3d: [ { model: "Art/3D/Wall_Corner_I_2.glb", pos: {x: -1, y: 0, z: -1}, rot: {x: 0, y: 180, z: 0},scale: {x: 1, y: 1, z: 1} } ], tags: [ "blocksMove", "blocksThrow", "static" ] }
@@ -1637,6 +1641,7 @@ objectDefinitions:
   wedge_e: { mapObject: Custom, dir: south, art3d: [ { model: "Art/3D/FloorTile.glb", pos: {x: -1, y: -0.27, z: 1}, rot: {x: 0, y: 0, z: 0}, scale: {x: 0.27, y: 1, z: 1} } ], tags: [ "static" ] }
   wedge_e_r: { mapObject: Custom, dir: south, art3d: [ { model: "Art/3D/FloorTile.glb", pos: {x: -1, y: -0.27, z: 0.5}, rot: {x: 0, y: 0, z: 0}, scale: {x: 0.27, y: 1, z: 1} } ], tags: [ "static" ] }
   wedge_s: { mapObject: Custom, dir: south, art3d: [ { model: "Art/3D/FloorTile.glb", pos: {x: 1, y: -0.27, z: -1}, rot: {x: 0, y: 0, z: 0}, scale: {x: 1, y: 1, z: 0.27} } ], tags: [ "static" ] }
+  wedge_n: { mapObject: Custom, dir: south, art3d: [ { model: "Art/3D/FloorTile.glb", pos: {x: -1.5, y: -0.27, z: -1}, rot: {x: 0, y: 0, z: 0}, scale: {x: 1, y: 1, z: 0.27} } ], tags: [ "static" ] }
 
   #BLUE
   f_Blue_HardCarpet: { mapObject: Custom, dir: north, art3d: [ { model: "Art/3D/FloorTile_Blue_HardCarpet.glb", pos: {x: -1, y: -0.27, z: -1}, rot: {x: 0, y: 180, z: 0}, scale: {x: 1, y: 1, z: 1} } ], tags: [ "floor", "static" ] }
@@ -2129,6 +2134,7 @@ objectDefinitions:
   foundation_Original_WallCorner_n: { mapObject: Custom, dir: north, art3d: [ { model: "Art/3D/Foundation_WallCorner_Original.glb", pos: {x: 2, y: -0.27, z: 1.5}, rot: {x: 0, y: 0, z: 0}, scale: {x: 1, y: 1, z: 1} } ], tags: [ "static" ] }
   foundation_Original_WallCorner_e: { mapObject: Custom, dir: north, art3d: [ { model: "Art/3D/Foundation_WallCorner_Flipped_Original.glb", pos: {x: -1, y: -0.27, z: 3}, rot: {x: 0, y: 270, z: 0}, scale: {x: 1, y: 1, z: 1} } ], tags: [ "static" ] }
   foundation_Original_WallCorner_s: { mapObject: Custom, dir: north, art3d: [ { model: "Art/3D/Foundation_WallCorner_Original.glb", pos: {x: 0.5, y: -0.27, z: 2}, rot: {x: 0, y: 270, z: 0}, scale: {x: 1, y: 1, z: 1} } ], tags: [ "static" ] }
+  foundation_Original_WallCorners_s: { mapObject: Custom, dir: north, art3d: [ { model: "Art/3D/Foundation_WallCorner_Original.glb", pos: {x: 0.1, y: -0.27, z: 2}, rot: {x: 0, y: 270, z: 0}, scale: {x: 1, y: 1, z: 1} } ], tags: [ "static" ] }
   foundation_Original_Two_Corners_n: { mapObject: Custom, dir: north, art3d: [ { model: "Art/3D/Foundation_Two_Corners_Original.glb", pos: {x: -0.5, y: -0.27, z: 1.5}, rot: {x: 0, y: 0, z: 0}, scale: {x: 1, y: 1, z: 1} } ], tags: [ "static" ] }
   foundation_Original_Two_Corners_e: { mapObject: Custom, dir: north, art3d: [ { model: "Art/3D/Foundation_Two_Corners_Original.glb", pos: {x: 1.5, y: -0.27, z: 0.5}, rot: {x: 0, y: 90, z: 0}, scale: {x: 1, y: 1, z: 1} } ], tags: [ "static" ] }
   foundation_Original_Two_Corners_s: { mapObject: Custom, dir: north, art3d: [ { model: "Art/3D/Foundation_Two_Corners_Original.glb", pos: {x: 0.5, y: -0.27, z: -1.5}, rot: {x: 0, y: 180, z: 0}, scale: {x: 1, y: 1, z: 1} } ], tags: [ "static" ] }

@@ -50,7 +50,7 @@ grid: |
 gridObjects:
 
   f2: [f, pillcab_closed_s]
-  g2: [f, b_s]
+  g2: [f, wedge_s, b_s]
 
   f3: [f]
   g3: [f]
@@ -69,7 +69,7 @@ gridObjects:
   i5: [f]
   j5: [f, syringecab_s]
 
-  c6: [f, applecab_s]
+  c6: [f, wedge_e, applecab_s]
   d6: [f]
   e6: [f]
   f6: [f, p3]
@@ -91,10 +91,10 @@ gridObjects:
 
   #Foundations, Walls and Lights
   f1: [wall_corner_se, lightbulb_s]
-  g1: [wall_s_rc, foundation_Original_Corner_SL_e, lightbulb_s]
+  g1: [wall_s_rc, lightbulb_s]
 
   e2: [lightbulb_e]
-  h2: [foundation_Original_FullTile_e]
+  h2: [foundation_Original_FullTile_e, foundation_Original_WallCorner_e]
 
   e3: [wall_e, lightbulb_e, wall_corner_se, lightbulb_s]
   h3: [foundation_Original_FullTile_e, foundation_Original_Corner_SL_e]
@@ -110,7 +110,7 @@ gridObjects:
   b6: [wall_e_lc, lightbulb_e, foundation_Original_FullTile_w]
   k6: [foundation_Original_Corner_SL_s]
 
-  c7: [foundation_Original_FullTile_s, foundation_Original_Corner_SL_w]
+  c7: [foundation_Original_FullTile_s, foundation_Original_WallCorner_s]
   d7: [foundation_Original_FullTile_w, foundation_Original_FullTile_s]
   i7: [foundation_Original_FullTile_s]
   j7: [foundation_Original_FullTile_s]
