@@ -7,4 +7,7 @@ Recorded screenshots for each sprint in our Trello board.
 An overview of our proposed design for the project.
 
 ## [Meeting log](meetingLog.md)
-A record of each meeting we do as a group outside of sprint meetings
+A record of each meeting we do as a group outside of sprint meetings.
+
+## [Report](report.md)
+WIP! The report document for our final submission.

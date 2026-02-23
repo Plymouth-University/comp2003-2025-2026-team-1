@@ -19,7 +19,8 @@ levels/                     # Level files
 +-- final/                  # Curated level files we have tested which match our requirements
 scripts/                    # Python scripts used in the project (like validating YAML files)
 logs/                       # Chat logs and decleration of any AI usage
-AGENTS.md                   # inital prompt provided to OpenCode agent
+AGENTS.md                   # Inital prompt provided to OpenCode agent
+README.md                   # The file you're reading right now!
 ```
 
 ## Proposed tools used
@@ -33,12 +34,3 @@ AGENTS.md                   # inital prompt provided to OpenCode agent
 | Co Operation modding tools | Testing levels in-engine |
 | YAML                       | Level format             |
 | Python                     | For project scripts      |
-
----
-
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/xGnTrW1S)
-[![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-2972f46106e565e64193e422d61a12cf1da4916b45550586e14ef0a7c637dd04.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=21437715)
-
-# COMP2003-2023
-
-Use this folder structure for your git repository. You may add additional folders as you see fit, but these basic folders provide the fundamental organization for evidences that need to be collected throughout the semester, so upload/commit them periodically.
