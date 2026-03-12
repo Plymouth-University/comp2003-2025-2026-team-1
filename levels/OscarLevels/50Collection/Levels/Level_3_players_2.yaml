@@ -1,0 +1,185 @@
+include: [ LevelsShared.yaml ]
+
+# Properties about the file like its creator
+fileProperties:
+  creatorName: OscarK
+
+# The Unity scene that will be loaded as background
+sceneName: BlueWorld
+
+cameraSettings:
+  postProcessing:
+    depthOfField: { enabled: true, focusDistance: 68, focalLength: 300, aperture: 1 }
+  target:
+    screenTargetX: 0.45
+    screenTargetY: 0.48
+    deadZoneWidth: 0.7
+    deadZoneHeight: 0.73
+    frameProportion: 0.70
+    mininmumFOV: 14
+  position:
+    offset: { x: -45, y: 32, z: -45 }
+
+grid: |
+  gm,__,__,__,__,__,  __,__,__,2b,__,__,__,__,2b,__,__,__,__,  __,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,  __,__,__,__,__,__,3h,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,  __,__,__,__,__,4a,3h,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,
+  __,__,__,3q,__,__,  3q,__,__,3q,__,__,3q,__,__,3q,__,__,3q,  __,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,  __,__,__,__,__,__,7b,__,__,__,__,__,7b,  __,__,__,__,__,__,__,__,__,
+  __,__,__,__,3h,__,  __,__,3h,__,4f,__,7h,__,4o,__,__,__,7h,  __,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,4r,  __,__,__,__,__,__,7b,__,__,__,__,__,7b,  __,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,  4a,__,__,__,__,__,7b,__,__,__,__,__,7b,  __,__,__,__,__,__,__,__,__,
+  
+  __,__,__,__,__,__,  __,__,__,c0,d0,e0,f0,g0,h0,i0,__,__,7b,  __,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,  __,__,__,c1,d1,e1,f1,g1,h1,i1,j1,__,7h,  __,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,  4b,__,b2,c2,d2,e2,f2,g2,h2,i2,j2,__,7b,  __,4a,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,  __,__,b3,c3,d3,e3,f3,g3,h3,i3,j3,__,7b,  __,__,__,__,__,__,__,__,__,
+  __,__,__,1e,__,__,  3h,__,b4,c4,d4,e4,f4,g4,h4,i4,j4,4a,7b,  __,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,7a,  7e,__,b5,c5,d5,e5,f5,g5,h5,i5,j5,__,7h,  __,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,  7b,__,b6,c6,d6,e6,f6,g6,h6,i6,j6,__,7b,  __,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,  7h,__,b7,c7,d7,e7,f7,g7,h7,i7,j7,3h,7b,  __,__,__,__,__,__,1b,__,__,
+  __,__,__,__,__,__,  7b,__,b8,c8,d8,e8,f8,g8,h8,i8,j8,__,7b,  __,4a,__,__,__,__,__,__,__,
+  __,__,__,1e,__,__,  7b,__,b9,c9,d9,e9,f9,g9,h9,i9,__,__,7h,  __,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,  7b,__,__,cA,dA,eA,fA,gA,hA,iA,__,__,7b,  __,__,__,__,__,__,1b,__,__,
+  
+  __,__,__,__,__,__,  7h,__,3h,__,__,__,__,__,__,__,__,__,7b,  __,__,__,__,__,__,__,__,__,
+  __,__,__,__,__,__,  7b,__,__,__,__,4d,__,__,__,3h,__,__,7b,  __,__,__,__,__,__,__,__,__,
+
+gridObjects:
+
+  c1: [f_Grey_LightWood, p1, floordeco21, walldeco3_s, walldeco21_e]
+  d1: [f_Grey_LightWood, walldeco6_s]
+  e1: [f_Grey_LightWood]
+  f1: [f_Grey_LightWood, door_brown_s]
+  g1: [f_Grey_LightWood]
+  h1: [f_Grey_LightWood, walldeco9_s]
+  i1: [f_Grey_LightWood, floordeco21, wedge_s, walldeco5_s]
+
+  c2: [f_Grey_LightWood, walldeco27_e]
+  d2: [f_Grey_LightWood, b_e]
+  e2: [f_Grey_LightWood]
+  f2: [f_Grey_LightWood, applecab_s]
+  g2: [f_Grey_LightWood]
+  h2: [f_Grey_LightWood, b_e]
+  i2: [f_Grey_LightWood]
+
+  c3: [f_Grey_LightWood]
+  d3: [f_Grey_LightWood, barrierglass2_s]
+  e3: [f_Grey_LightWood]
+  f3: [f_Grey_LightWood, barrierglass2_s]
+  g3: [f_Grey_LightWood, { id: patient, data: { id: pt8 } }]
+  h3: [f_Grey_LightWood, barrierglass2_s]
+  i3: [f_Grey_LightWood]
+
+  c4: [f_Grey_LightWood]
+  d4: [f_Grey_LightWood, barrierglass2_s]
+  e4: [f_Grey_LightWood]
+  f4: [f_Grey_LightWood, barrierglass2_s]
+  g4: [f_Grey_LightWood, { id: patient_edBanger, data: { id: pt1 } }]
+  h4: [f_Grey_LightWood, barrierglass2_s]
+  i4: [f_Grey_LightWood, { id: patient_childOliviaAndAvo, data: { id: pt5 } }]
+
+  c5: [f_Grey_LightWood, glass1_n]
+  d5: [f_Grey_LightWood, glass1_n]
+  e5: [f_Grey_LightWood, glass1_n]
+  f5: [f_Grey_LightWood, glass1_n]
+  g5: [f_Grey_LightWood, glass1_n]
+  h5: [f_Grey_LightWood, glass1_n]
+  i5: [f_Grey_LightWood, glasswithpost_s]
+
+  c6: [f_Grey_LightWood]
+  d6: [f_Grey_LightWood, barrierglass2_s]
+  e6: [f_Grey_LightWood, { id: patient_chris, data: { id: pt3 } }]
+  f6: [f_Grey_LightWood, barrierglass2_s]
+  g6: [f_Grey_LightWood]
+  h6: [f_Grey_LightWood, barrierglass2_s]
+  i6: [f_Grey_LightWood, { id: patient_chris_alt2, data: { id: pt7 } }]
+
+  c7: [f_Grey_LightWood]
+  d7: [f_Grey_LightWood, barrierglass2_s]
+  e7: [f_Grey_LightWood, { id: patient_edBanger_alt1, data: { id: pt6 } }]
+  f7: [f_Grey_LightWood, barrierglass2_s]
+  g7: [f_Grey_LightWood]
+  h7: [f_Grey_LightWood, barrierglass2_s]
+  i7: [f_Grey_LightWood]
+
+  c8: [f_Grey_LightWood, walldeco20_e]
+  d8: [f_Grey_LightWood, syringecab_s]
+  e8: [f_Grey_LightWood]
+  f8: [f_Grey_LightWood, b_e]
+  g8: [f_Grey_LightWood]
+  h8: [f_Grey_LightWood, pillcab_closed_s]
+  i8: [f_Grey_LightWood]
+
+  c9: [f_Grey_LightWood, floordeco21, wedge_e, walldeco12_e]
+  d9: [f_Grey_LightWood]
+  e9: [f_Grey_LightWood]
+  f9: [f_Grey_LightWood]
+  g9: [f_Grey_LightWood]
+  h9: [f_Grey_LightWood]
+  i9: [f_Grey_LightWood, p2, floordeco21]
+
+  #Foundations (background)
+
+  c0: [wall_corner_se_Red_Paint]
+  d0: [wall_s_Red_Paint]
+  e0: [window4_s_Red_Paint]
+  f0: [wall_s_Red_Paint]
+  g0: [window4_s_Red_Paint]
+  h0: [wall_s_Red_Paint]
+  i0: [wall_s_Red_Paint]
+
+  j1: [foundation_GreyWood_WallCorner_e]
+
+  b2: [wall_e_Red_Paint]
+  j2: [foundation_GreyWood_FullTile_e]
+
+  b3: [window4_e_Red_Paint]
+  j3: [foundation_GreyWood_FullTile_e]
+
+  b4: [wall_e_Red_Paint]
+  j4: [foundation_GreyWood_FullTile_e]
+
+  b5: [wall_e_Red_Paint, ticker_w]
+  j5: [foundation_GreyWood_FullTile_e]
+
+  b6: [wall_e_Red_Paint]
+  j6: [foundation_GreyWood_FullTile_e]
+
+  b7: [window4_e_Red_Paint]
+  j7: [foundation_GreyWood_FullTile_e]
+
+  b8: [wall_e_Red_Paint]
+  j8: [foundation_GreyWood_FullTile_e]
+
+  b9: [wall_e_Red_Paint]
+
+  cA: [foundation_GreyWood_WallCorner_s]
+  dA: [foundation_GreyWood_FullTile_s]
+  eA: [foundation_GreyWood_FullTile_s]
+  fA: [foundation_GreyWood_FullTile_s]
+  gA: [foundation_GreyWood_FullTile_s]
+  hA: [foundation_GreyWood_FullTile_s]
+  iA: [foundation_GreyWood_Corner_s]
+
+objectDefinitions:
+
+sounds:
+
+globalData:
+  #Starting patients
+  pt1: { health: 8, need: apple} #Ed
+  #pt2: { health: 8, need: pill, character: grace}
+  pt3: { health: 8, need: syringe} #Chris
+
+  # Spawning patients
+  #pt4: { health: 8, appearOnTurn: 3, need: syringe} #Chris alt 1
+  pt5: { health: 8, appearOnTurn: 3, need: apple} #childOliviaAndAvo
+  pt6: { health: 8, appearOnTurn: 3, need: pill} #Ed alt 1
+
+  pt7: { health: 8, appearOnTurn: 6, need: pill} #chris alt 2
+  pt8: { health: 8, appearOnTurn: 6, need: syringe, character: sammi}
+  #pt9: { health: 8, appearOnTurn: 6, need: apple}
