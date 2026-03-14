@@ -1,0 +1,150 @@
+include: [LevelsShared.yaml]
+
+# Properties about the file like its creator
+fileProperties:
+  creatorName: OscarK
+
+# The Unity scene that will be loaded as background.  Leave this unmodified for now.
+sceneName: OriginalWorld
+
+cameraSettings:
+  postProcessing:
+    depthOfField:
+      { enabled: true, focusDistance: 69, focalLength: 300, aperture: 1 }
+  target:
+    screenTargetX: 0.6
+    screenTargetY: 0.6
+    deadZoneWidth: 1.0
+    deadZoneHeight: 1.0
+    frameProportion: 1.0
+    mininmumFOV: 12
+  position:
+    offset: { x: -45, y: 32, z: -45 }
+
+grid: |
+  gm,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, 2b,__,__,__,2b,__,__,__,2b, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, 4c,__,__,__,__,__,__,4c,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,3h, __,__,__,__,3h,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,1b,__,__,__, __,__,__,__,__,__,__,__,__, __,__,3j,__,__,
+  __,__,__,__,__,__,__,7d, __,__,__,__,__,7a,7a,7g,7a, 7g,__,__,__,__,
+
+  __,__,__,__,__,__,__,7b, __,__,__,__,f1,g1,__,__,__, __,__,3j,__,__,
+  __,__,__,1b,__,__,__,7b, __,__,__,e2,f2,g2,h2,__,3h, __,__,__,__,__,
+  __,__,__,__,__,4b,__,7b, __,__,__,e3,f3,g3,h3,__,__, __,__,3j,__,__,
+  __,__,__,__,__,4a,__,7b, __,c4,d4,e4,f4,g4,h4,i4,j4, __,__,__,__,__,
+  __,__,__,__,__,__,__,7b, b5,c5,d5,e5,f5,g5,h5,i5,j5, k5,__,3n,__,__,
+  __,__,__,__,__,__,__,7b, b6,c6,d6,e6,f6,g6,h6,i6,j6, k6,__,__,__,__,
+  __,__,__,__,__,__,__,7b, __,c7,d7,e7,f7,g7,h7,i7,j7, __,__,3j,__,__,
+  __,__,__,__,__,__,3h,7b, __,__,__,e8,f8,g8,h8,__,__, __,__,__,__,__,
+  1g,__,__,__,__,__,__,7b, __,__,__,e9,f9,g9,h9,__,__, 4b,__,3j,__,__,
+  __,__,__,__,__,__,__,7h, __,__,__,__,fA,gA,__,__,__, __,__,__,__,__,
+
+  __,__,__,__,__,__,__,7c, 7a,7g,7a,7a,7a,7a,7a,7a,7a, 7g,__,3i,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,4f,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,2b,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+
+gridObjects:
+
+  f2: [f, pillcab_closed_s]
+  g2: [f, wedge_s, b_s]
+
+  f3: [f]
+  g3: [f]
+
+  e4: [f, { id: patient_chameleon, data: { id: pt3 } }, { id: patient_chameleon, data: { id: pt7 } }, { id: patient_chameleon, data: { id: pt11 } }]
+  f4: [f]
+  g4: [f]
+  h4: [f, { id: patient_chris, data: { id: pt2 } }, { id: patient, data: { id: pt5 } },{ id: patient, data: { id: pt10 } }]
+
+  c5: [f, b_pet_e]
+  d5: [f]
+  e5: [f]
+  f5: [f, p1]
+  g5: [f, p4]
+  h5: [f]
+  i5: [f]
+  j5: [f, syringecab_s]
+
+  c6: [f, wedge_e, applecab_s]
+  d6: [f]
+  e6: [f]
+  f6: [f, p3]
+  g6: [f, p2]
+  h6: [f]
+  i6: [f]
+  j6: [f, b_w]
+
+  e7: [f, { id: patient_edBanger, data: { id: pt1 } }, { id: patient_childOliviaAndAvo, data: { id: pt6 } }, { id: patient_chris_alt1, data: { id: pt9 } }]
+  f7: [f]
+  g7: [f]
+  h7: [f, { id: patient_chris_alt2, data: { id: pt4 } }, { id: patient_edBanger_alt1, data: { id: pt8 } }, { id: patient_chris, data: { id: pt12 } }]
+
+  f8: [f]
+  g8: [f]
+
+  f9: [f, b_n]
+  g9: [f]
+
+  #Foundations, Walls and Lights
+  f1: [wall_corner_se, lightbulb_s]
+  g1: [wall_s_rc, lightbulb_s]
+
+  e2: [lightbulb_e]
+  h2: [foundation_Original_FullTile_e, foundation_Original_WallCorner_e]
+
+  e3: [wall_e, lightbulb_e, wall_corner_se, lightbulb_s]
+  h3: [foundation_Original_FullTile_e, foundation_Original_Corner_SL_e]
+
+  c4: [wall_corner_se, lightbulb_s]
+  d4: [wall_s, lightbulb_e, lightbulb_s]
+  i4: [foundation_Original_FullTile_n]
+  j4: [foundation_Original_FullTile_n]
+
+  b5: [wall_e, lightbulb_e]
+  k5: [foundation_Original_Corner_SR_e]
+
+  b6: [wall_e_lc, lightbulb_e, foundation_Original_FullTile_w]
+  k6: [foundation_Original_Corner_SL_s]
+
+  c7: [foundation_Original_FullTile_s, foundation_Original_WallCorner_s]
+  d7: [foundation_Original_FullTile_w, foundation_Original_FullTile_s]
+  i7: [foundation_Original_FullTile_s]
+  j7: [foundation_Original_FullTile_s]
+
+  e8: [foundation_Original_FullTile_w, foundation_Original_FullTile_s, foundation_Original_Corner_SL_w]
+  h8: [foundation_Original_FullTile_e, foundation_Original_Corner_SR_s]
+
+  e9: [foundation_Original_FullTile_w]
+  h9: [foundation_Original_FullTile_e]
+
+  fA: [foundation_Original_Corner_SL_w]
+  gA: [foundation_Original_Corner_SR_s]
+
+objectDefinitions:
+# override the definitions in LevelsShared for level specific adjustments
+
+sounds:
+
+globalData:
+  # Starting patients
+  pt1: { health: 8, need: syringe } #Ed
+  pt2: { health: 8, need: pill } #Chris
+  pt3: { health: 8, need: apple } #chameleon
+  pt4: { health: 8, need: pill } # Chris alt 2
+
+  # Spawning patients
+  pt5: { health: 8, appearOnTurn: 3, need: pill, character: grace }
+  pt6: { health: 8, appearOnTurn: 3, need: apple } #childOliviaAndAvo
+  pt7: { health: 8, appearOnTurn: 3, need: apple } #chameleon
+  pt8: { health: 8, appearOnTurn: 3, need: syringe } #Ed alt 1
+
+  pt9: { health: 8, appearOnTurn: 6, need: pill } #chris alt 1
+  pt10: { health: 8, appearOnTurn: 6, need: syringe, character: sammi }
+  pt11: { health: 8, appearOnTurn: 6, need: syringe } #chameleon
+  pt12: { health: 8, appearOnTurn: 6, need: apple } #Chris
