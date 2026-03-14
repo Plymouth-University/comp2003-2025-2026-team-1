@@ -4,6 +4,10 @@
 
 The first step is to copy the entire **up to date** `finalpackage/` folder into your game's `PlayerPackages` folder. normally located under `SteamLibrary\steamapps\common\Co OPERATION MultiTurn\Co OPERATION_Data\StreamingAssets\PlayerPackages`
 
+## Copy Art and Code folder from `CoOperation/` folder
+
+On the GitHub, the `Art/` and `Code/` folder are empty as there are lots of files. Just copy the in-game `Art/` and `Code/` from `SteamLibrary\steamapps\common\Co OPERATION MultiTurn\Co OPERATION_Data\StreamingAssets\CoOperation`
+
 ## Make sure you add your ownership to your level
 
 Make sure to add your name in `creatorName:` like below example
@@ -15,7 +19,7 @@ fileProperties:
 
 ## Renaming your levels
 
-first you will need to rename your levels to match the order of current levels in under `finalpackage/Levels`. For example, if you're working on `Level_1_players_2.yaml` and it is ready to be added to `finalpackage/`, you need to rename it to `Level_$level_players_2.yaml` where `$level` is the next available level number.
+first you will need to rename your levels to match the order of current levels in under `finalpackage/Levels/`. For example, if you're working on `Level_1_players_2.yaml` and it is ready to be added to `finalpackage/`, you need to rename it to `Level_$level_players_2.yaml` where `$level` is the next available level number.
 
 ## Updating package.yaml
 
