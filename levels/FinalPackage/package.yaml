@@ -1,0 +1,64 @@
+# Properties about the file like its creator
+fileProperties:
+  creatorName: Oscar Kennedy, David Williams, Harrison McDevitt, Mervin Manuel
+
+# Package Info
+# Name and description will be displayed in the user interface
+packageName: Plymouth University Project Package
+packageDescription: This package contains the levels for our end of year project. It was created by Oscar Kennedy, David Williams, Harrison McDevitt, and Mervin Manuel.
+packageVersion: "1.0.0"
+
+# Levels
+# All of the levels contained within this package
+# Each level has the following properties:
+#   - levelId: Unique id for the level
+#   - levelName: The name that will displayed in the user interface
+#   - unlockedByDefault: If true, the level will be playable from the start
+#                          If false, the previous level will have to be completed first
+#   - minCuresToProgress: The minimum number of patients that must be cured to
+#                           complete the level and progress to the next one
+#   - levelCutscene: Name (if any) of the cutscene to be played
+#   - levelFiles: List of yaml files that define this level
+#       -- playerCount: If this many people are playing, the level file will be used
+#       -- fileName: Name of the yaml file to be loaded
+
+levels:
+  - levelId: level1
+    levelName: Level 1
+    unlockedByDefault: true
+    minCuresToProgress: 1
+    levelCutscene: "" # not yet used
+    levelFiles:
+      - { playerCount: 2, fileName: "Level_1_players_2" }
+      - { playerCount: 3, fileName: "Level_1_players_3" }
+      - { playerCount: 4, fileName: "Level_1_players_4" }
+
+  - levelId: level2
+    levelName: Level 2
+    unlockedByDefault: false
+    minCuresToProgress: 1
+    levelCutscene: "" # not yet used
+    levelFiles:
+      - { playerCount: 2, fileName: "Level_2_players_2" }
+      - { playerCount: 3, fileName: "Level_2_players_3" }
+      - { playerCount: 4, fileName: "Level_2_players_4" }
+
+  - levelId: level3
+    levelName: Level 3
+    unlockedByDefault: false
+    minCuresToProgress: 1
+    levelCutscene: "" # not yet used
+    levelFiles:
+      - { playerCount: 2, fileName: "Level_3_players_2" }
+      - { playerCount: 3, fileName: "Level_3_players_3" }
+      - { playerCount: 4, fileName: "Level_3_players_4" }
+
+  - levelId: level4
+    levelName: Level 4
+    unlockedByDefault: false
+    minCuresToProgress: 1
+    levelCutscene: "" # not yet used
+    levelFiles:
+      - { playerCount: 2, fileName: "Level_4_players_2" }
+      - { playerCount: 3, fileName: "Level_4_players_3" }
+      - { playerCount: 4, fileName: "Level_4_players_4" }
