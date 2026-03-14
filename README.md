@@ -9,17 +9,18 @@ Authors: @davtheconquerer, @merv300, @horsepie, @birdsky24
 ```
 assets/                     # Contains images used in the repo (e.g. Trello screenshots)
 docs/                       # Documentation
++-- report/                 # Contains our final report and build to pdf script
+ +-- build.sh               # build the report.md into report.pdf
+ +-- report.md              # our full report in markdown format
+ +-- report.pdf             # our fully exported report in pdf format
 +-- README.md               # Overview and outline of documentation
 +-- designDocument.md       # Contains details on our final design plan
 +-- meetingLog.md           # Records of our meetings (in Minutes)
 +-- trelloScreenshots.md    # Screenshots of our Trello plan
-levels/                     # Level files
-+-- README.md               # Details on individual level files
-+-- generated/              # Output directory for algorithmically generated levels
-+-- final/                  # Curated level files we have tested which match our requirements
-scripts/                    # Python scripts used in the project (like validating YAML files)
-logs/                       # Chat logs and decleration of any AI usage
-AGENTS.md                   # Inital prompt provided to OpenCode agent
+levels/                     # Level and Package files
++-- finalpackage/           # All our individual made levels put together in one place
+ +-- README.md              # Outlines how to use finalpackage folder
+scripts/                    # Python and Lua scripts used in the project (like validating YAML files)
 README.md                   # The file you're reading right now!
 ```
 
@@ -28,9 +29,8 @@ README.md                   # The file you're reading right now!
 | Tool/technology            | Purpose                  |
 | -------------------------- | ------------------------ |
 | Visual Studio Code         | IDE/Text editor          |
-| OpenCode                   | AI coding agent          |
-| Ollama                     | Local LLM platform       |
 | Git                        | Version control          |
 | Co Operation modding tools | Testing levels in-engine |
 | YAML                       | Level format             |
 | Python                     | For project scripts      |
+| Lua                        | More project scripts     |
