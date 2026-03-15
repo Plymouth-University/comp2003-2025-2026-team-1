@@ -94,7 +94,7 @@ gridObjects:
   e7: [f, { id: patient_edBanger, data: { id: pt1 } }, { id: patient_chris_alt1, data: { id: pt5 } }]
   f7: [f]
   g7: [f]
-  h7: [f, { id: patient_childOliviaAndAvo, data: { id: pt4 } }]
+  h7: [f, { id: patient_chris_alt2, data: { id: pt4 } }]
 
   f8: [f, glass1_s]
   g8: [f, glass1_s]
@@ -147,9 +147,9 @@ globalData:
   pt1: { health: 8, need: pill } #Ed
   pt2: { health: 8, need: pill } #Chris
   # Spawning patients
-  pt3: { health: 8, appearOnTurn: 3, need: syringe, character: grace }
-  pt4: { health: 8, appearOnTurn: 3, need: syringe } #childOliviaAndAvo
+  pt3: { health: 8, appearOnTurn: 4, need: syringe, character: grace }
+  pt4: { health: 8, appearOnTurn: 4, need: syringe } #Chris alt 2
   
-  pt5: { health: 8, appearOnTurn: 6, need: pill } #chris alt
-  pt6: { health: 8, appearOnTurn: 6, need: syringe, character: sammi }
+  pt5: { health: 8, appearOnTurn: 8, need: pill } #chris alt 1
+  pt6: { health: 8, appearOnTurn: 8, need: syringe, character: sammi }
 
