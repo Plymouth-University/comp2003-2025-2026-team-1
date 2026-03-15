@@ -80,7 +80,7 @@ gridObjects:
   f4: [f_Grey_LightWood, barrierglass2_s]
   g4: [f_Grey_LightWood, { id: patient_edBanger, data: { id: pt1 } }]
   h4: [f_Grey_LightWood, barrierglass2_s]
-  i4: [f_Grey_LightWood, { id: patient_childOliviaAndAvo, data: { id: pt5 } }]
+  i4: [f_Grey_LightWood, { id: patient, data: { id: pt5 } }]
 
   c5: [f_Grey_LightWood, glass1_n]
   d5: [f_Grey_LightWood, glass1_n]
@@ -176,10 +176,10 @@ globalData:
   pt3: { health: 6, need: syringe} #Chris
 
   # Spawning patients
-  pt4: { health: 4, appearOnTurn: 3, need: syringe} #Chris alt 1
-  pt5: { health: 6, appearOnTurn: 3, need: apple} #childOliviaAndAvo
-  pt6: { health: 6, appearOnTurn: 3, need: pill} #Ed alt 1
+  pt4: { health: 4, appearOnTurn: 4, need: syringe} #Chris alt 1
+  pt5: { health: 6, appearOnTurn: 4, need: apple} #random
+  pt6: { health: 6, appearOnTurn: 4, need: pill} #Ed alt 1
 
-  pt7: { health: 6, appearOnTurn: 6, need: pill} #chris alt 2
-  pt8: { health: 6, appearOnTurn: 6, need: syringe, character: sammi}
-  pt9: { health: 4, appearOnTurn: 6, need: apple}
+  pt7: { health: 6, appearOnTurn: 8, need: pill} #chris alt 2
+  pt8: { health: 6, appearOnTurn: 8, need: syringe, character: sammi}
+  pt9: { health: 4, appearOnTurn: 8, need: apple} #random

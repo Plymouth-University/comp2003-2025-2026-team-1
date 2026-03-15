@@ -55,7 +55,7 @@ gridObjects:
   f3: [f]
   g3: [f]
 
-  e4: [f, { id: patient_chameleon, data: { id: pt3 } }, { id: patient_chameleon, data: { id: pt6 } }, { id: patient_chameleon, data: { id: pt9 } }]
+  e4: [f, { id: patient_chris_alt1, data: { id: pt3 } }, { id: patient_chris_alt1, data: { id: pt6 } }, { id: patient_edBanger, data: { id: pt9 } }]
   f4: [f]
   g4: [f]
   h4: [f, { id: patient_chris, data: { id: pt2 } }, { id: patient, data: { id: pt4 } },{ id: patient, data: { id: pt8 } }]
@@ -78,7 +78,7 @@ gridObjects:
   i6: [f]
   j6: [f, b_w]
 
-  e7: [f, { id: patient_edBanger, data: { id: pt1 } }, { id: patient_childOliviaAndAvo, data: { id: pt5 } }, { id: patient_chris_alt1, data: { id: pt7 } }]
+  e7: [f, { id: patient_edBanger, data: { id: pt1 } }, { id: patient_edBanger_alt1, data: { id: pt5 } }, { id: patient_chris_alt1, data: { id: pt7 } }]
   f7: [f]
   g7: [f]
   h7: [f]
@@ -133,13 +133,13 @@ globalData:
   # Starting patients
   pt1: { health: 8, need: pill } #Ed
   pt2: { health: 8, need: pill } #Chris
-  pt3: { health: 8, need: apple } #chameleon
+  pt3: { health: 8, need: apple } #Chris alt 1
 
   # Spawning patients
-  pt4: { health: 8, appearOnTurn: 3, need: syringe, character: grace }
-  pt5: { health: 8, appearOnTurn: 3, need: syringe } #childOliviaAndAvo
-  pt6: { health: 8, appearOnTurn: 3, need: apple } #chameleon
+  pt4: { health: 8, appearOnTurn: 4, need: syringe, character: grace }
+  pt5: { health: 8, appearOnTurn: 4, need: syringe } #Ed alt 1
+  pt6: { health: 8, appearOnTurn: 4, need: apple } #Chris alt 2
 
-  pt7: { health: 8, appearOnTurn: 6, need: pill } #chris alt
-  pt8: { health: 8, appearOnTurn: 6, need: syringe, character: sammi }
-  pt9: { health: 8, appearOnTurn: 6, need: apple } #chameleon
+  pt7: { health: 8, appearOnTurn: 8, need: pill } #chris alt 1
+  pt8: { health: 8, appearOnTurn: 8, need: syringe, character: sammi }
+  pt9: { health: 8, appearOnTurn: 8, need: apple } #Ed
