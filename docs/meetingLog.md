@@ -13,3 +13,6 @@
 | 20/01/26 | Planning next steps/distributing tasks     | All           | 100                |
 | 11/02/26 | Checking group progress                    | All           | 45                 |
 | 17/02/26 | Discussion on keeping GitHub up to date    | All           | 20                 |
+| 25/02/26 | Discussion about final AI implementation   | All           | 65                 |
+| 05/03/26 | Further talks about level generation       | Oscar, Mervin | 45                 |
+| 13/03/26 | Discussing report content + structure      | All           | 25                 |
