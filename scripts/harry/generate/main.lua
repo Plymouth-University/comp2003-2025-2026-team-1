@@ -129,10 +129,22 @@ local function generateYAML(width, height)
     table.insert(yaml, "")
     table.insert(yaml, "grid: |")
     
+    local prevLineNum = 0
     for line in gridStr:gmatch("[^\n]+") do
+        local lineNum = 0
+        if line:gmatch("%S") then
+            lineNum = lineNum + 1
+        end
+        
+        -- Add blank line after row 8 (before middle section) and after row 8+height (before footer)
+        if prevLineNum == 8 or prevLineNum == 8 + height then
+            table.insert(yaml, "")
+        end
+        
         if line:gmatch("%S") then
             table.insert(yaml, "  " .. line)
         end
+        prevLineNum = prevLineNum + 1
     end
     
     table.insert(yaml, "")
@@ -185,13 +197,25 @@ local function generateYAML(width, height)
         return aColNum < bColNum
     end)
     
+    local prevRow = nil
     for _, key in ipairs(sortedKeys) do
         local objs = gridObjects[key]
+        
+        -- Get the row letter from the key
+        local currentRow = key:sub(-1)
+        
+        -- Add blank line when row changes
+        if prevRow ~= nil and currentRow ~= prevRow then
+            table.insert(yaml, "")
+        end
+        
         if #objs == 0 then
             table.insert(yaml, "  " .. key .. ": []")
         else
             table.insert(yaml, "  " .. key .. ": [" .. table.concat(objs, ", ") .. "]")
         end
+        
+        prevRow = currentRow
     end
     
     table.insert(yaml, "")
