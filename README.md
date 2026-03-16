@@ -21,6 +21,11 @@ levels/                     # Level and Package files
 +-- finalpackage/           # All our individual made levels put together in one place
  +-- README.md              # Outlines how to use finalpackage folder
 scripts/                    # Python and Lua scripts used in the project (like validating YAML files)
++-- dav/                    # Dav's scripts
+ +-- delete_blank.py        # Cleans up levels by removing empty gridObjects
++-- harry/                  # Harry's scripts
+ +-- analyse/main.lua       # Reads level YAML file and outputs level statistics. Useful for review
+ +--generate/main.lua       # Speeds up level creation dramatically by automatically creating valid level files
 README.md                   # The file you're reading right now!
 ```
 
