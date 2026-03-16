@@ -62,3 +62,13 @@ levels:
       - { playerCount: 2, fileName: "Level_4_players_2" }
       - { playerCount: 3, fileName: "Level_4_players_3" }
       - { playerCount: 4, fileName: "Level_4_players_4" }
+  
+  - levelId: level5
+    levelName: Level 5
+    unlockedByDefault: false
+    minCuresToProgress: 1
+    levelCutscene: "" # not yet used
+    levelFiles:
+      - { playerCount: 2, fileName: "Level_5_players_2" }
+      - { playerCount: 3, fileName: "Level_5_players_3" }
+      - { playerCount: 4, fileName: "Level_5_players_4" }
