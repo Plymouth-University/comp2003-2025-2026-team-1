@@ -1,9 +1,11 @@
-local yaml = require "lyaml"
-local grid = require "harry.grid"
-local objects = require "harry.objects"
-local patients = require "harry.patients"
+package.path = package.path .. ";../shared/?.lua"
 
-local filePath = arg[1] or "../levels/OscarLevels/First Level Recreated/Level_1_players_2.yaml"
+local yaml = require "lyaml"
+local grid = require "grid"
+local objects = require "objects"
+local patients = require "patients"
+
+local filePath = arg[1] or "../../../levels/OscarLevels/First Level Recreated/Level_1_players_2.yaml"
 
 local file = io.open(filePath, "r")
 if not file then
