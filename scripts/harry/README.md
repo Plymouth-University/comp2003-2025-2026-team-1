@@ -29,6 +29,22 @@ cd scripts/harry/generate
 lua main.lua [--width N] [--height N]
 ```
 
+Options:
+- `--width N` or `-w N`: Width of the playable area (default: 9, columns a-i)
+- `--height N` or `-h N`: Height of the playable area (default: 10, rows 1-9 and A)
+
+The generator places p1 and p2 at the center of the playable area.
+
+Example:
+```bash
+lua main.lua --width 12 --height 8
+```
+
+Output can be redirected to a file:
+```bash
+lua main.lua > my_new_level.yaml
+```
+
 ## Shared Modules
 The `shared/` directory contains common Lua modules used by both scripts:
 - `grid.lua` - Grid dimension and cell counting utilities
