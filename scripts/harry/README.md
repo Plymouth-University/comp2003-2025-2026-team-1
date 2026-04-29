@@ -60,3 +60,6 @@ The `shared/` directory contains common Lua modules used by both scripts:
 | `shared/grid.lua`     | Grid utility functions    |
 | `shared/objects.lua`  | Object utility functions  |
 | `shared/patients.lua` | Patient utility functions |
+
+
+Use images with AI.

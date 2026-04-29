@@ -84,7 +84,11 @@ local function generateGridObjects(width, height)
         table.insert(rows, getRowLetter(i))
     end
     
-    -- Calculate p1 and p2 positions (center of the grid)
+    local cols = {}
+    for i = 1, width do
+        table.insert(cols, getColumnLetter(i))
+    end
+    
     local p1Row = math.floor(height / 2)
     local p2Row = p1Row + 1
     local p1Col = math.floor(width / 2) + 1
@@ -102,6 +106,26 @@ local function generateGridObjects(width, height)
                 objects[key] = {"p2"}
             else
                 objects[key] = {}
+            end
+        end
+    end
+    
+    -- Add walls on north side (row 1)
+    for _, col in ipairs(cols) do
+        local key = col .. rows[1]
+        if objects[key] then
+            table.insert(objects[key], "wall_s")
+        end
+    end
+    
+    -- Add walls on west side (column a)
+    for _, row in ipairs(rows) do
+        local key = cols[1] .. row
+        if objects[key] then
+            if row == rows[1] then
+                table.insert(objects[key], "wall_corner_se")
+            else
+                table.insert(objects[key], "wall_e")
             end
         end
     end

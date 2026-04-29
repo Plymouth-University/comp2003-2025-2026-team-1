@@ -39,17 +39,17 @@ grid: |
   __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
 
 gridObjects:
-  a1: []
-  b1: []
-  c1: []
-  d1: []
-  e1: []
-  f1: []
-  g1: []
-  h1: []
-  i1: []
+  a1: [wall_s, wall_corner_se]
+  b1: [wall_s]
+  c1: [wall_s]
+  d1: [wall_s]
+  e1: [wall_s]
+  f1: [wall_s]
+  g1: [wall_s]
+  h1: [wall_s]
+  i1: [wall_s]
 
-  a2: []
+  a2: [wall_e]
   b2: []
   c2: []
   d2: []
@@ -59,7 +59,7 @@ gridObjects:
   h2: []
   i2: []
 
-  a3: []
+  a3: [wall_e]
   b3: []
   c3: []
   d3: []
@@ -69,7 +69,7 @@ gridObjects:
   h3: []
   i3: []
 
-  a4: []
+  a4: [wall_e]
   b4: []
   c4: []
   d4: []
@@ -79,7 +79,7 @@ gridObjects:
   h4: []
   i4: []
 
-  a5: []
+  a5: [wall_e]
   b5: []
   c5: []
   d5: []
@@ -89,7 +89,7 @@ gridObjects:
   h5: []
   i5: []
 
-  a6: []
+  a6: [wall_e]
   b6: []
   c6: []
   d6: []
@@ -99,7 +99,7 @@ gridObjects:
   h6: []
   i6: []
 
-  a7: []
+  a7: [wall_e]
   b7: []
   c7: []
   d7: []
@@ -109,7 +109,7 @@ gridObjects:
   h7: []
   i7: []
 
-  a8: []
+  a8: [wall_e]
   b8: []
   c8: []
   d8: []
@@ -119,7 +119,7 @@ gridObjects:
   h8: []
   i8: []
 
-  a9: []
+  a9: [wall_e]
   b9: []
   c9: []
   d9: []
@@ -129,7 +129,7 @@ gridObjects:
   h9: []
   i9: []
 
-  aA: []
+  aA: [wall_e]
   bA: []
   cA: []
   dA: []
