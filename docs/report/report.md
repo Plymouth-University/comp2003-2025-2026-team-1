@@ -1,118 +1,65 @@
-# 1. First Section
 
-This text should be pretty easy to edit since its in markdown. This text is *italicised*, this text is **bold**, this text is `monospace`, this is a [hyperlink](https://youtu.be/dQw4w9WgXcQ). 
+# Co Operation Multi-Turn AI Level Generation Project
 
-Here is a quote:
+Client: Shaz Yousaf - Co Operation Multi-turn
 
-> "Wowee!" - Some guy
+Group 1
 
-Here is a list:
+Group Members: Oscar Kennedy, David Williams, Mervin Manuel, Harrison McDevitt
 
-- This is a bullet point list
-  - This is a sub-item
-- This is the second item
-
-Have another list:
-
-1. **Entity 1** - This is a numbered list.
-2. **Entity 2** - it is pretty *cool*.
-
-Now here is a table:
-
-| Row 1 | Row 2 |
+| Group Members | Role |
 |---|---|
-| First row | 42  |
-| Second row | **bold item** |
-| Final row | `monospace text` |
+| David Williams | Group Admin & Python Automation |
+| Harrison McDevitt | AI Research & Lua |
+| Oscar Kennedy | Lead Level Designer |
+| Mervin Manuel | GUI Level Editor & Secondary Group Admin |
 
-Here is some Python code:
+# Introduction
 
-```python
-def double(value):
-    result = value * 2
-    return result
-```
+# Project Management
 
-Here is some Lua code:
-```lua
-function double(value)
-    local result = value * 2
-    return result
-end
-```
+# Design
 
-Here is example YAML:
-```yaml
-# comment
-key: "value"
-name: "bob"
-alive: true
-age: 67
-list:
-  - item 1
-  - item 2
-subentry:
-  nested: true
-  anotherList:
-  - awesome
-```
+## UMLs
 
-You can also use this for ASCII art.
+<!Harry Add UML Diagrams here>
 
-```
-+------------------+     +------------------+
-|    Component A   | --> |    Component B   |
-+------------------+     +------------------+
-         |                        |
-         v                        v
-+------------------+     +------------------+
-|    Component C   | --> |    Component D   |
-+------------------+     +------------------+
-```
+## David's Python Script
 
-Remember to reference information. Did you know ducks eat rocks?[^1] They also a type of waterfowl.[^2] If it isn't clear, this is showcasing how referencing text works. The references section is at the bottom of the report. 
+<!David Add your python snippets here and talk about your old level gen>
 
-Finally let me try an image:
+# Quality Assurance
 
-![Image description](../../assets/Level\ 1-50.png)
+<!Harry Add Your Testing here>
 
-You can also do one from a link like so:
+# Conclusion
 
-![Screenshot of a cool game ;)](https://horsepie.neocities.org/assets/story4.png)
+Our team managed to create a gui-based level editor, 6 levels, python scripts for automation.
 
-There are some additional Markdown features listed [here](https://www.markdownguide.org/extended-syntax/) which you may want to try.
+The original requirements were to build an AI tool to generate levels and we were unable to do that. However, we have made tools to make the level design quicker and provided python scripts that have a skills.md which can be used to train AI models in the future for full automation.
 
-## 1.1 Subsection
+## Problems we faced
 
-This is useful for splitting up long sections of the report
+### Hesitant Decision Making
 
-### 1.1.1 You can even go further than that, up to 5 I believe
+Our team struggled to settle on an approach until halfway through semester 2. These caused lot's of delays for our project as we had to scrap lots of hardwork.
 
-Awesome.
+# References
 
-A horizontal line can be used below to seperate major sections.
+# Appendix
 
----
+## Oscar Kennedy Personal Reflection
 
-# 2. Example text
+<!Oscar add your personal reflection here - less than 1000 words>
 
- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer luctus felis sed libero vestibulum ullamcorper. Nam viverra bibendum ipsum sed eleifend. Nullam mattis nibh at gravida placerat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec cursus odio odio, eget interdum felis tincidunt in. Suspendisse vel mauris vel tellus interdum suscipit et id nisl. Aliquam nec mi tortor. Integer ultricies at quam vel egestas. Phasellus a nisl fringilla tortor cursus eleifend. Proin consectetur lorem vitae leo tincidunt, vel tincidunt odio auctor. Donec consequat turpis lectus, sit amet varius ante tempor in. Duis placerat elementum ullamcorper. Aenean mattis elit nulla, gravida eleifend arcu iaculis quis.
+## David Williams Personal Reflection
 
-Maecenas eu urna ligula. In porta efficitur leo non fringilla. Suspendisse feugiat, lorem vitae congue blandit, elit metus gravida magna, in ultrices arcu velit ut eros. Praesent volutpat sem a mauris ornare blandit. Maecenas rutrum ligula lobortis euismod scelerisque. Nullam facilisis, risus eget rhoncus facilisis, orci dolor bibendum sapien, id pulvinar massa nisi sollicitudin tellus. Morbi pretium, est sed ultricies vulputate, mauris tellus pretium sapien, vel vulputate lacus lacus at diam.
+<!David add your personal reflection here - less than 1000 words>
 
-Vestibulum venenatis bibendum sem. Morbi porta placerat vehicula. Quisque venenatis porttitor mauris, non tincidunt massa ultricies pharetra. Quisque rutrum massa vel odio aliquam, a lacinia augue sodales. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam ultrices metus sit amet lorem facilisis, eleifend cursus tellus dictum. Nunc convallis cursus mauris, suscipit laoreet ligula. Donec aliquam massa sapien, in efficitur diam dignissim vel. Maecenas porta, tortor vulputate rutrum pulvinar, leo metus scelerisque sem, vel cursus eros odio a lectus. Nunc pretium nisi nisi, vel pulvinar nisi iaculis ac. Quisque elementum, quam condimentum consequat tristique, libero arcu imperdiet purus, eget hendrerit risus orci nec lorem. Pellentesque ac posuere quam. Ut sit amet tellus euismod, placerat dolor id, tincidunt orci. Vestibulum tincidunt lorem pulvinar enim commodo, sit amet pellentesque ligula laoreet. Phasellus quis elit eget nisi congue imperdiet. Vivamus metus sem, aliquet eu neque at, hendrerit fringilla sapien.
+## Mervin Manuel Personal Reflection
 
-Etiam in nisi metus. In malesuada, elit vitae aliquam euismod, neque arcu ultricies justo, bibendum luctus purus orci vel tellus. In accumsan ante et risus pharetra consectetur. Cras vehicula pellentesque congue. Nam eu justo varius, tincidunt nulla nec, molestie lorem. Praesent sit amet lorem rhoncus felis suscipit aliquet. Aliquam scelerisque felis vel libero blandit, id euismod neque pellentesque. 
+<!Mervin add your personal reflection here - less than 1000 words>
 
----
+## Harrison McDevitt Personal Reflection
 
-## References
-
-This is how you format sources The only annoying thing as that you need to duplicate the list as by default the sources only appear where they are first cited:
-
-1: Duck facts: [10 Intersting Facts About Ducks](https://www.thefactsite.com/duck-facts/)
-
-2: Duck info: [Duck - Wikipedia](https://en.wikipedia.org/wiki/Duck)
-
-[^1]: Duck facts: [10 Intersting Facts About Ducks](https://www.thefactsite.com/duck-facts/)
-[^2]: Duck info: [Duck - Wikipedia](https://en.wikipedia.org/wiki/Duck)
+<!Harry add your personal reflection here - less than 1000 words>
