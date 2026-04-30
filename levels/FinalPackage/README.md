@@ -4,7 +4,7 @@
 
 The first step is to copy the entire **up to date** `finalpackage/` folder into your game's `PlayerPackages` folder. normally located under `SteamLibrary\steamapps\common\Co OPERATION MultiTurn\Co OPERATION_Data\StreamingAssets\PlayerPackages`
 
-## Copy Art and Code folder from `CoOperation/` folder
+## Copy Art, Sounds and Code folders from `CoOperation/` folder
 
 On the GitHub, the `Art/`, `Sounds/` and `Code/` folder are empty as there are lots of files. Just copy the in-game `Art/`, `Sounds/` and `Code/` from `SteamLibrary\steamapps\common\Co OPERATION MultiTurn\Co OPERATION_Data\StreamingAssets\CoOperation`
 
