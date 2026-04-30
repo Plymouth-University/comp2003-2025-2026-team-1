@@ -6,7 +6,7 @@ The first step is to copy the entire **up to date** `finalpackage/` folder into 
 
 ## Copy Art and Code folder from `CoOperation/` folder
 
-On the GitHub, the `Art/` and `Code/` folder are empty as there are lots of files. Just copy the in-game `Art/` and `Code/` from `SteamLibrary\steamapps\common\Co OPERATION MultiTurn\Co OPERATION_Data\StreamingAssets\CoOperation`
+On the GitHub, the `Art/`, `Sounds/` and `Code/` folder are empty as there are lots of files. Just copy the in-game `Art/`, `Sounds/` and `Code/` from `SteamLibrary\steamapps\common\Co OPERATION MultiTurn\Co OPERATION_Data\StreamingAssets\CoOperation`
 
 ## Make sure you add your ownership to your level
 
