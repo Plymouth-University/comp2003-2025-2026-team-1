@@ -2,7 +2,7 @@ include: [ LevelsShared.yaml ]
 
 # Properties about the file like its creator
 fileProperties:
-  creatorName: Mind Feast Games
+  creatorName: OscarK
 
 # The Unity scene that will be loaded as background
 sceneName: BlueWorld
