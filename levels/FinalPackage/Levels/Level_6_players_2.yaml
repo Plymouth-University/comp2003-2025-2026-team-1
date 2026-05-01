@@ -11,7 +11,7 @@ cameraSettings:
   postProcessing:
     depthOfField: { enabled: true, focusDistance: 69, focalLength: 300, aperture: 1 }
   target:
-    screenTargetX: 0.55
+    screenTargetX: 0.5
     screenTargetY: 0.48
     deadZoneWidth: 0.7
     deadZoneHeight: 0.73
@@ -74,10 +74,10 @@ gridObjects:
   a3: [wall_e]
   b3: [f]
   c3: [f]
-  d3: [f, p4]
+  d3: [f]
   e3: [f]
   f3: [f]
-  g3: [f, p1]
+  g3: [f]
   h3: [f]
   i3: [f]
   j3: [foundation_Original_FullTile_e]
@@ -112,7 +112,7 @@ gridObjects:
   
   a7: [window2_e]
   b7: [f]
-  c7: [f, p2]
+  c7: [f, p1]
   d7: [f]
   e7: [foundation_Original_FullTile_e]
 
@@ -121,7 +121,7 @@ gridObjects:
   j7: [foundation_Original_FullTile_e]
   
   a8: [wall_e]
-  b8: [f, { id: patient_chris_alt2, data: { id: pt3 } }]
+  b8: [f]
   c8: [f]
   d8: [f, { id: patient_edBanger, data: { id: pt1 } }]
   e8: [foundation_Original_FullTile_e]
@@ -139,7 +139,7 @@ gridObjects:
   
   g9: [wall_e]
   h9: [f]
-  i9: [f, p3]
+  i9: [f, p2]
   j9: [foundation_Original_FullTile_e]
   
   aA: [wall_e]
