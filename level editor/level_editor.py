@@ -12,6 +12,7 @@ import os
 from pathlib import Path
 from typing import Dict, List, Any, Optional, Tuple, Set
 import re
+import copy
 
 # PIL/Pillow for image handling
 try:
@@ -594,6 +595,11 @@ class LevelEditor:
         self.painting = False  # Whether right-click painting is active
         self.erasing = False  # Whether Ctrl+Right-click eraser mode is active
         
+        # Undo/Redo system
+        self.undo_stack = []  # History of previous states
+        self.redo_stack = []  # States that were undone
+        self.max_undo_history = 50  # Maximum undo history size
+        
         # Camera settings (from YAML cameraSettings)
         self.camera_settings = {}  # Stores cameraSettings dict
         
@@ -611,6 +617,10 @@ class LevelEditor:
         # Bind Ctrl+S to save
         self.root.bind('<Control-s>', lambda e: self.save_yaml())
         self.root.bind('<Control-S>', lambda e: self.save_yaml())
+        
+        # Bind Ctrl+Z (Undo) and Ctrl+Shift+Z (Redo)
+        self.root.bind_all('<Control-z>', self.undo)
+        self.root.bind_all('<Control-Shift-Z>', self.redo)
         
         # Prompt on close
         self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
@@ -632,11 +642,17 @@ class LevelEditor:
         file_menu.add_command(label="Exit", command=self.root.quit)
         
         # Edit menu
-        edit_menu = tk.Menu(menubar, tearoff=0)
-        menubar.add_cascade(label="Edit", menu=edit_menu)
-        edit_menu.add_command(label="Grid Size...", command=self.change_grid_size)
-        edit_menu.add_command(label="Camera Settings...", command=self.edit_camera_settings)
-        edit_menu.add_command(label="Edit Object Definitions...", command=self.edit_object_definitions)
+        self.edit_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="Edit", menu=self.edit_menu)
+        
+        # Undo/Redo at top of Edit menu
+        self.edit_menu.add_command(label="Undo\tCtrl+Z", command=self.undo, state='disabled')
+        self.edit_menu.add_command(label="Redo\tCtrl+Shift+Z", command=self.redo, state='disabled')
+        self.edit_menu.add_separator()
+        
+        self.edit_menu.add_command(label="Grid Size...", command=self.change_grid_size)
+        self.edit_menu.add_command(label="Camera Settings...", command=self.edit_camera_settings)
+        self.edit_menu.add_command(label="Edit Object Definitions...", command=self.edit_object_definitions)
         
         # View menu
         view_menu = tk.Menu(menubar, tearoff=0)
@@ -955,6 +971,9 @@ class LevelEditor:
         
         if ctrl_held:
             # Eraser mode - no paint_code needed
+            # Push undo state only at start of paint action (not on drag)
+            if not self.painting:
+                self._push_undo_state()
             self.painting = True
             self.erasing = True
             self.grid_canvas.config(cursor="X_cursor")  # Eraser cursor
@@ -967,6 +986,9 @@ class LevelEditor:
             return
         
         # Set painting state to active
+        # Push undo state only at start of paint action (not on drag)
+        if not self.painting:
+            self._push_undo_state()
         self.painting = True
         self.erasing = False
         self.grid_canvas.config(cursor="pencil")  # Paintbrush cursor
@@ -1179,6 +1201,9 @@ class LevelEditor:
             messagebox.showwarning("No Selection", "Please select a cell first")
             return
         
+        # Push current state to undo stack before making changes
+        self._push_undo_state()
+        
         row, col = self.selected_cell
         new_code = self.grid_code_var.get().strip()
         
@@ -1203,6 +1228,10 @@ class LevelEditor:
     def clear_selected_cell(self):
         if not self.selected_cell:
             return
+        
+        # Push current state to undo stack before clearing
+        self._push_undo_state()
+        
         row, col = self.selected_cell
         self.grid_data[row][col] = '__'
         self.update_grid_display()
@@ -1211,18 +1240,21 @@ class LevelEditor:
     def edit_cell_objects(self):
         if not self.selected_cell:
             return
-            
+        
         row, col = self.selected_cell
         code = self.grid_data[row][col]
         
         if code == '__':
             messagebox.showinfo("Empty Cell", "This cell is empty (__). Apply a grid code first.")
             return
-            
+        
+        # Push current state to undo stack before editing objects
+        self._push_undo_state()
+        
         # Ensure grid_objects entry exists
         if code not in self.grid_objects:
             self.grid_objects[code] = []
-            
+        
         dialog = GridObjectDialog(self.root, code, self.grid_objects, self.object_definitions, 
                                  self.streaming_assets_path)
         self.root.wait_window(dialog.dialog)
@@ -1326,6 +1358,12 @@ class LevelEditor:
             self.full_yaml_data = {}
             self.loaded_includes = []
             self.current_file = None
+            
+            # Clear undo/redo history for new level
+            self.undo_stack.clear()
+            self.redo_stack.clear()
+            self.update_undo_redo_menu()
+            
             self.update_grid_display()
             self.update_defs_display()
             self.status_bar.config(text="New level created")
@@ -1392,7 +1430,7 @@ class LevelEditor:
             if self.loaded_includes:
                 inc_msg = f"Loaded with includes: {', '.join(self.loaded_includes)}"
                 self.status_bar.config(text=inc_msg)
-                
+            
             # Load grid - handle multiline string with sections
             if 'grid' in merged_data:
                 grid_str = merged_data['grid']
@@ -1418,15 +1456,11 @@ class LevelEditor:
                 for i, row in enumerate(self.grid_data):
                     if len(row) < self.grid_cols:
                         self.grid_data[i] = row + ['__'] * (self.grid_cols - len(row))
-                    
-            # Load gridObjects (merge from includes)
-            if 'gridObjects' in merged_data and merged_data['gridObjects']:
-                self.grid_objects = merged_data['gridObjects']
-                    
+            
             # Load objectDefinitions (merge from includes)
             if 'objectDefinitions' in merged_data and merged_data['objectDefinitions']:
                 self.object_definitions = merged_data['objectDefinitions']
-                    
+                
             # Load other metadata
             if 'sceneName' in merged_data:
                 self.scene_name = merged_data['sceneName']
@@ -1444,18 +1478,147 @@ class LevelEditor:
             self.update_defs_display()
             self.update_palette_values()
             
-            loaded_msg = f"Loaded: {os.path.basename(filename)}"
-            if self.loaded_includes:
-                loaded_msg += f" (with {len(self.loaded_includes)} include(s))"
-            if warnings:
-                loaded_msg += f" - {len(warnings)} warning(s)"
-            self.status_bar.config(text=loaded_msg)
+            # Clear undo/redo history and set initial state for loaded file
+            self.undo_stack.clear()
+            self.redo_stack.clear()
+            # Save initial state so "undo" after load reverts to empty (or previous)
+            self._push_undo_state()
+            self.update_undo_redo_menu()
+            
+            self.status_bar.config(text=f"Loaded: {os.path.basename(filename)}")
             
         except Exception as e:
             messagebox.showerror("Error Loading YAML", str(e))
             import traceback
             traceback.print_exc()
             
+    # ============================================
+    # Undo/Redo System
+    # ============================================
+    # Implements state-snapshot undo/redo with keyboard shortcuts:
+    # - Ctrl+Z: Undo last action
+    # - Ctrl+Shift+Z: Redo last undone action
+    # - Menu: Edit > Undo/Redo (enabled/disabled based on stack state)
+    #
+    # State snapshots capture: grid_data, grid_objects, object_definitions
+    # Maximum history: 50 states (configurable via max_undo_history)
+    # ============================================
+    
+    def _get_current_state(self):
+        """Capture current editor state for undo/redo.
+        
+        Returns a deep copy of:
+        - grid_data: 2D list of cell codes
+        - grid_objects: dict mapping codes to object lists
+        - object_definitions: dict mapping codes to definitions
+        
+        Uses deepcopy to ensure complete isolation between states.
+        """
+        return {
+            'grid_data': copy.deepcopy(self.grid_data),
+            'grid_objects': copy.deepcopy(self.grid_objects),
+            'object_definitions': copy.deepcopy(self.object_definitions)
+        }
+    
+    def _push_undo_state(self):
+        """Save current state to undo stack before making changes.
+        
+        Called before any action that modifies level data.
+        Clears redo stack since new actions invalidate redo history.
+        Trims history to max_undo_history (removes oldest entry).
+        """
+        state = self._get_current_state()
+        self.undo_stack.append(state)
+        # Trim history if over limit (remove oldest entry)
+        if len(self.undo_stack) > self.max_undo_history:
+            self.undo_stack.pop(0)
+        # Clear redo stack - new actions invalidate redo
+        self.redo_stack.clear()
+        self.update_undo_redo_menu()
+    
+    def _restore_state(self, state):
+        """Restore editor to a previously saved state.
+        
+        Restores grid_data, grid_objects, and object_definitions
+        from the saved state dictionary, then refreshes all UI elements.
+        """
+        self.grid_data = state['grid_data']
+        self.grid_objects = state['grid_objects']
+        self.object_definitions = state['object_definitions']
+        # Refresh all UI elements to reflect restored state
+        self.update_grid_display()
+        if self.selected_cell:
+            row, col = self.selected_cell
+            self.update_cell_info(row, col)
+        self.update_defs_display()
+        self.update_palette_values()
+    
+    def undo(self, event=None):
+        """Undo the last action (Ctrl+Z or Edit > Undo).
+        
+        Pops the last state from undo_stack and restores it.
+        The current state is saved to redo_stack for possible redo.
+        Shows "Nothing to undo" if undo_stack is empty.
+        """
+        if not self.undo_stack:
+            self.status_bar.config(text="Nothing to undo")
+            return
+        
+        # Save current state to redo stack
+        current_state = self._get_current_state()
+        self.redo_stack.append(current_state)
+        
+        # Restore previous state
+        previous_state = self.undo_stack.pop()
+        self._restore_state(previous_state)
+        
+        self.status_bar.config(text="Undo successful")
+        self.update_undo_redo_menu()
+    
+    def redo(self, event=None):
+        """Redo the last undone action (Ctrl+Shift+Z or Edit > Redo).
+        
+        Pops the last state from redo_stack and restores it.
+        The current state is saved to undo_stack for possible undo.
+        Shows "Nothing to redo" if redo_stack is empty.
+        """
+        if not self.redo_stack:
+            self.status_bar.config(text="Nothing to redo")
+            return
+        
+        # Save current state to undo stack
+        current_state = self._get_current_state()
+        self.undo_stack.append(current_state)
+        
+        # Restore redo state
+        redo_state = self.redo_stack.pop()
+        self._restore_state(redo_state)
+        
+        self.status_bar.config(text="Redo successful")
+        self.update_undo_redo_menu()
+    
+    def update_undo_redo_menu(self):
+        """Enable/disable Undo/Redo menu items based on stack state.
+        
+        Updates the Edit menu to show Undo/Redo as:
+        - Enabled (normal): when there's something to undo/redo
+        - Disabled (grayed out): when the respective stack is empty
+        
+        Menu indices: 0=Undo, 1=Redo (set in setup_menu)
+        """
+        if hasattr(self, 'edit_menu'):
+            # Undo menu item (index 0)
+            if self.undo_stack:
+                self.edit_menu.entryconfig(0, state='normal')
+            else:
+                self.edit_menu.entryconfig(0, state='disabled')
+            
+            # Redo menu item (index 1)
+            if self.redo_stack:
+                self.edit_menu.entryconfig(1, state='normal')
+            else:
+                self.edit_menu.entryconfig(1, state='disabled')
+    
     def save_yaml(self):
         if not self.current_file:
             self.save_yaml_as()
@@ -1879,7 +2042,10 @@ class LevelEditor:
                 if not code:
                     messagebox.showwarning("Missing Code", "Please enter a code")
                     return
-                    
+                
+                # Push undo state before modifying definitions
+                self._push_undo_state()
+                
                 if type_var.get() == "short":
                     self.object_definitions[code] = map_obj_var.get() or code
                 else:
@@ -1887,7 +2053,7 @@ class LevelEditor:
                         'mapObject': map_obj_var.get() or 'Custom',
                         'dir': dir_var.get()
                     }
-                    
+                
                 # Refresh tree
                 tree.delete(*tree.get_children())
                 for c, d in self.object_definitions.items():
@@ -1897,7 +2063,7 @@ class LevelEditor:
                         map_o = d.get('mapObject', d.get('id', '?'))
                         tags = ', '.join(d.get('tags', [])[:3])
                         tree.insert('', 'end', values=(c, 'Long Form', f"{map_o} | {tags}"))
-                        
+                       
                 self.update_defs_display()
                 self.update_grid_display()
                 add_dialog.destroy()
@@ -1912,6 +2078,9 @@ class LevelEditor:
                 item = tree.item(selection[0])
                 code = item['values'][0]
                 if messagebox.askyesno("Remove", f"Remove definition '{code}'?"):
+                    # Push undo state before modifying definitions
+                    self._push_undo_state()
+                    
                     del self.object_definitions[code]
                     tree.delete(selection[0])
                     self.update_defs_display()
