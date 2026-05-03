@@ -41,7 +41,8 @@ grid: |
 
 gridObjects:
   #place the beds for patients and the items used to heal said patients.
-  #Syringe cabinets, pill cabinets and apple cabinets can either be facing east or south. Beds can face any direction.
+  #Syringe cabinets, pill cabinets and apple cabinets can either be facing east or south.
+  #Beds can face any direction.
   #beds = b_n, b_e, b_s, b_w
   #syringe cabinets = syringecab_e, syringecab_s
   #pill cabinets = pillcab_closed_e, pillcab_closed_s

@@ -71,7 +71,7 @@ gridObjects:
   d9: [f, glass1_e]
   e9: [f, glass1_e]
   f9: [f, { id: patient_chris_alt1, data: { id: pt4 } }, { id: patient_chris_alt2, data: { id: pt7 } }]
-  #Added a syringe cabinet here so the difficulty isn't too easy.
+  #Added a syringe cabinet here so the difficulty isn't too easy. Meaning multiple cures.
   g9: [f, syringecab_s]
   h9: [f, p2, floordeco21]
 

@@ -40,7 +40,8 @@ grid: |
   __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,2b,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,__,__,
 
 gridObjects:
-  #Now you can add some decorations for this instance I've added a watercooler as seen at g9. As always more decorations can be added later.
+  #Now you can add some decorations for this instance
+  #I've added a watercooler as seen at g9. As always more decorations can be added later.
 
   #Floors, Players, Patients, Items and Decorations
   g4: [f, syringecab_s]

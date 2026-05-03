@@ -40,7 +40,8 @@ grid: |
   __,__,__,__,__,__,__,__,__,__,__,__,  __,__,__,2b,__,__,__,__,__,  __,__,__,__,__,__,__,__,__,__,__,
 
 gridObjects:
-  #Determine where the patients will spawn. They each have to have a unique id so they can be refered to in global data.
+  #Determine where the patients will spawn.
+  #They each have to have a unique id so they can be refered to in global data.
   #Patient name ids are:
   #patient_edBanger
   #patient_edBanger_alt1
@@ -48,8 +49,10 @@ gridObjects:
   #patient_chris_alt1
   #patient_chris_alt2
   #patient_childOliviaAndAvo
-  #patient_chameleon. The chameleon patient will require a unique bed for itself the bed is called: b_pet_n, b_pet_e, b_pet_s and b_pet_w.
-  #There are also two unique patients where you refer their names in global data and have their named id here as just patient.
+  #patient_chameleon. The chameleon patient will require a unique bed for itself
+  # the bed is called: b_pet_n, b_pet_e, b_pet_s and b_pet_w.
+  #There are also two unique patients where you refer their names in global
+  #data and have their named id here as just patient.
   #character: grace
   #character: sammi
 
