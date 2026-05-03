@@ -140,64 +140,64 @@ levels:
   - levelId: level5
     levelName: Level 5 of 10
     levelFiles:
-      - { playerCount: 2, fileName: "Level_4_players_2" }
-      - { playerCount: 3, fileName: "Level_4_players_3" }
-      - { playerCount: 4, fileName: "Level_4_players_4" }
+      - { playerCount: 2, fileName: "Level_5_players_2" }
+      - { playerCount: 3, fileName: "Level_5_players_3" }
+      - { playerCount: 4, fileName: "Level_5_players_4" }
     loadingHints:
       includeGlobalHints: false
       hintsText:
         - "loadingHint_level5_1"   
         
-    levelId: level6
+  - levelId: level6
     levelName: Level 6 of 10
     levelFiles:
-      - { playerCount: 2, fileName: "Level_4_players_2" }
-      - { playerCount: 3, fileName: "Level_4_players_3" }
-      - { playerCount: 4, fileName: "Level_4_players_4" }
+      - { playerCount: 2, fileName: "Level_6_players_2" }
+      - { playerCount: 3, fileName: "Level_6_players_3" }
+      - { playerCount: 4, fileName: "Level_6_players_4" }
     loadingHints:
       includeGlobalHints: false
       hintsText:
         - "loadingHint_level6_1"
 
-    levelId: level7
+  - levelId: level7
     levelName: Level 7 of 10
     levelFiles:
-      - { playerCount: 2, fileName: "Level_4_players_2" }
-      - { playerCount: 3, fileName: "Level_4_players_3" }
-      - { playerCount: 4, fileName: "Level_4_players_4" }
+      - { playerCount: 2, fileName: "Level_7_players_2" }
+      - { playerCount: 3, fileName: "Level_7_players_3" }
+      - { playerCount: 4, fileName: "Level_7_players_4" }
     loadingHints:
       includeGlobalHints: false
       hintsText:
         - "loadingHint_level7_1"
 
-    levelId: level8
+  - levelId: level8
     levelName: Level 8 of 10
     levelFiles:
-      - { playerCount: 2, fileName: "Level_4_players_2" }
-      - { playerCount: 3, fileName: "Level_4_players_3" }
-      - { playerCount: 4, fileName: "Level_4_players_4" }
+      - { playerCount: 2, fileName: "Level_8_players_2" }
+      - { playerCount: 3, fileName: "Level_8_players_3" }
+      - { playerCount: 4, fileName: "Level_8_players_4" }
     loadingHints:
       includeGlobalHints: false
       hintsText:
         - "loadingHint_level8_1"      
 
-    levelId: level9
+  - levelId: level9
     levelName: Level 9 of 10
     levelFiles:
-      - { playerCount: 2, fileName: "Level_4_players_2" }
-      - { playerCount: 3, fileName: "Level_4_players_3" }
-      - { playerCount: 4, fileName: "Level_4_players_4" }
+      - { playerCount: 2, fileName: "Level_9_players_2" }
+      - { playerCount: 3, fileName: "Level_9_players_3" }
+      - { playerCount: 4, fileName: "Level_9_players_4" }
     loadingHints:
       includeGlobalHints: false
       hintsText:
         - "loadingHint_level9_1"
 
-    levelId: level10
+  - levelId: level10
     levelName: Level 10 of 10
     levelFiles:
-      - { playerCount: 2, fileName: "Level_4_players_2" }
-      - { playerCount: 3, fileName: "Level_4_players_3" }
-      - { playerCount: 4, fileName: "Level_4_players_4" }
+      - { playerCount: 2, fileName: "Level_10_players_2" }
+      - { playerCount: 3, fileName: "Level_10_players_3" }
+      - { playerCount: 4, fileName: "Level_10_players_4" }
     loadingHints:
       includeGlobalHints: false
       hintsText:
@@ -258,13 +258,13 @@ defaultSaveDataValues:
   levelStat_rankRequirement_level6: 2
   levelRankRequirementText_level6: "levelStats_carouselItem_requiresRank2"
   levelStat_rankRequirement_level7: 4
-  levelRankRequirementText_level7: "levelStats_carouselItem_requiresRank2"
+  levelRankRequirementText_level7: "levelStats_carouselItem_requiresRank3"
   levelStat_rankRequirement_level8: 4
-  levelRankRequirementText_level8: "levelStats_carouselItem_requiresRank2"
+  levelRankRequirementText_level8: "levelStats_carouselItem_requiresRank3"
   levelStat_rankRequirement_level9: 6
-  levelRankRequirementText_level9: "levelStats_carouselItem_requiresRank3"
+  levelRankRequirementText_level9: "levelStats_carouselItem_requiresRank4"
   levelStat_rankRequirement_level10: 6
-  levelRankRequirementText_level10: "levelStats_carouselItem_requiresRank3"
+  levelRankRequirementText_level10: "levelStats_carouselItem_requiresRank4"
 
   # Starting rank = 1:
   levelStat_rank: 1

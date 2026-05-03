@@ -1,0 +1,335 @@
+include: [ "LevelsShared.yaml", "DIYParts.yaml", "Coins.yaml" ]
+
+# Properties about the file like its creator
+fileProperties:
+  creatorName: Mind Feast Games
+
+# The Unity scene that will be loaded as background
+sceneName: World1Dev
+
+grid:
+
+gridObjects:
+  lr: [ levelResults ]
+  dd: [ DIYManager ]
+  mm: [ ShopMoneyManager ]
+  TT: [ ShopTest ]
+  
+  d2: [  ]
+  e2: [  ] 
+  f2: [  ]
+  g2: [ wall_corner_se, lightbulb_s ]
+  h2: [ wall_s_Grey_Bricks, lightbulb_s ]
+  i2: [ wall_s_Grey_Bricks, lightbulb_s ]
+  j2: [ wall_s_Grey_Bricks, lightbulb_s, ticker_n ]
+  k2: [ wall_s_Grey_Bricks, lightbulb_s ]
+  l2: [ wall_s_Grey_Bricks, lightbulb_s ]
+  m2: [ wall_s_Grey_Bricks, lightbulb_s ]
+  n2: [ wall_s_Grey_Bricks, lightbulb_s ]
+  o2: [ wall_s_Grey_Bricks, lightbulb_s ]
+  p2: [ wall_s_Grey_Bricks, lightbulb_s ]
+  q2: [ wall_s_Grey_Bricks, lightbulb_s ]
+  r2: [ wall_s_rc ]
+  s2: [  ]
+  t2: [  ]
+  u2: [  ]
+
+  d3: [  ]
+  e3: [ ] # zone3 
+  f3: [  ]
+  g3: [ f_White_Tile, floordeco20, buyable_paintPot_red ]
+  h3: [ f_Black_Tile ]
+  i3: [ f_White_Tile, zone2, zone3 ]
+  j3: [ f_Black_Tile, floordeco20 ]
+  k3: [ f_White_Tile, floordeco20 ]
+  l3: [ f_Black_Tile, floordeco20, buyable_shrinkRay_dispenser ]
+  m3: [ f_White_Tile, floordeco20 ]
+  n3: [ f_Black_Tile, floordeco4_e ]
+  o3: [ f_White_Tile, table1_n, zone4 ]
+  p3: [ f_Black_Tile ]
+  q3: [ f_White_Tile ]
+  r3: [ f_Black_Tile, floordeco20, buyable_paintPot_purple ]
+  s3: [  ]
+  t3: [  ]
+  u3: [  ]
+
+  d4: [  ]
+  e4: [ wall_corner_se, lightbulb_s ]
+  f4: [ wall_corner_inside_se ]
+  g4: [ f_Black_Tile, table1_n, item5 ]
+  h4: [ f_White_Tile ]
+  i4: [ f_Black_Tile, atmB, atmSpinning10 ]
+  j4: [ f_White_Tile, floordeco4_w ]
+  k4: [ f_Black_Tile ]
+  l4: [ f_White_Tile ]
+  m4: [ f_Black_Tile ]
+  n4: [ f_White_Tile, floordeco4_e ]
+  o4: [ f_Black_Tile, table1_n, item2, zone1 ]
+  p4: [ f_White_Tile ]
+  q4: [ f_Black_Tile ]
+  r4: [ f_White_Tile, table1_n, item4 ]
+  s4: [  ]
+  t4: [  ]
+  u4: [  ]
+
+  d5: [  ]
+  e5: [ f_White_Tile, sofa_corner_e ]
+  f5: [ f_Black_Tile, sofa_s ]
+  g5: [ f_White_Tile ]
+  h5: [ f_Black_Tile ]
+  i5: [ f_White_Tile ]
+  j5: [ f_Black_Tile ]
+  k5: [ f_White_Tile ]
+  l5: [ f_Black_Tile ]
+  m5: [ f_White_Tile ]
+  n5: [ f_Black_Tile, floordeco4_e ]
+  o5: [ f_White_Tile, table1_n ]
+  p5: [ f_Black_Tile ]
+  q5: [ f_White_Tile ]
+  r5: [ f_Black_Tile, floordeco20, buyable_paintPot_red ]
+  s5: [  ]
+  t5: [  ]
+  u5: [  ]
+
+  d6: [ wall_e_Grey_Bricks, lightbulb_e ]
+  e6: [ f_Black_Tile, walldeco3_e, sofa_e ]
+  f6: [ f_White_Tile, table1_n, fishbowl ]
+  g6: [ f_Black_Tile ]
+  h6: [ f_White_Tile ]
+  i6: [ f_Black_Tile, atmA, atmSpinning5 ]
+  j6: [ f_White_Tile, floordeco4_w ]
+  k6: [ f_Black_Tile ]
+  l6: [ f_White_Tile ]
+  m6: [ f_Black_Tile ]
+  n6: [ f_White_Tile, floordeco4_e ]
+  o6: [ f_Black_Tile, table1_n, item1, zone2 ]
+  p6: [ f_White_Tile ]
+  q6: [ f_Black_Tile ]
+  r6: [ f_White_Tile, table1_n, item5 ]
+  s6: [  ]
+  t6: [  ]
+  u6: [  ]
+
+  d7: [ wall_e_Grey_Bricks, lightbulb_e ]
+  e7: [ f_White_Tile ]
+  f7: [ f_Black_Tile ]
+  g7: [ f_White_Tile ]
+  h7: [ f_Black_Tile ]
+  i7: [ f_White_Tile ]
+  j7: [ f_Black_Tile, replayleveldeco2 ]
+  k7: [ f_White_Tile, replayleveldeco2 ]
+  l7: [ f_Black_Tile, replayleveldeco2 ]
+  m7: [ f_White_Tile, replayleveldeco2 ]
+  n7: [ f_Black_Tile ]
+  o7: [ f_White_Tile ]
+  p7: [ f_Black_Tile ]
+  q7: [ f_White_Tile ]
+  r7: [ f_Black_Tile ]
+  s7: [  ]
+  t7: [  ]
+  u7: [  ]
+
+  d8: [ wall_corner_ne ]
+  e8: [ f_Black_Tile, watercooler ]
+  f8: [ f_White_Tile ]
+  g8: [ f_Black_Tile, DIYButtonR ]
+  h8: [ f_White_Tile ]
+  i8: [ f_Black_Tile ]
+  j8: [ f_White_Tile ]
+  k8: [ f_Black_Tile ]
+  l8: [ f_White_Tile ]
+  m8: [ f_Black_Tile ]
+  n8: [ f_White_Tile, arrowdeco2 ]
+  o8: [ f_Black_Tile ]
+  p8: [ f_White_Tile ]
+  q8: [ f_Black_Tile ]
+  r8: [ f_curve_se ]
+  s8: [  ]
+  t8: [  ]
+  u8: [  ]
+
+  d9: [  ]
+  e9: [  ]
+  f9: [ wall_corner_inside_ne ]
+  g9: [ f_White_Tile, DIYStall, DIYLight ]
+  h9: [ f_Black_Tile ]
+  i9: [ f_White_Tile ]
+  j9: [ f_Black_Tile, nextleveldeco2, zone1 ]
+  k9: [ f_White_Tile, nextleveldeco2 ]
+  l9: [ f_Black_Tile, nextleveldeco2 ]
+  m9: [ f_White_Tile, nextleveldeco2 ]
+  n9: [ f_Black_Tile ]
+  o9: [ f_White_Tile ]
+  p9: [ f_Black_Tile, table1_n, fishbowl ]
+  q9: [ f_White_Tile, sofa_w ]
+  r9: [  ]
+  s9: [  ]
+  t9: [  ]
+  u9: [  ]
+
+  da: [  ]
+  ea: [  ]
+  fa: [ wall_e_lc, lightbulb_e, walldeco1_e ]
+  ga: [ f_Black_Tile, wedge_e, zone3, DIYButtonL ]
+  ha: [ f_White_Tile ]
+  ia: [ f_Black_Tile ]
+  ja: [ f_White_Tile ]
+  ka: [ f_Black_Tile ]
+  la: [ f_White_Tile ]
+  ma: [ f_Black_Tile ]
+  na: [ f_White_Tile ]
+  oa: [ f_Black_Tile ]
+  pa: [ f_White_Tile, sofa_n ]
+  qa: [ f_curve_se, sofa_corner_w ]
+  ra: [ zone4 ]
+  sa: [  ]
+  ta: [  ]
+  ua: [  ]
+
+objectDefinitions:
+  levelResults: { mapObject: BlankStatic, mods: [ LevelResults ] }
+  
+  arrowdeco2: { mapObject: Custom, art2d: [ { texture: "resultsmovearrowdeco.png", displayType: decal, projectionDistance: 0.2, pos: {x: 0, y: -0.9, z: 0}, rot: {x: 90, y: 0, z: 0}, scale: {x: 2, y: 6, z: 0} } ], tags: [ "decal" ] }
+  nextleveldeco2: { mapObject: Custom, art2d: [ { texture: "nextleveldeco.png", displayType: decal, projectionDistance: 0.2, pos: {x: 0, y: -0.9, z: 0}, rot: {x: 90, y: 180, z: 0}, scale: {x: 2, y: 2, z: 0} } ], tags: [ "decal", "NextLevel" ] }
+  replayleveldeco2: { mapObject: Custom, art2d: [ { texture: "replayleveldeco.png", displayType: decal, projectionDistance: 0.2, pos: {x: 0, y: -0.9, z: 0}, rot: {x: 90, y: 180, z: 0}, scale: {x: 2, y: 2, z: 0} } ], tags: [ "decal", "ReplayLevel" ] }
+ 
+  barrier_l2: { mapObject: Custom, dir: south, art3d: [ { model: "Art/3D/GlassHalfWall_Straight_Border.glb", pos: {x: 0, y: 0, z: -0.4}, rot: {x: 0, y: 90, z: 0}, scale: {x: 1, y: 0.7, z: 1} } ], tags: [ "blocksMove", "static" ] }
+ 
+  # No scoreboard in results levels
+  scoreboard: { mapObject: BlankStatic }
+
+  zone1: { mapObject: BlankStatic, tags: [ "Zone-1", "static" ] }
+  zone2: { mapObject: BlankStatic, tags: [ "Zone-2", "static" ] }
+  zone3: { mapObject: BlankStatic, tags: [ "Zone-3", "static" ] }
+  zone4: { mapObject: BlankStatic, tags: [ "Zone-4", "static" ] }
+
+  # itemBase is a base object which item1 and 2 'inherit' from.
+  itemBase: { mapObject: Custom, mods: [ { name: ShopItem, tags: [ "payable" ] } ], tags: [ "payable" ] }
+  item1: { base: [ itemBase ], data: { id: flowersWhite }, art3d: [ { model: "Art/3D/FloorPlant_5_D.glb", pos: {y: 0.5}, scale: {x: 1.3, y: 1.3, z: 1.3} } ] }
+  item2: { base: [ itemBase ], data: { id: shrinkRay }, art3d: [ { model: "Art/3D/ShrinkRay.glb", pos: {y: 1, z: -0.4}, rot: {y: 180}, scale: {x: 0.7, y: 0.7, z: 0.7} } ] }
+  item3: { base: [ itemBase ], data: { id: paintBlue }, art3d: [ { model: "PaintPot-blue.glb", pos: {y: 0.5}, rot: {y: 180}, scale: {x: 0.7, y: 0.7, z: 0.7} } ] }
+  item4: { base: [ itemBase ], data: { id: paintPurple }, art3d: [ { model: "PaintPot-purple.glb", pos: {y: 0.5}, rot: {y: 180}, scale: {x: 0.7, y: 0.7, z: 0.7} } ] }
+  item5: { base: [ itemBase ], data: { id: paintRed }, art3d: [ { model: "PaintPot-red.glb", pos: {y: 0.5}, rot: {y: 180}, scale: {x: 0.7, y: 0.7, z: 0.7} } ] }
+  item6: { base: [ itemBase ], data: { id: paintGreen }, art3d: [ { model: "PaintPot-green.glb", pos: { y: 0.5 }, rot: { y: 180 }, scale: { x: 0.7, y: 0.7, z: 0.7 } } ] }
+  item7: { base: [ itemBase ], data: { id: paintWhite }, art3d: [ { model: "PaintPot-white.glb", pos: { y: 0.5 }, rot: { y: 180 }, scale: { x: 0.7, y: 0.7, z: 0.7 } } ] }
+  item8: { base: [ itemBase ], data: { id: paintBlack }, art3d: [ { model: "PaintPot-black.glb", pos: { y: 0.5 }, rot: { y: 180 }, scale: { x: 0.7, y: 0.7, z: 0.7 } } ] }
+
+  # atmBase is a base object which atmA and B 'inherit' from.
+  atmBase: { mapObject: Custom, mods: [ ATM ], dir: east, art3d: [ { model: "Art/3D/ATM.glb" } ], tags: [ "blocksMove", "static" ] }
+  atmA: { base: [ atmBase ], data: { id: atmA } }
+  atmB: { base: [ atmBase ], data: { id: atmB } }
+
+  patient: { mapObject: Patient, mods: [ PatientHealth-DirectCallingBased ], data: { health: 5, need: syringe, instructionLimit: 2000 }, tags: [ "carryable", "throwable" ] }
+
+  ShopMoneyManager:
+    mapObject: BlankStatic
+    mods: [ ShopMoneyManager ]
+
+  # A test script which sets things to initial values and/or runs 1 player through some test actions (get a coin, buy white flowers)
+  ShopTest:
+    mapObject: BlankStatic
+    mods: [ ShopTest ]
+
+  DIYManager:
+    mapObject: BlankStatic
+    mods:
+    - name: DIYManager
+      data: { instructionLimit: 10000 } # Needed to allow lots of customisations!
+    tags: [ "static" ]
+
+  DIYStall:
+    mapObject: Custom
+    art3d:
+      - model: "DIYStall.glb"
+    tags: [ "static", "interactable", "blocksMove", "blocksThrow" ]
+    mods: [ "DIYStall" ]
+    data:
+      items: [ "PaintPot-blue", "PaintPot-purple", "PaintPot-white", "PaintPot-black" ] # Make these activated by purchase
+
+  DIYLight:
+    mapObject: Light
+    tags: [ "static", "PointLight" ]
+    data:
+      PointLightRange: 2
+      PointLightIntensity: 8
+      PointLightPos: { y: 1.5 }
+
+  DIYButtonBase:
+    mapObject: BlankStatic
+    mods:
+    - "PushButton"
+    tags: [ "static", "interactable", "blocksMove", "blocksThrow" ]
+
+  DIYButtonR:
+    base: [ DIYButtonBase ]
+    data:
+      messageToSend: "selectRight"
+      targetPosRelative: { x: 0, y: 1 }
+
+  DIYButtonL:
+    base: [ DIYButtonBase ]
+    data:
+      messageToSend: "selectLeft"
+      targetPosRelative: { x: 0, y: -1 }
+
+  PaintPot-base:
+    mapObject: Custom
+    tags: [ "carryable", "throwable", "destroyIfNotCaught", "destroyIfPutDown" ]
+    mods: [ "PaintPot" ]
+
+  PaintPot-blue:
+    base: [ PaintPot-base ]
+    data: { id: paintBlue }
+    art3d:
+      - model: "PaintPot-blue.glb"
+        pos: { y: 0.25 }
+
+  PaintPot-purple:
+    base: [ PaintPot-base ]
+    data: { id: paintPurple }
+    art3d:
+      - model: "PaintPot-purple.glb"
+        pos: { y: 0.25 }
+
+  PaintPot-red:
+    base: [ PaintPot-base ]
+    data: { id: paintRed }
+    art3d:
+      - model: "PaintPot-red.glb"
+        pos: { y: 0.25 }
+
+  PaintPot-green:
+    base: [ PaintPot-base ]
+    data: { id: paintGreen }
+    art3d:
+      - model: "PaintPot-green.glb"
+        pos: { y: 0.25 }
+
+  PaintPot-white:
+    base: [ PaintPot-base ]
+    data: { id: paintWhite }
+    art3d:
+      - model: "PaintPot-white.glb"
+        pos: { y: 0.25 }
+
+  PaintPot-black:
+    base: [ PaintPot-base ]
+    data: { id: paintBlack }
+    art3d:
+      - model: "PaintPot-black.glb"
+        pos: { y: 0.25 }
+
+globalData:
+  shrinkRay:    { cost: 30, buyableName: "buyable_shrinkRay_dispenser" }
+  flowersWhite: { cost: 5, buyableName: "buyable_flowers_white" }
+  paintBlue:    { cost: 5, buyableName: "buyable_paintPot_blue", colour: "Blue" }
+  paintPurple:  { cost: 5, buyableName: "buyable_paintPot_purple", colour: "Purple" }
+  paintRed:     { cost: 5, buyableName: "buyable_paintPot_red", colour: "Red" }
+  paintGreen:   { cost: 5, buyableName: "buyable_paintPot_green", colour: "Green" }
+  paintWhite:   { cost: 5, buyableName: "buyable_paintPot_white", colour: "White" }
+  paintBlack:   { cost: 5, buyableName: "buyable_paintPot_black", colour: "Black" }
+  atmA:         { denomination: 5, item: coin5 }
+  atmB:         { denomination: 10, item: coin10 }
+  delayPerTurn: { delayPerTurn: 0 }
+
+sounds:
