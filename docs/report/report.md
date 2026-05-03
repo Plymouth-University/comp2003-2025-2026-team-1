@@ -16,6 +16,8 @@ Group Members: Oscar Kennedy, David Williams, Mervin Manuel, Harrison McDevitt
 
 # Introduction
 
+![Cover art for the game.](images/co-operation%20title.png)
+
 # Project Management
 
 # Design
