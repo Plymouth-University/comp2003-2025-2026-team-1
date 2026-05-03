@@ -62,13 +62,13 @@ gridObjects:
   d3: [f_Grey_DarkWood]
   f3: [f_Grey_DarkWood, { id: patient_chris, data: { id: pt3 } }]
 
-  d4: [f_Grey_DarkWood, p2, floordeco21]
+  d4: [f_Grey_DarkWood, p3, floordeco21]
   f4: [f_Grey_DarkWood]
 
   d5: [f_Grey_DarkWood, { id: patient_chris_alt2, data: { id: pt7 } }]
   f5: [f_curve_sw_Grey_DarkWood]
   g5: [f_Grey_DarkWood, { id: patient_edBanger_alt1, data: { id: pt6 } }]
-  h5: [f_Grey_DarkWood, p4, floordeco21]
+  h5: [f_Grey_DarkWood, p2, floordeco21]
   i5: [f_Grey_DarkWood]
   j5: [f_Grey_DarkWood]
   k5: [f_Blue_HardCarpet, b_s]
@@ -90,7 +90,7 @@ gridObjects:
 
   a9: [f_Blue_HardCarpet, b_s, wedge_e_Blue_DarkTile]
   b9: [f_Grey_DarkWood]
-  h9: [f_Grey_DarkWood, p3, floordeco21]
+  h9: [f_Grey_DarkWood]
 
   bA: [f_Grey_DarkWood]
   fA: [f_Grey_LightWood, pillcab_closed_s]
@@ -182,9 +182,9 @@ globalData:
 
   # Spawning patients
   
-  pt5: { health: 8, appearOnTurn: 5, need: apple} #chris alt 1
-  pt6: { health: 8, appearOnTurn: 5, need: pill} #Ed alt 1
+  pt5: { health: 8, appearOnTurn: 6, need: apple} #chris alt 1
+  pt6: { health: 8, appearOnTurn: 6, need: pill} #Ed alt 1
 
-  pt7: { health: 8, appearOnTurn: 8, need: pill} #chris alt 2
-  pt8: { health: 8, appearOnTurn: 8, need: syringe, character: sammi}
+  pt7: { health: 8, appearOnTurn: 12, need: pill} #chris alt 2
+  pt8: { health: 8, appearOnTurn: 12, need: syringe, character: sammi}
   #pt9: { health: 4, appearOnTurn: 6, need: apple}
