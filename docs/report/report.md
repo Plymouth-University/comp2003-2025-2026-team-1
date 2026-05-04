@@ -236,13 +236,302 @@ The editor's architecture is organised around three primary responsibilities: da
 
 **`LevelEditorApp`** is the root class, inheriting from `tk.Tk`. It owns the central data structures: `grid_data` (2D list of tile codes), `grid_objects` (dict mapping codes to GridObject lists), `object_definitions` (dict of user-defined tile presets), and the undo/redo stacks. It manages the overall layout — menu bar, scrollable canvas grid panel, side palette panel — and dispatches all keyboard shortcuts.
 
+```python
+class LevelEditor:
+    """Main Level Editor application"""
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Co OPERATION: MultiTurn - Level Editor")
+        self.root.geometry("1300x850")
+        
+        # Data
+        self.grid_data = []  # 2D list of cell codes
+        self.grid_objects = {}  # code -> list of objects
+        self.object_definitions = {}  # code -> definition
+        self.current_file = None
+        self.streaming_assets_path = None
+        self.available_assets = {'3d': [], '2d': [], 'sounds': []}
+        
+        # Shared definitions file path
+        self.shared_defs_path = tk.StringVar()  # Path to shared YAML file
+        self.shared_data = {}  # Cached shared definitions data
+        
+        # Full YAML data preservation
+        self.full_yaml_data = {}  # Store full YAML to preserve all sections
+        self.loaded_includes = []  # Track loaded include files
+        
+        # Grid state
+        self.grid_rows = 15
+        self.grid_cols = 12
+        self.cell_size = 42
+        self.selected_cell = None
+        
+        # Image display support
+        self.cell_images = {}  # (row, col) -> canvas image id
+        self.image_cache = {}  # (filepath, size) -> PhotoImage
+        self._image_refs = []  # Prevent garbage collection
+        self.extracted_textures = {}  # glb_path -> extracted_png_path
+        
+        # Pan state for middle-click panning
+        self.pan_start = None  # (x, y) canvas coordinates
+        
+        # Selection highlight
+        self.selection_id = None  # Canvas item id for selection rectangle
+        
+        # Painting state (RPG Maker-style)
+        self.paint_code = None  # Last applied grid code for painting
+        self.painting = False  # Whether right-click painting is active
+        self.erasing = False  # Whether Ctrl+Right-click eraser mode is active
+        
+        # Undo/Redo system
+        self.undo_stack = []  # History of previous states
+        self.redo_stack = []  # States that were undone
+        self.max_undo_history = 50  # Maximum undo history size
+        
+        # Camera settings (from YAML cameraSettings)
+        self.camera_settings = {}  # Stores cameraSettings dict
+        
+        # Setup UI
+        self.setup_menu()
+        self.setup_ui()
+        self.setup_grid()
+        
+        # Initialize with empty grid
+        self.init_empty_grid()
+        
+        # Auto-detect Mod folder (contains Art/ and Levels/)
+        self.root.after(100, self.auto_detect_mod_folder)
+        
+        # Bind Ctrl+S to save
+        self.root.bind('<Control-s>', lambda e: self.save_yaml())
+        self.root.bind('<Control-S>', lambda e: self.save_yaml())
+        
+        # Bind Ctrl+Z (Undo) and Ctrl+Shift+Z (Redo)
+        self.root.bind_all('<Control-z>', self.undo)
+        self.root.bind_all('<Control-Shift-Z>', self.redo)
+        
+        # Prompt on close
+        self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
+```
+
 **`GridObjectDialog`** is a modal `tk.Toplevel` presenting a scrollable listbox of the GridObjects assigned to a selected cell. It supports adding string-reference objects, adding inline dictionary definitions via YAML parsing, editing existing entries, reordering via up/down buttons, and removing entries.
+
+```python
+class GridObjectDialog:
+    """Dialog for editing GridObjects for a single cell (like RPG Maker event editor)"""
+    def __init__(self, parent, cell_code, grid_objects, object_definitions, game_assets_path=None):
+        self.parent = parent
+        self.cell_code = cell_code
+        self.grid_objects = grid_objects
+        self.object_definitions = object_definitions
+        self.game_assets_path = game_assets_path
+        self.result = None
+        
+        self.dialog = tk.Toplevel(parent)
+        self.dialog.title(f"GridObjects Editor - Cell {cell_code}")
+        self.dialog.geometry("650x550")
+        self.dialog.transient(parent)
+        self.dialog.grab_set()
+        
+        self.setup_ui()
+        self.load_current_objects()
+```
 
 **`GameFolderBrowser`** encapsulates the logic for locating and validating the mod folder. It offers auto-detection across common Steam installation paths and a manual browse fallback. Once the folder is set, it resolves the locations of `LevelsShared.yaml` and the `art/3d` subfolder used for GLB texture extraction.
 
+```python
+class GameFolderBrowser:
+    """Handles browsing and integrating with the game's folder structure"""
+    def __init__(self, parent, editor):
+        self.parent = parent
+        self.editor = editor
+        self.game_path = tk.StringVar()
+        
+    def find_game_path(self):
+        """Try to auto-find the game installation path"""
+        possible_paths = [
+            r"C:\Program Files (x86)\Steam\steamapps\common\Co OPERATION MultiTurn",
+            r"C:\Program Files\Steam\steamapps\common\Co OPERATION MultiTurn",
+            os.path.expanduser(r"~\Games\Co OPERATION MultiTurn"),
+        ]
+        
+        for path in possible_paths:
+            if os.path.exists(path):
+                self.game_path.set(path)
+                return path
+                
+        return None
+        
+    def browse_for_game(self):
+        """Open dialog to browse for game folder"""
+        initial = self.game_path.get() or "C:\\"
+        path = filedialog.askdirectory(
+            title="Select Co OPERATION: MultiTurn Game Folder",
+            initialdir=initial
+        )
+        if path:
+            self.game_path.set(path)
+            self.load_game_structure(path)
+            return path
+        return None
+        
+    def load_game_structure(self, game_path):
+        """Load the game's folder structure"""
+        # Try to find StreamingAssets
+        possible_assets = [
+            os.path.join(game_path, "Co OPERATION MultiTurn_Data", "StreamingAssets"),
+            os.path.join(game_path, "StreamingAssets"),
+            os.path.join(game_path, "Data", "StreamingAssets"),
+        ]
+        
+        streaming_assets = None
+        for path in possible_assets:
+            if os.path.exists(path):
+                streaming_assets = path
+                break
+                
+        if streaming_assets:
+            self.editor.streaming_assets_path = streaming_assets
+            self.editor.load_assets_from_folder(streaming_assets)
+            return True
+        else:
+            messagebox.showwarning("Folder Not Found", 
+                f"Could not find StreamingAssets in:\n{game_path}\n\n"
+                "Please ensure you selected the correct game folder.")
+            return False
+```
+
 **`CameraSettingsDialog`** is a pop-up form covering all `cameraSettings` fields. It reads current values from the working data model and writes them back on confirmation, with per-field reset-to-default buttons.
 
+```python
+self.edit_menu.add_command(label="Camera Settings...", command=self.edit_camera_settings)
+```
+
+```python
+def edit_camera_settings(self):
+        """Open dialog to edit cameraSettings (type, staticSettings, position, target)"""
+        dialog = tk.Toplevel(self.root)
+        dialog.title("Camera Settings")
+        dialog.geometry("400x550")
+        dialog.transient(self.root)
+        dialog.grab_set()
+        
+        main = ttk.Frame(dialog, padding="10")
+        main.pack(fill=tk.BOTH, expand=True)
+        
+        # Get current settings or use defaults
+        settings = self.camera_settings if self.camera_settings else {}
+        cam_type = settings.get('type', 'Static')
+        static = settings.get('staticSettings', {})
+        pos = settings.get('position', {})
+        target = settings.get('target', {})
+        
+        # Type selector
+        ttk.Label(main, text="Camera Type:").grid(row=0, column=0, sticky=tk.W, pady=(0, 5))
+        type_var = tk.StringVar(value=cam_type)
+        type_combo = ttk.Combobox(main, textvariable=type_var, state="readonly", width=15)
+        type_combo['values'] = ['Static', 'Dynamic']
+        type_combo.grid(row=0, column=1, sticky=tk.W, pady=(0, 5))
+        
+        # Static Settings frame
+        static_frame = ttk.LabelFrame(main, text="Static Settings", padding="5")
+        static_frame.grid(row=1, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=5)
+        
+        ttk.Label(static_frame, text="distanceMultiplier:").grid(row=0, column=0, sticky=tk.W, pady=2)
+        dist_var = tk.DoubleVar(value=static.get('distanceMultiplier', 2.0))
+        ttk.Entry(static_frame, textvariable=dist_var, width=10).grid(row=0, column=1, pady=2)
+        
+        ttk.Label(static_frame, text="heightMultiplier:").grid(row=1, column=0, sticky=tk.W, pady=2)
+        height_var = tk.DoubleVar(value=static.get('heightMultiplier', 0.73))
+        ttk.Entry(static_frame, textvariable=height_var, width=10).grid(row=1, column=1, pady=2)
+        
+        ttk.Label(static_frame, text="FOV:").grid(row=2, column=0, sticky=tk.W, pady=2)
+        fov_var = tk.DoubleVar(value=static.get('FOV', 15))
+        ttk.Entry(static_frame, textvariable=fov_var, width=10).grid(row=2, column=1, pady=2)
+        
+        ttk.Label(static_frame, text="editorCameraSizeMultiplier:").grid(row=3, column=0, sticky=tk.W, pady=2)
+        size_var = tk.DoubleVar(value=static.get('editorCameraSizeMultiplier', 0.55))
+        ttk.Entry(static_frame, textvariable=size_var, width=10).grid(row=3, column=1, pady=2)
+        
+        ttk.Label(static_frame, text="editorCameraHeightMultiplier:").grid(row=4, column=0, sticky=tk.W, pady=2)
+        cam_height_var = tk.DoubleVar(value=static.get('editorCameraHeightMultiplier', 1.02))
+        ttk.Entry(static_frame, textvariable=cam_height_var, width=10).grid(row=4, column=1, pady=2)
+```
+
 **`UndoStack`** is a utility class wrapping two Python lists: the undo stack and the redo stack. It provides `push`, `undo`, and `redo` methods, with the stack capped at 50 states to prevent unbounded memory growth.
+
+```python
+    def _get_current_state(self):
+        """Capture current editor state for undo/redo.
+        
+        Returns a deep copy of:
+        - grid_data: 2D list of cell codes
+        - grid_objects: dict mapping codes to object lists
+        - object_definitions: dict mapping codes to definitions
+        
+        Uses deepcopy to ensure complete isolation between states.
+        """
+        return {
+            'grid_data': copy.deepcopy(self.grid_data),
+            'grid_objects': copy.deepcopy(self.grid_objects),
+            'object_definitions': copy.deepcopy(self.object_definitions)
+        }
+    
+    def _push_undo_state(self):
+        """Save current state to undo stack before making changes.
+        
+        Called before any action that modifies level data.
+        Clears redo stack since new actions invalidate redo history.
+        Trims history to max_undo_history (removes oldest entry).
+        """
+        state = self._get_current_state()
+        self.undo_stack.append(state)
+        # Trim history if over limit (remove oldest entry)
+        if len(self.undo_stack) > self.max_undo_history:
+            self.undo_stack.pop(0)
+        # Clear redo stack - new actions invalidate redo
+        self.redo_stack.clear()
+        self.update_undo_redo_menu()
+    
+    def _restore_state(self, state):
+        """Restore editor to a previously saved state.
+        
+        Restores grid_data, grid_objects, and object_definitions
+        from the saved state dictionary, then refreshes all UI elements.
+        """
+        self.grid_data = state['grid_data']
+        self.grid_objects = state['grid_objects']
+        self.object_definitions = state['object_definitions']
+        # Refresh all UI elements to reflect restored state
+        self.update_grid_display()
+        if self.selected_cell:
+            row, col = self.selected_cell
+            self.update_cell_info(row, col)
+        self.update_defs_display()
+        self.update_palette_values()
+    
+    def undo(self, event=None):
+        """Undo the last action (Ctrl+Z or Edit > Undo).
+        
+        Pops the last state from undo_stack and restores it.
+        The current state is saved to redo_stack for possible redo.
+        Shows "Nothing to undo" if undo_stack is empty.
+        """
+        if not self.undo_stack:
+            self.status_bar.config(text="Nothing to undo")
+            return
+        
+        # Save current state to redo stack
+        current_state = self._get_current_state()
+        self.redo_stack.append(current_state)
+        
+        # Restore previous state
+        previous_state = self.undo_stack.pop()
+        self._restore_state(previous_state)
+        
+        self.status_bar.config(text="Undo successful")
+        self.update_undo_redo_menu()
+```
 
 ### State Transition Model
 
@@ -283,7 +572,7 @@ def validate_level(filepath):
     return warnings, errors
 ```
 
-The accompanying `skills.md` file, written by David, documents the level format in structured prose intended for use as a system prompt when training or prompting AI models in a future generation pipeline. It covers the YAML schema, the two-character code convention, the include system, and the required keys for a loadable level file.
+The accompanying `skills.md` file, written by Harry, documents the level format in structured prose intended for use as a system prompt when training or prompting AI models in a future generation pipeline. It covers the YAML schema, the two-character code convention, the include system, and the required keys for a loadable level file.
 
 ---
 
