@@ -1494,7 +1494,13 @@ class LevelEditor:
             # Load objectDefinitions (merge from includes)
             if 'objectDefinitions' in merged_data and merged_data['objectDefinitions']:
                 self.object_definitions = merged_data['objectDefinitions']
-                
+            
+            # Load gridObjects (merge from includes)
+            if 'gridObjects' in merged_data and merged_data['gridObjects']:
+                self.grid_objects = merged_data['gridObjects']
+            else:
+                self.grid_objects = {}
+            
             # Load other metadata
             if 'sceneName' in merged_data:
                 self.scene_name = merged_data['sceneName']
