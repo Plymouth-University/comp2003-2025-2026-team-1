@@ -15,12 +15,49 @@ fi
 
 echo "Building PDF from $INPUT..."
 
+# Create temp Lua filter to handle emojis
+LUA_FILTER=$(mktemp --suffix=.lua)
+cat > "$LUA_FILTER" << 'EOF'
+-- Lua filter to convert common emojis to text equivalents
+local emoji_map = {
+  ["✅"] = "[PASS]",
+  ["❌"] = "[FAIL]",
+  ["⚠️"] = "[WARNING]",
+  ["📝"] = "[NOTE]",
+  ["🎮"] = "[GAME]",
+  ["💡"] = "[IDEA]"
+}
+
+function Str(elem)
+  if emoji_map[elem.text] then
+    return pandoc.Str(emoji_map[elem.text])
+  end
+  return elem
+end
+
+function Code(elem)
+  for emoji, replacement in pairs(emoji_map) do
+    elem.text = string.gsub(elem.text, emoji, replacement)
+  end
+  return elem
+end
+
+function CodeBlock(elem)
+  for emoji, replacement in pairs(emoji_map) do
+    elem.text = string.gsub(elem.text, emoji, replacement)
+  end
+  return elem
+end
+EOF
+
 pandoc "$INPUT" \
     -o "$OUTPUT" \
     --standalone \
     --toc \
     --toc-depth=2 \
     --highlight-style=tango \
+    --pdf-engine=lualatex \
+    --lua-filter="$LUA_FILTER" \
     -V "titlepage=true" \
     -V "title=COMP2003 Project Report" \
     -V "author=Mervin Manuel, David Williams, Oscar Kennedy, Harry McDevitt" \
@@ -34,6 +71,9 @@ pandoc "$INPUT" \
     -V "hyperrefoptions=colorlinks=true" \
     -V "linkcolor=blue" \
     -V "urlcolor=blue"
+
+# Cleanup temp file
+rm -f "$LUA_FILTER"
 
 if [ -f "$OUTPUT" ]; then
     echo "PDF generated successfully: $OUTPUT"
