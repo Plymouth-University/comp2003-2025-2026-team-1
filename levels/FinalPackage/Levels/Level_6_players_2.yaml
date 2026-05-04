@@ -11,7 +11,7 @@ cameraSettings:
   postProcessing:
     depthOfField: { enabled: true, focusDistance: 69, focalLength: 300, aperture: 1 }
   target:
-    screenTargetX: 0.5
+    screenTargetX: 0.55
     screenTargetY: 0.48
     deadZoneWidth: 0.7
     deadZoneHeight: 0.73
@@ -34,7 +34,7 @@ grid: |
   __,__,__,__,__,__,__,__, __,b1,c1,d1,e1,f1,g1,h1,i1, __,__,3j,__,__,
   __,__,__,1b,__,__,__,__, __,b2,c2,d2,e2,f2,g2,h2,i2, j2,__,__,__,__,
   __,__,__,__,__,__,__,__, a3,b3,c3,d3,e3,f3,g3,h3,i3, j3,__,3j,__,__,
-  __,__,__,__,__,__,4a,__, a4,b4,burger_king,d4,e4,f4,g4,h4,i4, j4,__,__,__,__,
+  __,__,__,__,__,__,4a,__, a4,b4,c4,d4,e4,f4,g4,h4,i4, j4,__,__,__,__,
   __,__,__,__,__,__,__,__, a5,b5,c5,d5,e5,f5,g5,h5,i5, __,__,3j,__,__,
   __,__,__,__,__,__,__,__, a6,b6,c6,d6,e6,__,__,__,i6, __,__,__,__,__,
   __,__,__,__,__,__,4a,__, a7,b7,c7,d7,e7,__,__,h7,i7, j7,__,3j,__,4o,
@@ -50,7 +50,6 @@ grid: |
   __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
 
 gridObjects:
-  burger_king: [f]
 
   b1: [wall_corner_se]
   c1: [wall_s]
@@ -67,17 +66,17 @@ gridObjects:
   e2: [f]
   f2: [f, b_s]
   g2: [f]
-  h2: [f]
+  h2: [f, barrier2_s]
   i2: [f, wedge_s]
   j2: [foundation_Original_Corner_SR_e]
   
   a3: [wall_e]
   b3: [f]
   c3: [f]
-  d3: [f]
+  d3: [f, p4]
   e3: [f]
   f3: [f]
-  g3: [f]
+  g3: [f, p1]
   h3: [f]
   i3: [f]
   j3: [foundation_Original_FullTile_e]
@@ -89,14 +88,14 @@ gridObjects:
   e4: [f]
   f4: [f]
   g4: [f]
-  h4: [f]
+  h4: [f, barrier2_s]
   i4: [f, window3_s]
   j4: [foundation_Original_FullTile_e]
   
   a5: [wall_e]
   b5: [f]
-  c5: [f]
-  d5: [f]
+  c5: [f, barrier2_s]
+  d5: [f, wetfloor_n]
   e5: [foundation_Original_Corner_SR_e, foundation_Original_3_Quarters_r_s]
   f5: [foundation_Original_FullTile_s]
   g5: [foundation_Original_FullTile_s]
@@ -112,16 +111,16 @@ gridObjects:
   
   a7: [window2_e]
   b7: [f]
-  c7: [f, p1]
+  c7: [f, p2]
   d7: [f]
   e7: [foundation_Original_FullTile_e]
 
   h7: [wall_corner_inside_se]
-  i7: [f]
+  i7: [f, { id: patient_chris_alt1, data: { id: pt8 } }]
   j7: [foundation_Original_FullTile_e]
   
   a8: [wall_e]
-  b8: [f]
+  b8: [f, { id: patient_chris_alt2, data: { id: pt3 } }]
   c8: [f]
   d8: [f, { id: patient_edBanger, data: { id: pt1 } }]
   e8: [foundation_Original_FullTile_e]
@@ -139,7 +138,7 @@ gridObjects:
   
   g9: [wall_e]
   h9: [f]
-  i9: [f, p2]
+  i9: [f, p3]
   j9: [foundation_Original_FullTile_e]
   
   aA: [wall_e]
@@ -148,7 +147,7 @@ gridObjects:
   dA: [f]
   eA: [foundation_Original_FullTile_e]
   
-  hA: [f, { id: patient_edBanger_alt1, data: { id: pt2 } }]
+  hA: [f, { id: patient_edBanger_alt1, data: { id: pt4 } }, { id: patient_chris_alt1, data: { id: pt5 } } ]
   iA: [f]
   jA: [foundation_Original_FullTile_e]
   
@@ -159,12 +158,24 @@ gridObjects:
   
   hB: [foundation_Original_FullTile_s]
   iB: [foundation_Original_Corner_SR_s]
-  
 
 objectDefinitions:
 
-  
 sounds:
 
 globalData:
+  #starting patients
+  pt1: { health: 6, need: syringe }
+  pt2: { health: 6, need: syringe}
+
+  #spawning patients 
+  pt3: { health: 6, appearOnTurn: 2, need: syringe} 
+  pt4: { health: 6, appearOnTurn: 2, need: syringe}
+  pt5: { health: 6, appearOnTurn: 2, need: syringe} 
+
+  pt6: { health: 5, appearOnTurn: 4, need: syringe} 
+  
+  
+ 
+
   
