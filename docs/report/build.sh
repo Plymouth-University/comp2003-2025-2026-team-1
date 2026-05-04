@@ -15,41 +15,6 @@ fi
 
 echo "Building PDF from $INPUT..."
 
-# Create temp Lua filter to handle emojis
-LUA_FILTER=$(mktemp --suffix=.lua)
-cat > "$LUA_FILTER" << 'EOF'
--- Lua filter to convert common emojis to text equivalents
-local emoji_map = {
-  ["✅"] = "[PASS]",
-  ["❌"] = "[FAIL]",
-  ["⚠️"] = "[WARNING]",
-  ["📝"] = "[NOTE]",
-  ["🎮"] = "[GAME]",
-  ["💡"] = "[IDEA]"
-}
-
-function Str(elem)
-  if emoji_map[elem.text] then
-    return pandoc.Str(emoji_map[elem.text])
-  end
-  return elem
-end
-
-function Code(elem)
-  for emoji, replacement in pairs(emoji_map) do
-    elem.text = string.gsub(elem.text, emoji, replacement)
-  end
-  return elem
-end
-
-function CodeBlock(elem)
-  for emoji, replacement in pairs(emoji_map) do
-    elem.text = string.gsub(elem.text, emoji, replacement)
-  end
-  return elem
-end
-EOF
-
 pandoc "$INPUT" \
     -o "$OUTPUT" \
     --standalone \
@@ -59,7 +24,6 @@ pandoc "$INPUT" \
     --pdf-engine=lualatex \
     --pdf-engine-opt="--shell-escape" \
     --lua-filter="filters/diagram.lua" \
-    --lua-filter="$LUA_FILTER" \
     --extract-media=media \
     -V "titlepage=true" \
     -V "title=COMP2003 Project Report" \
@@ -69,14 +33,16 @@ pandoc "$INPUT" \
     -V "geometry=margin=2.5cm" \
     -V "toc-title=Table of Contents" \
     -V "mainfont=Times New Roman" \
+    -V "mainfontfallback=NotoColorEmoji:mode=harf" \
     -V "sansfont=Arial" \
+    -V "monofont=Latin Modern Mono" \
+    -V "monofontfallback=NotoColorEmoji:mode=harf" \
     -V "documentclass=report" \
     -V "hyperrefoptions=colorlinks=true" \
     -V "linkcolor=blue" \
     -V "urlcolor=blue"
 
-# Cleanup temp file and media directory
-rm -f "$LUA_FILTER"
+# Cleanup media directory
 rm -rf media
 
 if [ -f "$OUTPUT" ]; then
