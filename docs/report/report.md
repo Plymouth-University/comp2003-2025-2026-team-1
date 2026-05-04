@@ -236,6 +236,25 @@ The editor's architecture is organised around three primary responsibilities: da
 
 **`LevelEditorApp`** is the root class, inheriting from `tk.Tk`. It owns the central data structures: `grid_data` (2D list of tile codes), `grid_objects` (dict mapping codes to GridObject lists), `object_definitions` (dict of user-defined tile presets), and the undo/redo stacks. It manages the overall layout — menu bar, scrollable canvas grid panel, side palette panel — and dispatches all keyboard shortcuts.
 
+```plantuml
+@startuml LevelEditor Class Diagram
+class LevelEditor {
+    - root : Tk
+    - grid_data : list
+    - grid_objects : dict
+    - object_definitions : dict
+    - current_file : str
+    - streaming_assets_path : str
+    - available_assets : dict
+    - shared_defs_path : StringVar
+    - shared_data : dict
+    - full_yaml_data : dict
+    - loaded_includes : list
+    + __init__(root : Tk)
+}
+@enduml
+```
+
 ```python
 class LevelEditor:
     """Main Level Editor application"""
