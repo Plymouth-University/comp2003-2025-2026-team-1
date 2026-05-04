@@ -1352,11 +1352,40 @@ class LevelEditor:
             
     def new_level(self):
         if messagebox.askyesno("New Level", "Create a new level? Unsaved changes will be lost."):
+            # Create empty grid
             self.grid_data = [['__' for _ in range(self.grid_cols)] for _ in range(self.grid_rows)]
-            self.grid_objects = {}
+            
+            # Check if shared definitions are set
+            has_shared_defs = (self.shared_defs_path.get() and 
+                              os.path.exists(self.shared_defs_path.get()))
+            
+            if has_shared_defs:
+                # Place 'gm' tile at top-left (row=0, col=0)
+                self.grid_data[0][0] = 'gm'
+                
+                # Define gm grid objects (management tiles)
+                self.grid_objects['gm'] = [
+                    {'id': 'itemVoteManagement', 'data': {'id': 'itemVoting'}},
+                    {'id': 'narrativeManager', 'data': {'id': 'narrativeManager'}},
+                    'actionsDisplay',
+                    'gm',
+                    'rankAndStatsManager',
+                    'waitActionManager',
+                    'directionalArrows',
+                    'delay',
+                    'scoreboard',
+                    'coinScoreboard'
+                ]
+                
+                # Preserve the shared definitions include
+                self.loaded_includes = [os.path.basename(self.shared_defs_path.get())]
+            else:
+                # No shared defs - empty grid, no includes
+                self.grid_objects = {}
+                self.loaded_includes = []
+            
             self.object_definitions = {}
             self.full_yaml_data = {}
-            self.loaded_includes = []
             self.current_file = None
             
             # Clear undo/redo history for new level
@@ -1366,7 +1395,12 @@ class LevelEditor:
             
             self.update_grid_display()
             self.update_defs_display()
-            self.status_bar.config(text="New level created")
+            self.update_palette_values()  # Update palette to show 'gm' if placed
+            
+            if has_shared_defs:
+                self.status_bar.config(text="New level created with gm tile at (0,0)")
+            else:
+                self.status_bar.config(text="New level created")
              
     def open_yaml(self):
         filename = filedialog.askopenfilename(
