@@ -21,18 +21,7 @@ This editor is a Python tkinter tool for creating YAML level files for *Co OPERA
    py level_editor.py  # Windows
    python3 level_editor.py  # Linux/macOS
    ```
-3. On first launch, you will be prompted to load a shared definitions file (e.g., `LevelsShared.yaml` from your level pack). You can skip this and set it later via *File → Set Shared Definitions*.
-
-## Initial Setup
-### 1. Set Game Folder (Optional)
-For texture display on grid tiles:
-- Go to *File → Set Game Folder*
-- Browse to your *Co OPERATION: MultiTurn* installation directory (auto-detects Steam paths by default)
-
-### 2. Set Shared Definitions (Recommended)
-Shared definition files contain common object codes used across multiple levels:
-- Go to *File → Set Shared Definitions*
-- Select the shared YAML file from your level pack
+3. On first launch, you will be prompted to set the Mod Folder. (e.g., `FinalPackage/` folder). You can skip this and set it later via *File → Set Mod Folder*.
 
 ## Step-by-Step: Create a New Level
 ### 1. Start a New Level
@@ -82,5 +71,5 @@ Shared definition files contain common object codes used across multiple levels:
 
 ## Troubleshooting
 - **No textures displayed**: Install Pillow, set the correct game folder, or add `art2d`/`art3d` entries to your object definitions
-- **Undefined code warnings**: Add the code to *Edit → Object Definitions* or load a shared definitions file
+- **Undefined code warnings**: Add the code to *Edit → Object Definitions* or make sure you have set the Mod Folder: *File → Set Mod Folder*
 - **YAML errors**: Ensure inline definitions use valid YAML syntax (e.g., `{id: X, dir: South}`)
