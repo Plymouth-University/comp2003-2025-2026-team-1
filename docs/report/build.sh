@@ -75,8 +75,9 @@ pandoc "$INPUT" \
     -V "linkcolor=blue" \
     -V "urlcolor=blue"
 
-# Cleanup temp file
+# Cleanup temp file and media directory
 rm -f "$LUA_FILTER"
+rm -rf media
 
 if [ -f "$OUTPUT" ]; then
     echo "PDF generated successfully: $OUTPUT"
