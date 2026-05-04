@@ -1,0 +1,9 @@
+filters:
+  - filters/diagram.lua
+
+metadata:
+  diagram:
+    engine:
+      plantuml:
+        mime-type:
+          application/pdf: false

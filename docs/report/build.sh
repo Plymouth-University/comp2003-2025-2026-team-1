@@ -57,7 +57,10 @@ pandoc "$INPUT" \
     --toc-depth=2 \
     --highlight-style=tango \
     --pdf-engine=lualatex \
+    --pdf-engine-opt="--shell-escape" \
+    --lua-filter="filters/diagram.lua" \
     --lua-filter="$LUA_FILTER" \
+    --extract-media=media \
     -V "titlepage=true" \
     -V "title=COMP2003 Project Report" \
     -V "author=Mervin Manuel, David Williams, Oscar Kennedy, Harry McDevitt" \
