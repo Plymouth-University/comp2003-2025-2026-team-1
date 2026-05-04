@@ -24,6 +24,7 @@ pandoc "$INPUT" \
     --pdf-engine=lualatex \
     --pdf-engine-opt="--shell-escape" \
     --lua-filter="filters/diagram.lua" \
+    --include-in-header=header.tex \
     --extract-media=media \
     -V "titlepage=true" \
     -V "title=COMP2003 Project Report" \
