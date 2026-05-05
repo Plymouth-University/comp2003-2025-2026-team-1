@@ -1040,7 +1040,11 @@ If we followed through with creating an AI generation the most valuable outcome 
 
 ## David Williams — Personal Reflection
 
-<!David add your personal reflection here - less than 1000 words>
+From taking part in this project, I learnt a couple of technical skills. First one being YAML syntax. This took a while to become proficient but once I understood it, I started making python scripts to automate certain level formatting and level generation (although this was discarded later in Semester 2). A couple of soft skills I developed on were leadership and teamwork. As I took a leadership role I managed and guided the group through each sprint. I had to manage tasks on Trello and assign them to individuals. I also developed my professional communication skills as I was the main point of contact with the client (Shaz Yousaf).
+
+The main challenge that I overcome was the fact that the projects focus changed a lot during development. This would mean my work that I worked on in a sprint would be obselete for the next sprint. I overcame this just letting things happen and appreciate that in order to make an omelette you have to break a few eggs. Another challenge was I found that my `delete_blank.py` script would reorder the yaml file alphabetically. e.g. after running my script, cameraSettings would appear at the top of the file and include which should be at the top was halfway down. To fix this I created a custom YAML dumper which I've never used before but I confered with Gemini (AI Model) that this would be the best option. I haven't worked much with YAML before this project so I really enjoyed learning this new skill and hope to use it again in University and in my future career.
+
+I got on well with my groupmates. I was fortunate enough to have them selected and we have been friends since Year 1. We also happened to be in a flat together this year so if someone wasn't awake yet for the sprint meeting we could just knock on their door and they would be ready in time. This was something I really valued about this group as it was easy for us to keep each other accountable. Another thing is we are still all friends so the stress of this project did not break us.
 
 ## Mervin Manuel — Personal Reflection
 
