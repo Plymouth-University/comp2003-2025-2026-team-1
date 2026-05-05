@@ -23,11 +23,12 @@
 3. [Design](#design)
     - 3.1 [Level Design](#31-level-design)
    - 3.2 [Initial AI Level Generation Concept](#32-initial-ai-level-generation-concept)
-   - 3.3 [The Agentic Approach](#33-the-agentic-approach)
-   - 3.4 [The Pivot: From Generation to Authoring](#34-the-pivot-from-generation-to-authoring)
-   - 3.5 [Level Editor Architecture](#35-level-editor-architecture)
-   - 3.6 [Development Process with OpenCode](#36-development-process-with-opencode)
-   - 3.7 [UML Diagrams](#37-uml-diagrams)
+   - 3.3 [David's Python Automation Scripts](#33-davids-python-automation-scripts)
+   - 3.4 [The Agentic Approach](#34-the-agentic-approach)
+   - 3.5 [The Pivot: From Generation to Authoring](#35-the-pivot-from-generation-to-authoring)
+   - 3.6 [Level Editor Architecture](#36-level-editor-architecture)
+   - 3.7 [Development Process with OpenCode](#37-development-process-with-opencode)
+   - 3.8 [UML Diagrams](#38-uml-diagrams)
 4. [Quality Assurance & Testing](#quality-assurance--testing)
    - 4.1 [Unit Tests](#41-unit-tests)
    - 4.2 [Integration & Functional Tests](#42-integration--functional-tests)
@@ -363,7 +364,34 @@ The third and most ambitious approach drew on large language models. Harrison in
 
 > **LLM Generation Challenges:** When prompted to generate level YAML, language models produced structurally valid output but frequently introduced semantic errors — missing `objectDefinitions` entries for referenced codes, incorrect `include` directive syntax, and layout configurations that produced unreachable game areas. Correcting these errors required game-engine knowledge that could not be automated without a runtime validator.
 
-## 3.3 The Agentic Approach - Mervin
+## 3.3 David's Python Automation Scripts
+
+Alongside the GUI editor, David produced a set of Python automation scripts for batch processing and validation of level files. The scripts operate directly on YAML files and are intended for pipeline use rather than interactive editing.
+
+The primary script performs structural validation: it loads a level YAML, resolves includes, and checks for orphaned grid codes (codes appearing in the `grid` block with no corresponding `gridObjects` entry), codes referenced in `gridObjects` that have no `objectDefinitions` entry, and grid dimensions that do not match the declared size. Errors are printed with line-level context to aid manual correction.
+
+A secondary script handles batch export: given a directory of level files, it resolves all includes and produces standalone YAML files suitable for distribution without a separate `LevelsShared.yaml` dependency. This was used to prepare the eight hand-crafted levels for handoff to the client.
+
+```python
+# Example: validate a single level file
+def validate_level(filepath):
+    data, warnings, errors = resolve_includes(filepath)
+    grid = parse_grid_string(data.get('grid', ''))
+    grid_objects = data.get('gridObjects', {})
+    object_definitions = data.get('objectDefinitions', {})
+
+    # Check for orphaned codes
+    all_codes = set(code for row in grid for code in row if code != '__')
+    for code in all_codes:
+        if code not in grid_objects:
+            errors.append(f"Grid code '{code}' has no gridObjects entry")
+
+    return warnings, errors
+```
+
+The accompanying `skills.md` file, written by Harry, documents the level format in structured prose intended for use as a system prompt when training or prompting AI models in a future generation pipeline. It covers the YAML schema, the two-character code convention, the include system, and the required keys for a loadable level file.
+
+## 3.4 The Agentic Approach - Mervin
 
 One of the most intellectually stimulating avenues explored by our team was an agentic AI approach to level testing and validation. The concept, developed by Harrison, was inspired by emerging work in AI game testing: rather than having a human play a generated level to check for problems, an AI agent could be given a description of the game's rules and tasked with playing the level autonomously, logging any issues it encountered.
 
@@ -375,7 +403,7 @@ However, the approach encountered a fundamental practical obstacle. **The game e
 
 Static YAML analysis was implemented in a limited form as part of David's Python automation scripts. These scripts checked for: orphaned GridObject references (codes that appeared in `grid` but had no corresponding `gridObjects` entry), missing `objectDefinitions` entries, and invalid grid dimensions. These checks caught common structural errors but could not detect emergent gameplay problems such as level imbalance, inaccessible areas, or unfair patient-to-medicine distances, which only manifest at runtime.
 
-## 3.4 The Pivot: From Generation to Authoring - Mervin
+## 3.5 The Pivot: From Generation to Authoring - Mervin
 
 By the midpoint of Semester 2 it became clear that fully automated AI level generation was not achievable within the remaining timeframe. Each of the three generative approaches had fundamental blockers that could not be resolved quickly, and the agentic testing concept — while architecturally sound — was stymied by the game engine's opacity.
 
@@ -387,7 +415,7 @@ This pivot was informed by pragmatic constraints, but it also carried genuine va
 
 > **Pivot Rationale:** The pivot was driven by three factors: (1) insufficient training data for example-based models; (2) lack of runtime API access for agentic testing; (3) LLM output requiring domain-expert validation that was itself more expensive than manual design. The editor reframes AI-assistance as future-compatible infrastructure rather than an immediate deliverable.
 
-## 3.5 Level Editor Architecture - Mervin
+## 3.6 Level Editor Architecture - Mervin
 
 The level editor, `level_editor.py`, is a single-file Python application built on the Tkinter GUI framework. It follows an RPG Maker-inspired dual-panel design — separating tile grid editing (the map layer) from GridObject editing (the event/object layer). This mirrors the conceptual distinction the game engine itself draws between the `grid` (which defines spatial layout) and the `gridObjects` section (which attaches behaviour and entities to each cell).
 
@@ -454,7 +482,7 @@ The editor's feature set was informed directly by a detailed development convers
 - **Camera settings editor:** a pop-up dialog for all `cameraSettings` fields with per-field reset-to-default buttons.
 - **Ctrl+S save:** serialises the current level to YAML with a close-prompt safeguard for unsaved changes.
 
-## 3.6 Development Process with OpenCode - Mervin
+## 3.7 Development Process with OpenCode - Mervin
 
 The level editor was developed using OpenCode, an AI-assisted coding tool, in a conversational and iterative fashion. The development conversation — preserved in the project's documentation — reveals a pattern characteristic of this kind of AI-assisted development: the developer poses a high-level requirement, the AI produces an implementation, the developer tests it, identifies problems, and feeds those problems back as subsequent prompts.
 
@@ -473,7 +501,7 @@ for type 'cooperation.model.levels.CoOperationLevelDefinition'
 
 The fix required understanding the game engine's precise expectations: `objectDefinitions: {}` must be present even when empty, and the level file must contain an `include: [LevelsShared.yaml]` directive rather than inlining the shared content. Restructuring the save logic to emit only the minimal required keys resolved the issue.
 
-## 3.7 UML Diagrams
+## 3.8 UML Diagrams
 
 ### Class Overview
 
@@ -810,33 +838,6 @@ The editor operates in three interaction modes:
 Transitions between modes are triggered by mouse button press and release events. In all modes, Ctrl+Z invokes undo and Ctrl+Shift+Z invokes redo.
 
 > **Design Pattern Note:** The separation of the grid code (a spatial index) from the GridObjects (the behavioural data associated with that index) mirrors the Entity-Component pattern common in game engines. Each two-character code functions as a key into a shared object definitions table, allowing multiple cells to reference the same logical object type without duplicating its configuration.
-
-### David's Python Automation Scripts
-
-Alongside the GUI editor, David produced a set of Python automation scripts for batch processing and validation of level files. The scripts operate directly on YAML files and are intended for pipeline use rather than interactive editing.
-
-The primary script performs structural validation: it loads a level YAML, resolves includes, and checks for orphaned grid codes (codes appearing in the `grid` block with no corresponding `gridObjects` entry), codes referenced in `gridObjects` that have no `objectDefinitions` entry, and grid dimensions that do not match the declared size. Errors are printed with line-level context to aid manual correction.
-
-A secondary script handles batch export: given a directory of level files, it resolves all includes and produces standalone YAML files suitable for distribution without a separate `LevelsShared.yaml` dependency. This was used to prepare the eight hand-crafted levels for handoff to the client.
-
-```python
-# Example: validate a single level file
-def validate_level(filepath):
-    data, warnings, errors = resolve_includes(filepath)
-    grid = parse_grid_string(data.get('grid', ''))
-    grid_objects = data.get('gridObjects', {})
-    object_definitions = data.get('objectDefinitions', {})
-
-    # Check for orphaned codes
-    all_codes = set(code for row in grid for code in row if code != '__')
-    for code in all_codes:
-        if code not in grid_objects:
-            errors.append(f"Grid code '{code}' has no gridObjects entry")
-
-    return warnings, errors
-```
-
-The accompanying `skills.md` file, written by Harry, documents the level format in structured prose intended for use as a system prompt when training or prompting AI models in a future generation pipeline. It covers the YAML schema, the two-character code convention, the include system, and the required keys for a loadable level file.
 
 ---
 
