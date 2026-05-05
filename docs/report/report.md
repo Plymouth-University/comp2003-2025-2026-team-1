@@ -101,7 +101,7 @@ A third risk was **asset integration for tile visualisation**. The editor needed
 
 # Design
 
-## 3.1 Level Design
+## 3.1 Level Design - Written by Oscar
 
 The level design component of this project involved the manual creation of 8 playable levels for Co-Operation Multi-Turn, a cooperative turn-based hospital puzzle game. Each level is defined entirely in YAML and must be provided in three variants — one each for two-, three-, and four-player sessions — giving 30 individual level files in total. This section documents the design approach, the technical structure of those files, the step-by-step process used to construct each level, and the player-count adaptation strategy employed across all 8 levels.
 
@@ -345,7 +345,7 @@ The design follows a decomposed generation strategy in which level creation is b
 
 This decomposition mirrors the eight-step manual process and reduces the complexity of any single generation task, making it more tractable for a language model to learn from examples. The 8 levels delivered by this project, alongside the 16 levels shipped with the base game, can form the initial training data for future peers or us to develop this AI generation level capability.
 
-## 3.2 Initial AI Level Generation Concept
+## 3.2 Initial AI Level Generation Concept - Mervin
 
 The project's original intention was fully automated level generation. Early team discussions centred on procedural content generation (PCG) techniques that could produce valid YAML level files without human authorship. Three broad approaches were explored during Semester 1.
 
@@ -363,7 +363,7 @@ The third and most ambitious approach drew on large language models. Harrison in
 
 > **LLM Generation Challenges:** When prompted to generate level YAML, language models produced structurally valid output but frequently introduced semantic errors — missing `objectDefinitions` entries for referenced codes, incorrect `include` directive syntax, and layout configurations that produced unreachable game areas. Correcting these errors required game-engine knowledge that could not be automated without a runtime validator.
 
-## 3.3 The Agentic Approach
+## 3.3 The Agentic Approach - Mervin
 
 One of the most intellectually stimulating avenues explored by our team was an agentic AI approach to level testing and validation. The concept, developed by Harrison, was inspired by emerging work in AI game testing: rather than having a human play a generated level to check for problems, an AI agent could be given a description of the game's rules and tasked with playing the level autonomously, logging any issues it encountered.
 
@@ -375,7 +375,7 @@ However, the approach encountered a fundamental practical obstacle. **The game e
 
 Static YAML analysis was implemented in a limited form as part of David's Python automation scripts. These scripts checked for: orphaned GridObject references (codes that appeared in `grid` but had no corresponding `gridObjects` entry), missing `objectDefinitions` entries, and invalid grid dimensions. These checks caught common structural errors but could not detect emergent gameplay problems such as level imbalance, inaccessible areas, or unfair patient-to-medicine distances, which only manifest at runtime.
 
-## 3.4 The Pivot: From Generation to Authoring
+## 3.4 The Pivot: From Generation to Authoring - Mervin
 
 By the midpoint of Semester 2 it became clear that fully automated AI level generation was not achievable within the remaining timeframe. Each of the three generative approaches had fundamental blockers that could not be resolved quickly, and the agentic testing concept — while architecturally sound — was stymied by the game engine's opacity.
 
@@ -387,7 +387,7 @@ This pivot was informed by pragmatic constraints, but it also carried genuine va
 
 > **Pivot Rationale:** The pivot was driven by three factors: (1) insufficient training data for example-based models; (2) lack of runtime API access for agentic testing; (3) LLM output requiring domain-expert validation that was itself more expensive than manual design. The editor reframes AI-assistance as future-compatible infrastructure rather than an immediate deliverable.
 
-## 3.5 Level Editor Architecture
+## 3.5 Level Editor Architecture - Mervin
 
 The level editor, `level_editor.py`, is a single-file Python application built on the Tkinter GUI framework. It follows an RPG Maker-inspired dual-panel design — separating tile grid editing (the map layer) from GridObject editing (the event/object layer). This mirrors the conceptual distinction the game engine itself draws between the `grid` (which defines spatial layout) and the `gridObjects` section (which attaches behaviour and entities to each cell).
 
@@ -454,7 +454,7 @@ The editor's feature set was informed directly by a detailed development convers
 - **Camera settings editor:** a pop-up dialog for all `cameraSettings` fields with per-field reset-to-default buttons.
 - **Ctrl+S save:** serialises the current level to YAML with a close-prompt safeguard for unsaved changes.
 
-## 3.6 Development Process with OpenCode
+## 3.6 Development Process with OpenCode - Mervin
 
 The level editor was developed using OpenCode, an AI-assisted coding tool, in a conversational and iterative fashion. The development conversation — preserved in the project's documentation — reveals a pattern characteristic of this kind of AI-assisted development: the developer poses a high-level requirement, the AI produces an implementation, the developer tests it, identifies problems, and feeds those problems back as subsequent prompts.
 
@@ -978,7 +978,7 @@ The undo stack is capped at 50 states to prevent unbounded memory growth on larg
 
 ---
 
-# Conclusion
+# Conclusion - Harry
 
 Our team managed to deliver a GUI-based level editor, eight hand-crafted levels, Python automation scripts for YAML validation and batch export, and a `skills.md` document designed to facilitate future AI training.
 
