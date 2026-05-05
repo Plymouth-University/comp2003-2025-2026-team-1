@@ -817,7 +817,7 @@ Alongside the GUI editor, David produced a set of Python automation scripts for 
 
 The primary script performs structural validation: it loads a level YAML, resolves includes, and checks for orphaned grid codes (codes appearing in the `grid` block with no corresponding `gridObjects` entry), codes referenced in `gridObjects` that have no `objectDefinitions` entry, and grid dimensions that do not match the declared size. Errors are printed with line-level context to aid manual correction.
 
-A secondary script handles batch export: given a directory of level files, it resolves all includes and produces standalone YAML files suitable for distribution without a separate `LevelsShared.yaml` dependency. This was used to prepare the six hand-crafted levels for handoff to the client.
+A secondary script handles batch export: given a directory of level files, it resolves all includes and produces standalone YAML files suitable for distribution without a separate `LevelsShared.yaml` dependency. This was used to prepare the eight hand-crafted levels for handoff to the client.
 
 ```python
 # Example: validate a single level file
@@ -980,7 +980,7 @@ The undo stack is capped at 50 states to prevent unbounded memory growth on larg
 
 # Conclusion
 
-Our team managed to deliver a GUI-based level editor, six hand-crafted levels, Python automation scripts for YAML validation and batch export, and a `skills.md` document designed to facilitate future AI training.
+Our team managed to deliver a GUI-based level editor, eight hand-crafted levels, Python automation scripts for YAML validation and batch export, and a `skills.md` document designed to facilitate future AI training.
 
 The original requirement — to build an AI tool that generates levels autonomously — was not met. However, our team's systematic exploration of generative approaches, and the candid recognition of where those approaches failed, produced a clearer picture of what a functional AI generation tool would actually require: a larger corpus of example levels, programmatic access to the game engine for runtime validation, and a more constrained specification of what constitutes a "good" level for this particular game.
 
