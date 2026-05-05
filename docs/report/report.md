@@ -23,18 +23,20 @@
 3. [Design](#design)
     - 3.1 [Level Design](#31-level-design)
    - 3.2 [Initial AI Level Generation Concept](#32-initial-ai-level-generation-concept)
-   - 3.3 [The Agentic Approach](#33-the-agentic-approach)
-   - 3.4 [The Pivot: From Generation to Authoring](#34-the-pivot-from-generation-to-authoring)
-   - 3.5 [Level Editor Architecture](#35-level-editor-architecture)
-   - 3.6 [Development Process with OpenCode](#36-development-process-with-opencode)
-    - 3.7 [UML Diagrams](#37-uml-diagrams)
-    - 3.8 [Lua Scripts for Level Analysis & Generation](#38-lua-scripts-for-level-analysis--generation)
- 4. [Quality Assurance & Testing](#quality-assurance--testing)
+    - 3.3 [David's Python Automation Scripts](#33-davids-python-automation-scripts)
+    - 3.4 [The Agentic Approach](#34-the-agentic-approach)
+    - 3.5 [The Pivot: From Generation to Authoring](#35-the-pivot-from-generation-to-authoring)
+    - 3.6 [Level Editor Architecture](#36-level-editor-architecture)
+    - 3.7 [Development Process with OpenCode](#37-development-process-with-opencode)
+    - 3.8 [UML Diagrams](#38-uml-diagrams)
+    - 3.9 [Lua Scripts for Level Analysis & Generation](#39-lua-scripts-for-level-analysis--generation)
+4. [Quality Assurance & Testing](#quality-assurance--testing)
    - 4.1 [Unit Tests](#41-unit-tests)
    - 4.2 [Integration & Functional Tests](#42-integration--functional-tests)
-5. [Conclusion](#conclusion)
-6. [References](#references)
-7. [Appendix: Personal Reflections](#appendix-personal-reflections)
+5. [Trello](#trello)
+6. [Conclusion](#conclusion)
+7. [References](#references)
+8. [Appendix: Personal Reflections](#appendix-personal-reflections)
 
 ---
 
@@ -102,7 +104,7 @@ A third risk was **asset integration for tile visualisation**. The editor needed
 
 # Design
 
-## 3.1 Level Design
+## 3.1 Level Design - Written by Oscar
 
 The level design component of this project involved the manual creation of 8 playable levels for Co-Operation Multi-Turn, a cooperative turn-based hospital puzzle game. Each level is defined entirely in YAML and must be provided in three variants — one each for two-, three-, and four-player sessions — giving 30 individual level files in total. This section documents the design approach, the technical structure of those files, the step-by-step process used to construct each level, and the player-count adaptation strategy employed across all 8 levels.
 
@@ -346,7 +348,7 @@ The design follows a decomposed generation strategy in which level creation is b
 
 This decomposition mirrors the eight-step manual process and reduces the complexity of any single generation task, making it more tractable for a language model to learn from examples. The 8 levels delivered by this project, alongside the 16 levels shipped with the base game, can form the initial training data for future peers or us to develop this AI generation level capability.
 
-## 3.2 Initial AI Level Generation Concept
+## 3.2 Initial AI Level Generation Concept - Mervin
 
 The project's original intention was fully automated level generation. Early team discussions centred on procedural content generation (PCG) techniques that could produce valid YAML level files without human authorship. Three broad approaches were explored during Semester 1.
 
@@ -364,7 +366,106 @@ The third and most ambitious approach drew on large language models. Harrison in
 
 > **LLM Generation Challenges:** When prompted to generate level YAML, language models produced structurally valid output but frequently introduced semantic errors — missing `objectDefinitions` entries for referenced codes, incorrect `include` directive syntax, and layout configurations that produced unreachable game areas. Correcting these errors required game-engine knowledge that could not be automated without a runtime validator.
 
-## 3.3 The Agentic Approach
+## 3.3 David's Python Automation Scripts - Written by David
+
+### Old Level Generation
+
+Me and Harry both went separate ways to try and find a solution to the "generating levels" problem. So we tried a more algorithmic approach. We thought if we could separate out different generative parts of level gen it would be easier to control and be more stable than using LLMs. I tried doing it in Python (see `scripts/archived/OldLevelGenDav.py`). I used Gemini (AI Model) to help me generate the structure of the file and add `pass` to all functions so that I could implement them one at a time. If you looked at that Python script you will see a lot of missing code and that's because Harry's Lua script worked well. So I worked on the next script.
+
+### Current Python Script
+
+The next and final script I worked on, due to poor time management, was the `delete_blank.py`. You might be wondering what is the point of this script. Well as I learnt from making a level manually myself, it was a tedious process. You would make up a new gridObjects as you went along. This made the process of making a level quite a long process. To solve this, I created a `blank_level.yaml` that had all the gridObjects possible.
+
+```python
+grid: |
+  gm,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+
+  __,__,__,__,__,__,__,__, a1,b1,c1,d1,e1,f1,g1,h1,i1, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, a2,b2,c2,d2,e2,f2,g2,h2,i2, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, a3,b3,c3,d3,e3,f3,g3,h3,i3, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, a4,b4,c4,d4,e4,f4,g4,h4,i4, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, a5,b5,c5,d5,e5,f5,g5,h5,i5, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, a6,b6,c6,d6,e6,f6,g6,h6,i6, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, a7,b7,c7,d7,e7,f7,g7,h7,i7, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, a8,b8,c8,d8,e8,f8,g8,h8,i8, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, a9,b9,c9,d9,e9,f9,g9,h9,i9, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, aA,bA,cA,dA,eA,fA,gA,hA,iA, __,__,__,__,__,
+
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+```
+
+This meant that down below in `gridObjects:` you could just had p1 for player or b_s for a bed and it would work right away.
+
+```python
+gridObjects:
+  a1: []
+  b1: []
+  c1: []
+  d1: []
+  e1: [p1]
+  f1: []
+  g1: []
+  h1: []
+  i1: []
+
+  a2: []
+  b2: []
+  c2: []
+  d2: []
+  e2: [p2]
+  f2: []
+  g2: []
+  h2: []
+  i2: []
+  ...
+```
+
+So what my script does is it iterates through the gridObjects and sees all the empty lists. Any that are empty it takes note of them and puts it in a list called deleted_keys. This will then go to another function which iterates through the grid and checks if any are from deleted_keys and if so it will replace them with a `"__"` to signify an empty cell.
+
+```python
+def delete_blank_grid(grid: str, deleted_keys: list):
+    """
+    Removes occurrences of deleted keys from the grid string by replacing them with an empty string.
+    Parameters:
+        grid (str): The original grid string.
+        deleted_keys (list): A list of keys that have been deleted from the grid_objects dictionary and need to be removed from the grid.
+    Returns:
+        str: The modified grid string with the deleted keys removed.
+    """
+
+    for key in deleted_keys:
+        if key in grid:
+            grid = grid.replace(key, '__')  # Replace the key with an 'empty' string in the grid
+
+    return grid
+```
+
+### SKILL.md
+
+The `SKILL.md` file made by Harry allows an AI model to use my python script `delete_blank.py`. If we had more time, we would make more scripts that could be implemented into `SKILL.md` and then an AI model could create a level using all these scripts. This is the "layered" approach we were going for but could not achieve in the end.
+
+### My Manually Created Level
+
+My level (Level 5) was designed to be unique. I noticed that there were no doughnut shaped levels with a courtyard in the middle. So I made it. I start with my `blank_level.yaml` and once I designed the level I finished by running my `delete_blank.py` on it and it removed all the orphaned grid codes.
+
+![Level 5 designed by David](images\Level_5_players_4_thumbnail.png)
+
+
+---
+
+## 3.4 The Agentic Approach - Mervin
 
 One of the most intellectually stimulating avenues explored by our team was an agentic AI approach to level testing and validation. The concept, developed by Harrison, was inspired by emerging work in AI game testing: rather than having a human play a generated level to check for problems, an AI agent could be given a description of the game's rules and tasked with playing the level autonomously, logging any issues it encountered.
 
@@ -376,7 +477,7 @@ However, the approach encountered a fundamental practical obstacle. **The game e
 
 Static YAML analysis was implemented in a limited form as part of David's Python automation scripts. These scripts checked for: orphaned GridObject references (codes that appeared in `grid` but had no corresponding `gridObjects` entry), missing `objectDefinitions` entries, and invalid grid dimensions. These checks caught common structural errors but could not detect emergent gameplay problems such as level imbalance, inaccessible areas, or unfair patient-to-medicine distances, which only manifest at runtime.
 
-## 3.4 The Pivot: From Generation to Authoring
+## 3.5 The Pivot: From Generation to Authoring - Mervin
 
 By the midpoint of Semester 2 it became clear that fully automated AI level generation was not achievable within the remaining timeframe. Each of the three generative approaches had fundamental blockers that could not be resolved quickly, and the agentic testing concept — while architecturally sound — was stymied by the game engine's opacity.
 
@@ -388,7 +489,7 @@ This pivot was informed by pragmatic constraints, but it also carried genuine va
 
 > **Pivot Rationale:** The pivot was driven by three factors: (1) insufficient training data for example-based models; (2) lack of runtime API access for agentic testing; (3) LLM output requiring domain-expert validation that was itself more expensive than manual design. The editor reframes AI-assistance as future-compatible infrastructure rather than an immediate deliverable.
 
-## 3.5 Level Editor Architecture
+## 3.6 Level Editor Architecture - Mervin
 
 The level editor, `level_editor.py`, is a single-file Python application built on the Tkinter GUI framework. It follows an RPG Maker-inspired dual-panel design — separating tile grid editing (the map layer) from GridObject editing (the event/object layer). This mirrors the conceptual distinction the game engine itself draws between the `grid` (which defines spatial layout) and the `gridObjects` section (which attaches behaviour and entities to each cell).
 
@@ -455,7 +556,7 @@ The editor's feature set was informed directly by a detailed development convers
 - **Camera settings editor:** a pop-up dialog for all `cameraSettings` fields with per-field reset-to-default buttons.
 - **Ctrl+S save:** serialises the current level to YAML with a close-prompt safeguard for unsaved changes.
 
-## 3.6 Development Process with OpenCode
+## 3.7 Development Process with OpenCode - Mervin
 
 The level editor was developed using OpenCode, an AI-assisted coding tool, in a conversational and iterative fashion. The development conversation — preserved in the project's documentation — reveals a pattern characteristic of this kind of AI-assisted development: the developer poses a high-level requirement, the AI produces an implementation, the developer tests it, identifies problems, and feeds those problems back as subsequent prompts.
 
@@ -474,7 +575,7 @@ for type 'cooperation.model.levels.CoOperationLevelDefinition'
 
 The fix required understanding the game engine's precise expectations: `objectDefinitions: {}` must be present even when empty, and the level file must contain an `include: [LevelsShared.yaml]` directive rather than inlining the shared content. Restructuring the save logic to emit only the minimal required keys resolved the issue.
 
-## 3.7 UML Diagrams
+## 3.8 UML Diagrams
 
 ### Class Overview
 
@@ -581,6 +682,23 @@ class LevelEditor:
 
 **`GridObjectDialog`** is a modal `tk.Toplevel` presenting a scrollable listbox of the GridObjects assigned to a selected cell. It supports adding string-reference objects, adding inline dictionary definitions via YAML parsing, editing existing entries, reordering via up/down buttons, and removing entries.
 
+```plantuml
+@startuml GridObjectDialog Class Diagram
+class GridObjectDialog {
+    - parent
+    - cell_code
+    - grid_objects
+    - object_definitions
+    - game_assets_path
+    - result
+    - dialog : tk.Toplevel
+    + __init__(parent, cell_code, grid_objects, object_definitions, game_assets_path=None)
+    + setup_ui()
+    + load_current_objects()
+}
+@enduml
+```
+
 ```python
 class GridObjectDialog:
     """Dialog for editing GridObjects for a single cell (like RPG Maker event editor)"""
@@ -603,6 +721,21 @@ class GridObjectDialog:
 ```
 
 **`GameFolderBrowser`** encapsulates the logic for locating and validating the mod folder. It offers auto-detection across common Steam installation paths and a manual browse fallback. Once the folder is set, it resolves the locations of `LevelsShared.yaml` and the `art/3d` subfolder used for GLB texture extraction.
+
+```plantuml
+@startuml GameFolderBrowser Class Diagram
+class GameFolderBrowser {
+    - parent: tk.Widget
+    - editor: Editor
+    - game_path: tk.StringVar
+    
+    + __init__(parent: tk.Widget, editor: Editor)
+    + find_game_path(): str | None
+    + browse_for_game(): str | None
+    + load_game_structure(game_path: str): bool
+}
+@enduml
+```
 
 ```python
 class GameFolderBrowser:
@@ -812,36 +945,9 @@ Transitions between modes are triggered by mouse button press and release events
 
 > **Design Pattern Note:** The separation of the grid code (a spatial index) from the GridObjects (the behavioural data associated with that index) mirrors the Entity-Component pattern common in game engines. Each two-character code functions as a key into a shared object definitions table, allowing multiple cells to reference the same logical object type without duplicating its configuration.
 
-### David's Python Automation Scripts
-
-Alongside the GUI editor, David produced a set of Python automation scripts for batch processing and validation of level files. The scripts operate directly on YAML files and are intended for pipeline use rather than interactive editing.
-
-The primary script performs structural validation: it loads a level YAML, resolves includes, and checks for orphaned grid codes (codes appearing in the `grid` block with no corresponding `gridObjects` entry), codes referenced in `gridObjects` that have no `objectDefinitions` entry, and grid dimensions that do not match the declared size. Errors are printed with line-level context to aid manual correction.
-
-A secondary script handles batch export: given a directory of level files, it resolves all includes and produces standalone YAML files suitable for distribution without a separate `LevelsShared.yaml` dependency. This was used to prepare the eight hand-crafted levels for handoff to the client.
-
-```python
-# Example: validate a single level file
-def validate_level(filepath):
-    data, warnings, errors = resolve_includes(filepath)
-    grid = parse_grid_string(data.get('grid', ''))
-    grid_objects = data.get('gridObjects', {})
-    object_definitions = data.get('objectDefinitions', {})
-
-    # Check for orphaned codes
-    all_codes = set(code for row in grid for code in row if code != '__')
-    for code in all_codes:
-        if code not in grid_objects:
-            errors.append(f"Grid code '{code}' has no gridObjects entry")
-
-    return warnings, errors
-```
-
-The accompanying `skills.md` file, written by Harry, documents the level format in structured prose intended for use as a system prompt when training or prompting AI models in a future generation pipeline. It covers the YAML schema, the two-character code convention, the include system, and the required keys for a loadable level file.
-
 ---
 
-## 3.8 Lua Scripts for Level Analysis & Generation
+## 3.9 Lua Scripts for Level Analysis & Generation
 
 As part of the AI research strand, Harrison developed a suite of Lua scripts for level analysis and generation. These scripts were designed to work with the game's YAML level format and provide lightweight tooling that does not depend on the Python ecosystem used by the main editor.
 
@@ -1029,7 +1135,14 @@ The undo stack is capped at 50 states to prevent unbounded memory growth on larg
 
 ---
 
-# Conclusion
+# Trello
+
+Below is a screenshot of our trello board which can be found here: https://trello.com/b/oFRRteUB/comp2003-team-1
+
+![All 6 sprints from Trello Board](images/trello-final.png)
+
+
+# Conclusion - Harry
 
 Our team managed to deliver a GUI-based level editor, eight hand-crafted levels, Python automation scripts for YAML validation and batch export, and a `skills.md` document designed to facilitate future AI training.
 
@@ -1057,18 +1170,18 @@ The impossibility of running levels programmatically — which effectively ruled
 
 # References
 
-- Shaker, N., Togelius, J. and Nelson, M.J. (2016) *Procedural Content Generation in Games*. Springer. Available at: http://pcgbook.com (Accessed: April 2025).
+- Shaker, N., Togelius, J. and Nelson, M.J. (2016) *Procedural Content Generation in Games*. Springer. Available at: http://pcgbook.com (Accessed: November 2025).
 - Guzdial, M. and Riedl, M. (2018) 'Game Level Generation from Gameplay Videos', in *Proceedings of the Twelfth AAAI Conference on Artificial Intelligence and Interactive Digital Entertainment (AIIDE-16)*. AAAI Press.
 - Summerville, A., Guzdial, M., Mateas, M. and Riedl, M. (2018) 'Learning Player Models and Level Generation from Player Experience', *IEEE Transactions on Computational Intelligence and AI in Games*, 10(1), pp. 61–72.
 - Togelius, J., Yannakakis, G.N., Stanley, K.O. and Browne, C. (2011) 'Search-based Procedural Content Generation: A Taxonomy and Survey', *IEEE Transactions on Computational Intelligence and AI in Games*, 3(3), pp. 172–186.
 - Brown, T.B. et al. (2020) 'Language Models are Few-Shot Learners', in *Advances in Neural Information Processing Systems*, 33, pp. 1877–1901. Available at: https://arxiv.org/abs/2005.14165.
-- Mind Feast Games (2025) *Co-Operation: Multi-Turn Documentation*. Available at: https://www.mindfeastgames.com/MultiTurn/Docs/ (Accessed: March 2025).
-- PyYAML (2023) *PyYAML Documentation*. Available at: https://pyyaml.org/wiki/PyYAMLDocumentation (Accessed: March 2025).
-- pygltflib (2023) *pygltflib: Python library for reading, writing and handling GLTF files*. Available at: https://gitlab.com/dodgyville/pygltflib (Accessed: April 2025).
+- Mind Feast Games (2025) *Co-Operation: Multi-Turn Documentation*. Available at: https://www.mindfeastgames.com/MultiTurn/Docs/ (Accessed: October 2025).
+- PyYAML (2023) *PyYAML Documentation*. Available at: https://pyyaml.org/wiki/PyYAMLDocumentation (Accessed: January 2026).
+- pygltflib (2023) *pygltflib: Python library for reading, writing and handling GLTF files*. Available at: https://gitlab.com/dodgyville/pygltflib (Accessed: April 2026).
 - Effenberger, T. and Šebesta, J. (2020) 'Procedural Level Generation for a Turn-Based Dungeon Crawler Using a Genetic Algorithm', in *Proceedings of the 15th International Joint Conference on Computer Vision, Imaging and Computer Graphics Theory and Applications (VISIGRAPP 2020)*.
 - Karth, I. and Smith, A.M. (2017) 'WaveFunctionCollapse is Constraint Solving in the Wild', in *Proceedings of the 12th International Conference on the Foundations of Digital Games (FDG 2017)*.
 - OpenAI (2023) *GPT-4 Technical Report*. arXiv:2303.08774. Available at: https://arxiv.org/abs/2303.08774.
-- Anthropic (2024) *Claude: AI-Assisted Development*. Available at: https://www.anthropic.com (Accessed: April 2025).
+- Anthropic (2024) *Claude: AI-Assisted Development*. Available at: https://www.anthropic.com (Accessed: April 2026).
 
 ---
 
@@ -1091,7 +1204,11 @@ If we followed through with creating an AI generation the most valuable outcome 
 
 ## David Williams — Personal Reflection
 
-<!David add your personal reflection here - less than 1000 words>
+From taking part in this project, I learnt a couple of technical skills. First one being YAML syntax. This took a while to become proficient but once I understood it, I started making python scripts to automate certain level formatting and level generation (although this was discarded later in Semester 2). A couple of soft skills I developed on were leadership and teamwork. As I took a leadership role I managed and guided the group through each sprint. I had to manage tasks on Trello and assign them to individuals. I also developed my professional communication skills as I was the main point of contact with the client (Shaz Yousaf).
+
+The main challenge that I overcome was the fact that the projects focus changed a lot during development. This would mean my work that I worked on in a sprint would be obselete for the next sprint. I overcame this just letting things happen and appreciate that in order to make an omelette you have to break a few eggs. Another challenge was I found that my `delete_blank.py` script would reorder the yaml file alphabetically. e.g. after running my script, cameraSettings would appear at the top of the file and include which should be at the top was halfway down. To fix this I created a custom YAML dumper which I've never used before but I confered with Gemini (AI Model) that this would be the best option. I haven't worked much with YAML before this project so I really enjoyed learning this new skill and hope to use it again in University and in my future career.
+
+I got on well with my groupmates. I was fortunate enough to have them selected and we have been friends since Year 1. We also happened to be in a flat together this year so if someone wasn't awake yet for the sprint meeting we could just knock on their door and they would be ready in time. This was something I really valued about this group as it was easy for us to keep each other accountable. Another thing is we are still all friends so the stress of this project did not break us.
 
 ## Mervin Manuel — Personal Reflection
 
