@@ -32,9 +32,10 @@
 4. [Quality Assurance & Testing](#quality-assurance--testing)
    - 4.1 [Unit Tests](#41-unit-tests)
    - 4.2 [Integration & Functional Tests](#42-integration--functional-tests)
-5. [Conclusion](#conclusion)
-6. [References](#references)
-7. [Appendix: Personal Reflections](#appendix-personal-reflections)
+5. [Trello](#trello)
+6. [Conclusion](#conclusion)
+7. [References](#references)
+8. [Appendix: Personal Reflections](#appendix-personal-reflections)
 
 ---
 
