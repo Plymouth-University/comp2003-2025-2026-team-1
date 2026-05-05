@@ -1,6 +1,6 @@
-# Co-Operation: Multi-Turn — AI Level Generation Project
+# Co-Operation: Multi-Turn -- AI Level Generation Project
 
-**Client:** Shaz Yousaf — Mind Feast Games
+**Client:** Shaz Yousaf -- Mind Feast Games
 
 **Group 1**
 
@@ -44,17 +44,17 @@
 
 ![Cover art for the game.](images/co-operation%20title.png)
 
-Co-Operation: Multi-Turn is a game created by Mind Feast Games (founded in 2020) that is centred around a turn-based gameplay loop of healing and relocating patients within a comedic hospital setting and getting them the correct medicine in a timely manner. Mind Feast Games create games as part of an initiative to encourage people to collaborate and connect with one another — something the studio achieved convincingly with this title. A standout aspect of the game is the integration of mobile devices to control the on-screen characters, implemented in a similar vein to the Jackbox series. Players queue up a set of actions that play out on a shared screen, and the ability to join a lobby from any browser-capable device — phone, laptop, tablet — makes the experience uniquely portable. Movement must be coordinated actively for the game to run smoothly, and the lively group discussion this demands regularly produces comical moments when a wrong move is chosen.
+Co-Operation: Multi-Turn is a game created by Mind Feast Games (founded in 2020) that is centred around a turn-based gameplay loop of healing and relocating patients within a comedic hospital setting and getting them the correct medicine in a timely manner. Mind Feast Games create games as part of an initiative to encourage people to collaborate and connect with one another -- something the studio achieved convincingly with this title. A standout aspect of the game is the integration of mobile devices to control the on-screen characters, implemented in a similar vein to the Jackbox series. Players queue up a set of actions that play out on a shared screen, and the ability to join a lobby from any browser-capable device -- phone, laptop, tablet -- makes the experience uniquely portable. Movement must be coordinated actively for the game to run smoothly, and the lively group discussion this demands regularly produces comical moments when a wrong move is chosen.
 
 ![Initial preview of game.](images/level%20preview%20intro.png)
 
-We played the game as a group to gauge its gameplay loop and understand how the levels were structured. We found a lot of heart in the design, and the level layouts complemented the core game loop well across all of the base-game content. We had fun dissecting the various traversal avenues available to the player and examining how each prop altered movement possibilities differently — for example, low barriers allow items and patients to be thrown over them, while solid walls block movement entirely. During this play session we began forming early ideas about how we might approach level generation.
+We played the game as a group to gauge its gameplay loop and understand how the levels were structured. We found a lot of heart in the design, and the level layouts complemented the core game loop well across all of the base-game content. We had fun dissecting the various traversal avenues available to the player and examining how each prop altered movement possibilities differently -- for example, low barriers allow items and patients to be thrown over them, while solid walls block movement entirely. During this play session we began forming early ideas about how we might approach level generation.
 
 ![Initial preview of game.](images/drawn%20players%20playing%20game.png)
 
 The brief from our client, Mind Feast Games, asked us to create AI tools capable of generating an arbitrary number of levels that were cohesive, fun to play, and of comparable quality to the base game's existing content. The intended workflow was for levels to be generated externally and hand-picked by the developers before being included in a future release. This placed a premium on quality over quantity: generated levels needed to be architecturally sound and capable of sitting alongside professionally designed content without feeling out of place.
 
-Understanding the level file format was the essential first step. Levels in Co-Operation: Multi-Turn are defined entirely in YAML files. A level consists of a two-dimensional grid of two-character alphanumeric tile codes, a `gridObjects` section that maps each code to an ordered list of game objects, a `cameraSettings` block, and an `include` directive that pulls in shared asset definitions from a file called `LevelsShared.yaml`. A tile such as `f` denotes a floor tile, `2b` a particular building variant, and the special code `gm` anchors the level's management and scoring systems. This structure is both expressive and precise — even a small formatting error in the YAML causes the game engine to refuse to load the level.
+Understanding the level file format was the essential first step. Levels in Co-Operation: Multi-Turn are defined entirely in YAML files. A level consists of a two-dimensional grid of two-character alphanumeric tile codes, a `gridObjects` section that maps each code to an ordered list of game objects, a `cameraSettings` block, and an `include` directive that pulls in shared asset definitions from a file called `LevelsShared.yaml`. A tile such as `f` denotes a floor tile, `2b` a particular building variant, and the special code `gm` anchors the level's management and scoring systems. This structure is both expressive and precise -- even a small formatting error in the YAML causes the game engine to refuse to load the level.
 
 > **Game Format Summary:** Levels are defined as YAML files containing: an `include` directive pointing to `LevelsShared.yaml`; a `sceneName` indicating the Unity background scene; a `grid` block storing comma-separated 2-character tile codes as a literal block scalar (`|`); a `gridObjects` section mapping each code to an ordered list of objects; `cameraSettings`; and an `objectDefinitions` section for user-defined tile presets.
 
@@ -77,11 +77,11 @@ Communication was maintained through a shared messaging channel and regular in-p
 
 ## 2.2 Sprint Planning & Timeline
 
-The project spanned two semesters. Semester 1 was largely exploratory — our team spent considerable time understanding the game's data format, playing existing levels, and researching generative approaches. This period was valuable for building domain knowledge but produced no concrete technical output, and it created a dependency on strategic decisions that were deferred into Semester 2.
+The project spanned two semesters. Semester 1 was largely exploratory -- our team spent considerable time understanding the game's data format, playing existing levels, and researching generative approaches. This period was valuable for building domain knowledge but produced no concrete technical output, and it created a dependency on strategic decisions that were deferred into Semester 2.
 
 Semester 2 was divided into informal two-week sprints. The first sprint was dedicated entirely to resolving the overarching strategic question: what would our team actually build? The subsequent sprints tracked the following milestones:
 
-- **Sprint 1 (Weeks 1–2):** Strategic decision confirmed — pivot to GUI editor; YAML format research completed.
+- **Sprint 1 (Weeks 1–2):** Strategic decision confirmed -- pivot to GUI editor; YAML format research completed.
 - **Sprint 2 (Weeks 3–4):** Core Tkinter grid editor prototype; YAML load/save working end-to-end.
 - **Sprint 3 (Weeks 5–6):** Visual tile rendering via GLB texture extraction; mod folder integration.
 - **Sprint 4 (Weeks 7–8):** Paint tool, camera settings editor, Ctrl+S saving, close-prompt for unsaved changes.
@@ -92,13 +92,13 @@ Semester 2 was divided into informal two-week sprints. The first sprint was dedi
 
 Several risks were identified throughout the project, some of which materialised and required active mitigation.
 
-The most significant risk was **scope ambiguity**. The original brief called for AI level generation, but no single approach was agreed upon during Semester 1. This led to the primary challenge described in Section 3 — prolonged indecision about which generation strategy to pursue. Our team mitigated this by formally deciding at the start of Semester 2 to produce a high-quality tool rather than a partially-working generative algorithm.
+The most significant risk was **scope ambiguity**. The original brief called for AI level generation, but no single approach was agreed upon during Semester 1. This led to the primary challenge described in Section 3 -- prolonged indecision about which generation strategy to pursue. Our team mitigated this by formally deciding at the start of Semester 2 to produce a high-quality tool rather than a partially-working generative algorithm.
 
-A secondary risk was **technical compatibility with the game's YAML dialect**. The game uses custom YAML tags such as `!SpineAnimation` and `!MeshDeformAnimation` — non-standard constructs that Python's default `yaml.safe_load` rejects with a `ConstructorError`. Mervin addressed this by writing custom tag constructors for each known type, plus a generic multi-constructor fallback for any unknown tags encountered at runtime.
+A secondary risk was **technical compatibility with the game's YAML dialect**. The game uses custom YAML tags such as `!SpineAnimation` and `!MeshDeformAnimation` -- non-standard constructs that Python's default `yaml.safe_load` rejects with a `ConstructorError`. Mervin addressed this by writing custom tag constructors for each known type, plus a generic multi-constructor fallback for any unknown tags encountered at runtime.
 
 A third risk was **asset integration for tile visualisation**. The editor needed to display tile textures, but the game's textures were embedded inside GLB (binary GLTF) 3D model files rather than standalone image assets. This required implementing texture extraction via the `pygltflib` library, with a fallback to coloured rectangles when extraction was not possible.
 
-> **Key Risk Summary:** The three main risks were: (1) strategic indecision leading to project delays — mitigated by a formal scope pivot; (2) YAML parsing failures due to custom tags — mitigated by custom constructors; (3) missing tile textures — mitigated by GLB texture extraction with colour fallback.
+> **Key Risk Summary:** The three main risks were: (1) strategic indecision leading to project delays -- mitigated by a formal scope pivot; (2) YAML parsing failures due to custom tags -- mitigated by custom constructors; (3) missing tile textures -- mitigated by GLB texture extraction with colour fallback.
 
 ---
 
@@ -106,7 +106,7 @@ A third risk was **asset integration for tile visualisation**. The editor needed
 
 ## 3.1 Level Design - Written by Oscar
 
-The level design component of this project involved the manual creation of 8 playable levels for Co-Operation Multi-Turn, a cooperative turn-based hospital puzzle game. Each level is defined entirely in YAML and must be provided in three variants — one each for two-, three-, and four-player sessions — giving 30 individual level files in total. This section documents the design approach, the technical structure of those files, the step-by-step process used to construct each level, and the player-count adaptation strategy employed across all 8 levels.
+The level design component of this project involved the manual creation of 8 playable levels for Co-Operation Multi-Turn, a cooperative turn-based hospital puzzle game. Each level is defined entirely in YAML and must be provided in three variants -- one each for two-, three-, and four-player sessions -- giving 30 individual level files in total. This section documents the design approach, the technical structure of those files, the step-by-step process used to construct each level, and the player-count adaptation strategy employed across all 8 levels.
 
 ### Role and Contribution
 
@@ -133,9 +133,9 @@ The package.yaml file serves as the table of contents for the entire collection.
 
 The game engine reads this file at startup and uses it to populate the level-select carousel. Individual level YAML files are loaded on demand when a level is selected. The only file that must be edited when adding a new level is package.yaml; the level files themselves are self-contained.
 
-*Figure: Package folder structure — PlayerPackages directory layout*
+*Figure: Package folder structure -- PlayerPackages directory layout*
 
-![Package folder structure — PlayerPackages directory layout](images/FileStructureLong.png)
+![Package folder structure -- PlayerPackages directory layout](images/FileStructureLong.png)
 
 ### Level File Structure
 
@@ -146,7 +146,7 @@ Every level YAML file follows a consistent schema with five functional sections:
 | **include** | References LevelsShared.yaml, which provides the full library of available object types (floors, walls, items, decorations). |
 | **sceneName** | Specifies the Unity background scene to render (e.g. OriginalWorld). |
 | **grid** | A multi-line ASCII string that names every active tile on the map using two-character coordinates (e.g. g8, f9). Blank tiles are written as `__`. |
-| **gridObjects** | Maps each grid coordinate to an array of objects — floors, patients, items, walls, and decorations — placed at that position. |
+| **gridObjects** | Maps each grid coordinate to an array of objects -- floors, patients, items, walls, and decorations -- placed at that position. |
 | **globalData** | Defines every patient's health, treatment requirement (pill, syringe, or apple), optional spawn turn, and character model. |
 
 ### The Grid and Coordinate System
@@ -155,13 +155,13 @@ The grid uses a two-character alphanumeric coordinate system. The first characte
 
 A minimal example of a grid definition is shown below. Each comma-separated value on a row is a cell reference; `__` denotes an empty (non-interactive) tile.
 
-![Grid — coordinate system example](images/Grid.png)
+![Grid -- coordinate system example](images/Grid.png)
 
 Background decorations such as trees (`3h`), lampposts (`3j`), flowers (`4a`), and pavement tiles (`7b`, `7e`, `7h`) are placed directly in the grid using their numeric prefixes. These require no corresponding gridObjects entry as they are background-layer assets.
 
 Once a coordinate is named in the grid, it must be assigned objects in gridObjects or the engine will produce a validation error. A floor tile is the minimum valid assignment.
 
-![gridObjects — coordinate-to-object mapping](images/GridObjects.png)
+![gridObjects -- coordinate-to-object mapping](images/GridObjects.png)
 
 *Figure: Annotated grid showing coordinate system and object placement*
 
@@ -169,14 +169,14 @@ Once a coordinate is named in the grid, it must be assigned objects in gridObjec
 
 The globalData section controls the behaviour of every patient in the level. Each patient is assigned a unique reference identifier (e.g. `pt1`, `pt2`) that links their grid placement to their properties. The core properties are:
 
-- **health** — the patient's starting health value (consistently set to 8 across all levels in this project).
-- **need** — the treatment type required: pill, syringe, or apple.
-- **appearOnTurn** — the turn on which the patient spawns. Patients without this property are present from turn 1.
-- **character** — an optional named character model (e.g. grace, sammi). Unnamed patients receive a random model.
+- **health** -- the patient's starting health value (consistently set to 8 across all levels in this project).
+- **need** -- the treatment type required: pill, syringe, or apple.
+- **appearOnTurn** -- the turn on which the patient spawns. Patients without this property are present from turn 1.
+- **character** -- an optional named character model (e.g. grace, sammi). Unnamed patients receive a random model.
 
 A three-wave escalation pattern was used consistently across all six levels, distributing patients across turns 1, 3, and 6. This creates a natural difficulty curve: players begin with a manageable initial load, must treat the first wave before the second arrives, and face maximum pressure only once they have had time to establish a working strategy.
 
-![globalData — patient properties for Level_1_players_2 and Level_8_players_4](images/GlobalData.png)
+![globalData -- patient properties for Level_1_players_2 and Level_8_players_4](images/GlobalData.png)
 
 *Figure: Annotated grid showing Global Data of Level_1_players_2 and Level_8_players_4. The bottom shows the corresponding grid objects names.*
 
@@ -190,25 +190,25 @@ The process is documented here using Level 2 (4-player variant) as the primary e
 
 The level begins with a minimal grid containing only a small cluster of floor tiles at the intended centre of the playspace. Player spawn points (p1–p4) are placed on these tiles, each accompanied by a `floordeco21` marker to make spawn positions visually distinct. No patients, items, or walls exist at this stage.
 
-Starting with player positions ensures that all subsequent spatial decisions — where to place cabinets, beds, and patients — flow outward from where players begin. This prevents layouts where resources are unreachable from spawn.
+Starting with player positions ensures that all subsequent spatial decisions -- where to place cabinets, beds, and patients -- flow outward from where players begin. This prevents layouts where resources are unreachable from spawn.
 
-![Step 1 YAML — player spawn placement](images/Step1.png)
+![Step 1 YAML -- player spawn placement](images/Step1.png)
 
-![Step 1 — Minimal grid with player spawns only](images/Level_2_players_4_Step1_thumbnail.png)
+![Step 1 -- Minimal grid with player spawns only](images/Level_2_players_4_Step1_thumbnail.png)
 
-*Figure: Step 1 — Minimal grid with player spawns only*
+*Figure: Step 1 -- Minimal grid with player spawns only*
 
 #### Step 2: Floor Plan Layout
 
 The grid is expanded to define the full spatial footprint of the level. Additional floor tiles are added to create distinct zones: in Level 2, this produced a northern treatment zone, a central patient area, and a southern treatment zone, with players positioned at the four cardinal extremes to encourage movement across the whole space.
 
-No items or patients are placed at this step. The sole objective is confirming that the spatial logic works — that every zone is reachable from every spawn and that the overall layout fits within the visible camera area.
+No items or patients are placed at this step. The sole objective is confirming that the spatial logic works -- that every zone is reachable from every spawn and that the overall layout fits within the visible camera area.
 
-![Step 2 YAML — floor plan layout](images/Step2.png)
+![Step 2 YAML -- floor plan layout](images/Step2.png)
 
-![Step 2 — Full floor plan across all zones, no items](images/Level_2_players_4_Step2_thumbnail.png)
+![Step 2 -- Full floor plan across all zones, no items](images/Level_2_players_4_Step2_thumbnail.png)
 
-*Figure: Step 2 — Full floor plan across all zones, no items*
+*Figure: Step 2 -- Full floor plan across all zones, no items*
 
 #### Step 3: Beds and Treatment Cabinets
 
@@ -216,31 +216,31 @@ The three treatment cabinet types and their associated patient beds are placed w
 
 Level 2 uses one cabinet of each treatment type: a syringe cabinet (`syringecab_s`) at the north end, a pill cabinet (`pillcab_closed_e`) at the west end, and an apple cabinet (`applecab_s`) at the south end. This spatial separation of treatment types is a deliberate design choice to prevent any single player from monopolising the supply.
 
-![Step 3 YAML — beds and treatment cabinets](images/Step3.png)
+![Step 3 YAML -- beds and treatment cabinets](images/Step3.png)
 
-![Step 3 — Beds and all three treatment cabinets in position](images/images/Level_2_players_4_Step3_thumbnail.png)
+![Step 3 -- Beds and all three treatment cabinets in position](images/images/Level_2_players_4_Step3_thumbnail.png)
 
-*Figure: Step 3 — Beds and all three treatment cabinets in position*
+*Figure: Step 3 -- Beds and all three treatment cabinets in position*
 
 #### Step 4: Decorations
 
 Non-functional decorative objects such as water coolers, plants, and floor stickers are added to support the clinical visual theme. These have no mechanical effect but contribute to the game's atmosphere and help players orient themselves within the space.
 
-![Step 4 YAML — decorations added](images/Step4.png)
+![Step 4 YAML -- decorations added](images/Step4.png)
 
-![Step 4 — Decorative items added to the level](images/Level_2_players_4_Step4_thumbnail.png)
+![Step 4 -- Decorative items added to the level](images/Level_2_players_4_Step4_thumbnail.png)
 
-*Figure: Step 4 — Decorative items added to the level*
+*Figure: Step 4 -- Decorative items added to the level*
 
 #### Step 5: Patient Placement and globalData
 
-All patients are placed in the gridObjects section and their properties defined in globalData. Patients are grouped in shared tiles within the patient area and distributed across three arrival waves as described in the globalData section above. This step is the most consequential for gameplay — it determines the entire treatment challenge of the level.
+All patients are placed in the gridObjects section and their properties defined in globalData. Patients are grouped in shared tiles within the patient area and distributed across three arrival waves as described in the globalData section above. This step is the most consequential for gameplay -- it determines the entire treatment challenge of the level.
 
-![Step 5 YAML — patient placement and globalData](images/Step5.png)
+![Step 5 YAML -- patient placement and globalData](images/Step5.png)
 
-![Step 5 — All patients placed; globalData defines three-wave progression](images/Level_2_players_4_Step5_thumbnail.png)
+![Step 5 -- All patients placed; globalData defines three-wave progression](images/Level_2_players_4_Step5_thumbnail.png)
 
-*Figure: Step 5 — All patients placed; globalData defines three-wave progression*
+*Figure: Step 5 -- All patients placed; globalData defines three-wave progression*
 
 #### Step 6: Glass Barriers and Outer Walls
 
@@ -248,11 +248,11 @@ Glass barriers are introduced along zone boundaries to prevent a softlock condit
 
 Simultaneously, structural wall tiles are placed along the north and west boundaries. Corner variants (`wall_corner_se`, `wall_corner_IL_se`, `wall_corner_inside_se`) are used at junctions. Wedge tiles are added beneath exposed wall ends to prevent a visually floating appearance.
 
-![Step 6 YAML — glass barriers and outer walls](images/Step6.png)
+![Step 6 YAML -- glass barriers and outer walls](images/Step6.png)
 
-![Step 6 — Glass barriers between zones and structural walls placed](images/Level_2_players_4_Step6_thumbnail.png)
+![Step 6 -- Glass barriers between zones and structural walls placed](images/Level_2_players_4_Step6_thumbnail.png)
 
-*Figure: Step 6 — Glass barriers between zones and structural walls placed*
+*Figure: Step 6 -- Glass barriers between zones and structural walls placed*
 
 #### Step 7: Foundation Tiles
 
@@ -260,11 +260,11 @@ Foundation tiles are the decorative backing panels placed behind walls and floor
 
 Only foundations visible to the player within the camera viewport are placed, avoiding unnecessary file size increase.
 
-![Step 7 YAML — foundation tiles](images/Step7.png)
+![Step 7 YAML -- foundation tiles](images/Step7.png)
 
-![Step 7 — Foundation tiles added behind all wall and floor edges](images/Level_2_players_4_Step7_thumbnail.png)
+![Step 7 -- Foundation tiles added behind all wall and floor edges](images/Level_2_players_4_Step7_thumbnail.png)
 
-*Figure: Step 7 — Foundation tiles added behind all wall and floor edges*
+*Figure: Step 7 -- Foundation tiles added behind all wall and floor edges*
 
 #### Step 8: Background Decorations
 
@@ -272,11 +272,11 @@ The final step populates the empty grid cells outside the playable area with env
 
 This step is completed last so that it does not interfere with the spatial reasoning of earlier steps and can be adjusted freely without affecting any gameplay elements.
 
-![Step 8 YAML — background decorations](images/Step8.png)
+![Step 8 YAML -- background decorations](images/Step8.png)
 
-![Step 8 — Completed level with all background environmental decorations](images/Level_2_players_4_Step8_thumbnail.png)
+![Step 8 -- Completed level with all background environmental decorations](images/Level_2_players_4_Step8_thumbnail.png)
 
-*Figure: Step 8 — Completed level with all background environmental decorations*
+*Figure: Step 8 -- Completed level with all background environmental decorations*
 
 ### Player-Count Adaptation Strategy
 
@@ -293,19 +293,19 @@ Every level must function correctly and remain appropriately challenging for 2-,
 
 The key design insight from this process was that reducing player count does not automatically reduce difficulty proportionally. With two players managing the same patient load as three, the workload per player actually increases. To compensate, the 2-player variant of Level 2 adds an additional syringe cabinet at the centre of the patient area. This additional resource was identified through playtesting as necessary to keep the level fair rather than punishing.
 
-Apple patients are removed in both the 3-player and 2-player variants. Managing three treatment types simultaneously with a reduced team is too demanding at this stage of the game's progression. Restricting the treatment types to syringe and pill — which share the same cabinet locations — gives smaller teams a clearer decision space.
+Apple patients are removed in both the 3-player and 2-player variants. Managing three treatment types simultaneously with a reduced team is too demanding at this stage of the game's progression. Restricting the treatment types to syringe and pill -- which share the same cabinet locations -- gives smaller teams a clearer decision space.
 
-![Step 9 YAML — 3-player adaptation: apple patients removed](images/Step9.png)
+![Step 9 YAML -- 3-player adaptation: apple patients removed](images/Step9.png)
 
-![3-player variant — apple patients removed, p4 replaced by water cooler](images/Level_2_players_3_thumbnail.png)
+![3-player variant -- apple patients removed, p4 replaced by water cooler](images/Level_2_players_3_thumbnail.png)
 
-*Figure: 3-player variant — apple patients removed, p4 replaced by water cooler*
+*Figure: 3-player variant -- apple patients removed, p4 replaced by water cooler*
 
-![Step 10 YAML — 2-player adaptation: additional syringe cabinet](images/Step10.png)
+![Step 10 YAML -- 2-player adaptation: additional syringe cabinet](images/Step10.png)
 
-![2-player variant — additional syringe cabinet, reduced patient spawns](images/Level_2_players_2_thumbnail.png)
+![2-player variant -- additional syringe cabinet, reduced patient spawns](images/Level_2_players_2_thumbnail.png)
 
-*Figure: 2-player variant — additional syringe cabinet, reduced patient spawns*
+*Figure: 2-player variant -- additional syringe cabinet, reduced patient spawns*
 
 ### The Six Levels
 
@@ -313,18 +313,18 @@ Six levels were designed and delivered for the FinalPackage collection. Each lev
 
 | **Level** | **Zone Structure** | **4P Patients** | **Design Notes** |
 |---|---|---|---|
-| **1** | Stubby plus shape ![Level 1 — 4-player thumbnail](images/Level_1_players_4_thumbnail.png)| 16 | Simple layout, quite small. 3 waves of 4 patients made possible by having the cures and beds within reach during 1 turn. |
-| **2** | Three-zone hub![Level 2 — 4-player thumbnail](images/Level_2_players_4_thumbnail.png) | 9 | Main hub where P1 must pick up and throw patients over glass barriers to secluded areas with other players. P1 then catches and throws required cures to each of the 3 closed areas. |
-| **3** | Rectangular room divided by glass barriers![Level 3 — 4-player thumbnail](images/Level_3_players_4_thumbnail.png) | 9 | Players must throw patients and cures down corridors to each other. |
-| **4** | Snaking path (loops)![Level 4 — 4-player thumbnail](images/Level_4_players_4_thumbnail.png) | 8 | Players must move along the path and throw things to people on the other sides. |
-| **7** | Rectangular room with tall 6 sets of glass dividers positioned like the dice 6 (⠿)![Level 7 — 4-player thumbnail](images/Level_7_players_4_thumbnail.png) | 9 | Players can walk or throw. Free range. |
-| **8** | Layout using OK initials![Level 8 — 4-player thumbnail](images/Level_8_players_4_thumbnail.png) | 9 | Beds and cures are at the corners of the map, forcing players to walk long distances. |
+| **1** | Stubby plus shape ![Level 1 -- 4-player thumbnail](images/Level_1_players_4_thumbnail.png)| 16 | Simple layout, quite small. 3 waves of 4 patients made possible by having the cures and beds within reach during 1 turn. |
+| **2** | Three-zone hub![Level 2 -- 4-player thumbnail](images/Level_2_players_4_thumbnail.png) | 9 | Main hub where P1 must pick up and throw patients over glass barriers to secluded areas with other players. P1 then catches and throws required cures to each of the 3 closed areas. |
+| **3** | Rectangular room divided by glass barriers![Level 3 -- 4-player thumbnail](images/Level_3_players_4_thumbnail.png) | 9 | Players must throw patients and cures down corridors to each other. |
+| **4** | Snaking path (loops)![Level 4 -- 4-player thumbnail](images/Level_4_players_4_thumbnail.png) | 8 | Players must move along the path and throw things to people on the other sides. |
+| **7** | Rectangular room with tall 6 sets of glass dividers positioned like the dice 6 (6)![Level 7 -- 4-player thumbnail](images/Level_7_players_4_thumbnail.png) | 9 | Players can walk or throw. Free range. |
+| **8** | Layout using OK initials![Level 8 -- 4-player thumbnail](images/Level_8_players_4_thumbnail.png) | 9 | Beds and cures are at the corners of the map, forcing players to walk long distances. |
 
 ![Package select screen showing FinalPackage](images/PackageSelect.png)
 
 ![Level select carousel showing completed levels](images/LevelSelect.png)
 
-*Figure: Levels — level select carousel showing completed levels*
+*Figure: Levels -- level select carousel showing completed levels*
 
 ### Package Configuration and Unlock System
 
@@ -342,9 +342,9 @@ The original objective of the manual level design work was to produce structured
 
 The design follows a decomposed generation strategy in which level creation is broken into three sequential phases that an AI model could replicate independently:
 
-- **Phase 1 — Floor plan generation:** produce a valid grid of floor tiles, walls, and spatial zones with no items or patients.
-- **Phase 2 — Item placement:** given a floor plan, assign treatment cabinets, beds, barriers, and decorative items.
-- **Phase 3 — Patient and player assignment:** given a populated floor plan, determine spawn positions, patient wave timing, and treatment requirements.
+- **Phase 1 -- Floor plan generation:** produce a valid grid of floor tiles, walls, and spatial zones with no items or patients.
+- **Phase 2 -- Item placement:** given a floor plan, assign treatment cabinets, beds, barriers, and decorative items.
+- **Phase 3 -- Patient and player assignment:** given a populated floor plan, determine spawn positions, patient wave timing, and treatment requirements.
 
 This decomposition mirrors the eight-step manual process and reduces the complexity of any single generation task, making it more tractable for a language model to learn from examples. The 8 levels delivered by this project, alongside the 16 levels shipped with the base game, can form the initial training data for future peers or us to develop this AI generation level capability.
 
@@ -354,17 +354,17 @@ The project's original intention was fully automated level generation. Early tea
 
 ### Constraint-Based Generation
 
-The first approach involved using a constraint solver or search algorithm to explore the space of valid level configurations. Given the game's grid format and the set of known tile codes, such a system could theoretically enumerate layouts satisfying a set of design rules — minimum floor coverage, at least one patient and one medicine cabinet, a reachable path between all key objects. The fundamental challenge was defining what "valid" meant beyond technical well-formedness. A grid that loads without errors is not the same as a grid that constitutes a fun, balanced level. Encoding playability as constraints proved more complex than initially anticipated.
+The first approach involved using a constraint solver or search algorithm to explore the space of valid level configurations. Given the game's grid format and the set of known tile codes, such a system could theoretically enumerate layouts satisfying a set of design rules -- minimum floor coverage, at least one patient and one medicine cabinet, a reachable path between all key objects. The fundamental challenge was defining what "valid" meant beyond technical well-formedness. A grid that loads without errors is not the same as a grid that constitutes a fun, balanced level. Encoding playability as constraints proved more complex than initially anticipated.
 
 ### Example-Based Generation
 
-The second approach used the existing base-game levels as a training corpus. A generative model could learn patterns of tile placement and produce novel arrangements that preserved those statistical regularities — analogous to texture synthesis or Markov-chain map generation. A prototype was briefly sketched using bigram tile transition probabilities. However, the base game contained too few levels for meaningful pattern extraction, and the resulting outputs lacked the intentionality of hand-crafted design.
+The second approach used the existing base-game levels as a training corpus. A generative model could learn patterns of tile placement and produce novel arrangements that preserved those statistical regularities -- analogous to texture synthesis or Markov-chain map generation. A prototype was briefly sketched using bigram tile transition probabilities. However, the base game contained too few levels for meaningful pattern extraction, and the resulting outputs lacked the intentionality of hand-crafted design.
 
 ### LLM-Driven Generation
 
-The third and most ambitious approach drew on large language models. Harrison investigated whether a language model — provided with the game's YAML format documentation and example levels — could generate new levels as structured text outputs. Initial experiments were promising in that the model understood the format and produced syntactically valid YAML. However, semantic coherence was inconsistent: the model would sometimes place patient spawn points without corresponding medicine cabinets, define grid codes in the `grid` block that had no entry in `gridObjects`, or produce layouts with unreachable areas. Validating and correcting this output would itself require detailed game-engine knowledge that our team did not have access to at runtime.
+The third and most ambitious approach drew on large language models. Harrison investigated whether a language model -- provided with the game's YAML format documentation and example levels -- could generate new levels as structured text outputs. Initial experiments were promising in that the model understood the format and produced syntactically valid YAML. However, semantic coherence was inconsistent: the model would sometimes place patient spawn points without corresponding medicine cabinets, define grid codes in the `grid` block that had no entry in `gridObjects`, or produce layouts with unreachable areas. Validating and correcting this output would itself require detailed game-engine knowledge that our team did not have access to at runtime.
 
-> **LLM Generation Challenges:** When prompted to generate level YAML, language models produced structurally valid output but frequently introduced semantic errors — missing `objectDefinitions` entries for referenced codes, incorrect `include` directive syntax, and layout configurations that produced unreachable game areas. Correcting these errors required game-engine knowledge that could not be automated without a runtime validator.
+> **LLM Generation Challenges:** When prompted to generate level YAML, language models produced structurally valid output but frequently introduced semantic errors -- missing `objectDefinitions` entries for referenced codes, incorrect `include` directive syntax, and layout configurations that produced unreachable game areas. Correcting these errors required game-engine knowledge that could not be automated without a runtime validator.
 
 ## 3.3 David's Python Automation Scripts - Written by David
 
@@ -469,29 +469,29 @@ My level (Level 5) was designed to be unique. I noticed that there were no dough
 
 One of the most intellectually stimulating avenues explored by our team was an agentic AI approach to level testing and validation. The concept, developed by Harrison, was inspired by emerging work in AI game testing: rather than having a human play a generated level to check for problems, an AI agent could be given a description of the game's rules and tasked with playing the level autonomously, logging any issues it encountered.
 
-The envisioned architecture was a feedback loop: an LLM-based agent would receive the current level's YAML, a description of the game mechanics, and access to a set of "test actions" it could perform — checking whether every patient had a corresponding medicine cabinet, whether all floor tiles were reachable from the spawn point, whether the game management objects were correctly placed at the `gm` tile. The agent would produce a structured bug report, which could either be fed back to a generative model for correction or surfaced to a human level designer for review.
+The envisioned architecture was a feedback loop: an LLM-based agent would receive the current level's YAML, a description of the game mechanics, and access to a set of "test actions" it could perform -- checking whether every patient had a corresponding medicine cabinet, whether all floor tiles were reachable from the spawn point, whether the game management objects were correctly placed at the `gm` tile. The agent would produce a structured bug report, which could either be fed back to a generative model for correction or surfaced to a human level designer for review.
 
 This approach was appealing because it separated the concerns of generation and validation. A generative model need not produce perfect output on the first pass; instead, it could produce a rough layout that an agentic tester would critique, and the cycle would iterate toward a playable level over successive rounds.
 
-However, the approach encountered a fundamental practical obstacle. **The game engine is a closed Unity binary — there was no exposed API through which an agent could programmatically query the game state or run a level headlessly.** Our team had no access to the game's source code and could not instrument it for automated testing. Without the ability to run levels in a controllable environment, the agentic tester was reduced to static analysis of the YAML file — useful, but a significant reduction from the full runtime validation the concept had promised.
+However, the approach encountered a fundamental practical obstacle. **The game engine is a closed Unity binary -- there was no exposed API through which an agent could programmatically query the game state or run a level headlessly.** Our team had no access to the game's source code and could not instrument it for automated testing. Without the ability to run levels in a controllable environment, the agentic tester was reduced to static analysis of the YAML file -- useful, but a significant reduction from the full runtime validation the concept had promised.
 
 Static YAML analysis was implemented in a limited form as part of David's Python automation scripts. These scripts checked for: orphaned GridObject references (codes that appeared in `grid` but had no corresponding `gridObjects` entry), missing `objectDefinitions` entries, and invalid grid dimensions. These checks caught common structural errors but could not detect emergent gameplay problems such as level imbalance, inaccessible areas, or unfair patient-to-medicine distances, which only manifest at runtime.
 
 ## 3.5 The Pivot: From Generation to Authoring - Mervin
 
-By the midpoint of Semester 2 it became clear that fully automated AI level generation was not achievable within the remaining timeframe. Each of the three generative approaches had fundamental blockers that could not be resolved quickly, and the agentic testing concept — while architecturally sound — was stymied by the game engine's opacity.
+By the midpoint of Semester 2 it became clear that fully automated AI level generation was not achievable within the remaining timeframe. Each of the three generative approaches had fundamental blockers that could not be resolved quickly, and the agentic testing concept -- while architecturally sound -- was stymied by the game engine's opacity.
 
-This realisation prompted a period of honest reflection. Our team had invested considerable time in research and had little shipped tooling to show for it. The risk of submitting a partially-working generative algorithm — one that produced technically valid YAML but levels of questionable quality — was weighed against pivoting to a different deliverable entirely.
+This realisation prompted a period of honest reflection. Our team had invested considerable time in research and had little shipped tooling to show for it. The risk of submitting a partially-working generative algorithm -- one that produced technically valid YAML but levels of questionable quality -- was weighed against pivoting to a different deliverable entirely.
 
-The pivot decision was made collectively. Rather than abandoning the project's AI dimension, our team reframed the problem: **a high-quality GUI level editor, designed with deep awareness of the game's format, would become the primary deliverable.** This reframing served two purposes simultaneously. First, the editor would directly accelerate human-authored level creation, allowing the client's team to produce expansion content without manual YAML editing. Second, the levels created with it — along with the editor's documented format rules — would constitute a structured training corpus for a future AI pipeline. The `skills.md` file produced alongside the editor was explicitly designed with this future use case in mind.
+The pivot decision was made collectively. Rather than abandoning the project's AI dimension, our team reframed the problem: **a high-quality GUI level editor, designed with deep awareness of the game's format, would become the primary deliverable.** This reframing served two purposes simultaneously. First, the editor would directly accelerate human-authored level creation, allowing the client's team to produce expansion content without manual YAML editing. Second, the levels created with it -- along with the editor's documented format rules -- would constitute a structured training corpus for a future AI pipeline. The `skills.md` file produced alongside the editor was explicitly designed with this future use case in mind.
 
-This pivot was informed by pragmatic constraints, but it also carried genuine value. The resulting editor is a sophisticated tool that non-technical designers can use productively, and it delivers on the core promise of the brief — making it faster and easier to create more levels for Co-Operation: Multi-Turn.
+This pivot was informed by pragmatic constraints, but it also carried genuine value. The resulting editor is a sophisticated tool that non-technical designers can use productively, and it delivers on the core promise of the brief -- making it faster and easier to create more levels for Co-Operation: Multi-Turn.
 
 > **Pivot Rationale:** The pivot was driven by three factors: (1) insufficient training data for example-based models; (2) lack of runtime API access for agentic testing; (3) LLM output requiring domain-expert validation that was itself more expensive than manual design. The editor reframes AI-assistance as future-compatible infrastructure rather than an immediate deliverable.
 
 ## 3.6 Level Editor Architecture - Mervin
 
-The level editor, `level_editor.py`, is a single-file Python application built on the Tkinter GUI framework. It follows an RPG Maker-inspired dual-panel design — separating tile grid editing (the map layer) from GridObject editing (the event/object layer). This mirrors the conceptual distinction the game engine itself draws between the `grid` (which defines spatial layout) and the `gridObjects` section (which attaches behaviour and entities to each cell).
+The level editor, `level_editor.py`, is a single-file Python application built on the Tkinter GUI framework. It follows an RPG Maker-inspired dual-panel design -- separating tile grid editing (the map layer) from GridObject editing (the event/object layer). This mirrors the conceptual distinction the game engine itself draws between the `grid` (which defines spatial layout) and the `gridObjects` section (which attaches behaviour and entities to each cell).
 
 ### Core Data Model
 
@@ -558,7 +558,7 @@ The editor's feature set was informed directly by a detailed development convers
 
 ## 3.7 Development Process with OpenCode - Mervin
 
-The level editor was developed using OpenCode, an AI-assisted coding tool, in a conversational and iterative fashion. The development conversation — preserved in the project's documentation — reveals a pattern characteristic of this kind of AI-assisted development: the developer poses a high-level requirement, the AI produces an implementation, the developer tests it, identifies problems, and feeds those problems back as subsequent prompts.
+The level editor was developed using OpenCode, an AI-assisted coding tool, in a conversational and iterative fashion. The development conversation -- preserved in the project's documentation -- reveals a pattern characteristic of this kind of AI-assisted development: the developer poses a high-level requirement, the AI produces an implementation, the developer tests it, identifies problems, and feeds those problems back as subsequent prompts.
 
 The initial request was deliberately broad: *given documentation of the YAML format and an example level file, build a Python Tkinter editor focused on grid editing with separate GridObject creation, similar to RPG Maker.* The AI produced a functional prototype in a single response, but iteration was required immediately: the YAML include system was broken, the mod folder structure was not correctly inferred, and there was no visual tile rendering.
 
@@ -581,7 +581,7 @@ The fix required understanding the game engine's precise expectations: `objectDe
 
 The editor's architecture is organised around three primary responsibilities: data management, rendering, and user interaction. The five main classes are described below.
 
-**`LevelEditorApp`** is the root class, inheriting from `tk.Tk`. It owns the central data structures: `grid_data` (2D list of tile codes), `grid_objects` (dict mapping codes to GridObject lists), `object_definitions` (dict of user-defined tile presets), and the undo/redo stacks. It manages the overall layout — menu bar, scrollable canvas grid panel, side palette panel — and dispatches all keyboard shortcuts.
+**`LevelEditorApp`** is the root class, inheriting from `tk.Tk`. It owns the central data structures: `grid_data` (2D list of tile codes), `grid_objects` (dict mapping codes to GridObject lists), `object_definitions` (dict of user-defined tile presets), and the undo/redo stacks. It manages the overall layout -- menu bar, scrollable canvas grid panel, side palette panel -- and dispatches all keyboard shortcuts.
 
 ```plantuml
 @startuml LevelEditor Class Diagram
@@ -989,9 +989,9 @@ The default output is a 9×10 grid with p1 and p2 placed at the centre. The scri
 ### Shared Modules (`scripts/harry/shared/`)
 
 Three utility modules support both scripts:
-- **`grid.lua`** — Grid dimension calculation and non-empty cell counting
-- **`objects.lua`** — Object reference counting and definition-based object counting
-- **`patients.lua`** — Patient data extraction and formatting from `globalData`
+- **`grid.lua`** -- Grid dimension calculation and non-empty cell counting
+- **`objects.lua`** -- Object reference counting and definition-based object counting
+- **`patients.lua`** -- Patient data extraction and formatting from `globalData`
 
 These modules encapsulate the parsing logic and allow both tools to operate consistently on the same level format.
 
@@ -999,7 +999,7 @@ These modules encapsulate the parsing logic and allow both tools to operate cons
 
 # Quality Assurance & Testing
 
-Given the absence of a formal test framework in the original codebase, testing was conducted both manually and through a series of targeted unit tests written against the editor's core logic components. Because the editor's UI is built on Tkinter — which is not available in the project's CI environment — UI-level testing was performed through manual inspection and recorded observations. The non-UI components (YAML handling, grid serialisation, undo/redo, and include resolution) were extracted and tested programmatically.
+Given the absence of a formal test framework in the original codebase, testing was conducted both manually and through a series of targeted unit tests written against the editor's core logic components. Because the editor's UI is built on Tkinter -- which is not available in the project's CI environment -- UI-level testing was performed through manual inspection and recorded observations. The non-UI components (YAML handling, grid serialisation, undo/redo, and include resolution) were extracted and tested programmatically.
 
 ## 4.1 Unit Tests
 
@@ -1007,20 +1007,20 @@ The following tests were executed against extracted logic from `level_editor.py`
 
 | # | Test Name | Description | Result |
 |---|---|---|---|
-| T01 | LiteralString block scalar | Verify grids serialised as `LiteralString` produce YAML `|` block scalar notation matching the game's expected format | ✅ PASS |
-| T02 | TaggedObject with custom tag | Verify a `TaggedObject` with `_tag='SpineAnimation'` serialises as `!SpineAnimation` in YAML output | ✅ PASS |
-| T03 | TaggedObject without tag (fallback) | Verify a `TaggedObject` without a tag serialises as a plain YAML mapping without raising an exception | ✅ PASS |
-| T04 | Include resolution — present file | Verify a level YAML referencing `LevelsShared.yaml` correctly merges shared data and preserves `_original_includes` | ✅ PASS |
-| T05 | Include resolution — missing file | Verify a missing include file generates a warning rather than an exception, allowing partial data loading | ✅ PASS |
-| T06 | Circular include detection | Verify two files including each other do not produce an infinite loop; the second encounter returns an empty dict with a warning | ✅ PASS |
-| T07 | Grid encode/decode round-trip | Verify converting a 2D list to a comma-separated YAML string and back produces an identical 2D list | ✅ PASS |
-| T08 | Empty grid creation | Verify a 5×5 empty grid is initialised with all cells set to `__` and has the correct dimensions | ✅ PASS |
-| T09 | Full YAML level file output | Verify a serialised level file contains all required keys: `include`, `grid` as block scalar, `cameraSettings`, and `objectDefinitions` | ✅ PASS |
-| T10 | Undo functionality | Verify pushing two states and calling undo returns the prior state and repopulates the redo stack | ✅ PASS |
-| T11 | Redo functionality | Verify calling redo after an undo returns the redone state and repopulates the undo stack | ✅ PASS |
-| T12 | Grid code format validation | Verify the regex validator accepts two-character alphanumeric codes and rejects single-char, three-char, empty, and other invalid inputs | ✅ PASS |
+| T01 | LiteralString block scalar | Verify grids serialised as `LiteralString` produce YAML `|` block scalar notation matching the game's expected format |  PASS |
+| T02 | TaggedObject with custom tag | Verify a `TaggedObject` with `_tag='SpineAnimation'` serialises as `!SpineAnimation` in YAML output |  PASS |
+| T03 | TaggedObject without tag (fallback) | Verify a `TaggedObject` without a tag serialises as a plain YAML mapping without raising an exception |  PASS |
+| T04 | Include resolution -- present file | Verify a level YAML referencing `LevelsShared.yaml` correctly merges shared data and preserves `_original_includes` |  PASS |
+| T05 | Include resolution -- missing file | Verify a missing include file generates a warning rather than an exception, allowing partial data loading |  PASS |
+| T06 | Circular include detection | Verify two files including each other do not produce an infinite loop; the second encounter returns an empty dict with a warning |  PASS |
+| T07 | Grid encode/decode round-trip | Verify converting a 2D list to a comma-separated YAML string and back produces an identical 2D list |  PASS |
+| T08 | Empty grid creation | Verify a 5×5 empty grid is initialised with all cells set to `__` and has the correct dimensions |  PASS |
+| T09 | Full YAML level file output | Verify a serialised level file contains all required keys: `include`, `grid` as block scalar, `cameraSettings`, and `objectDefinitions` |  PASS |
+| T10 | Undo functionality | Verify pushing two states and calling undo returns the prior state and repopulates the redo stack |  PASS |
+| T11 | Redo functionality | Verify calling redo after an undo returns the redone state and repopulates the undo stack |  PASS |
+| T12 | Grid code format validation | Verify the regex validator accepts two-character alphanumeric codes and rejects single-char, three-char, empty, and other invalid inputs |  PASS |
 
-### Test T01 — LiteralString Block Scalar
+### Test T01 -- LiteralString Block Scalar
 
 This test verifies the custom YAML representer that forces grid data to be emitted as a literal block scalar. The game engine's YAML parser requires the `grid` key to use `|` style; flow-style or quoted strings cause load failures.
 
@@ -1045,7 +1045,7 @@ grid: |
   __,__,__,__
 ```
 
-### Test T06 — Circular Include Detection
+### Test T06 -- Circular Include Detection
 
 Two YAML files were created in a temporary directory: `FileA.yaml` includes `FileB.yaml`, and `FileB.yaml` includes `FileA.yaml`. The `resolve_includes` function uses a set of already-visited absolute paths; when a path is encountered a second time it immediately returns an empty dict and appends a `'Circular include detected'` warning.
 
@@ -1058,7 +1058,7 @@ assert any('Circular' in w for w in warnings)  # PASS
 # warnings: ['Circular include detected']
 ```
 
-### Test T09 — Full YAML Level File Output
+### Test T09 -- Full YAML Level File Output
 
 This test assembles a minimal but complete level data structure and serialises it, checking that all keys required by the game engine are present. The `objectDefinitions` key was the source of a critical game-loading failure during development (see IT04 below), making its presence a regression check in every subsequent build.
 
@@ -1078,29 +1078,29 @@ level_data = {
 }
 output = yaml.dump(level_data, default_flow_style=False)
 
-assert 'LevelsShared.yaml' in output  # ✅
-assert 'grid: |'            in output  # ✅
-assert 'cameraSettings'     in output  # ✅
-assert 'objectDefinitions'  in output  # ✅
+assert 'LevelsShared.yaml' in output  # 
+assert 'grid: |'            in output  # 
+assert 'cameraSettings'     in output  # 
+assert 'objectDefinitions'  in output  # 
 ```
 
 ## 4.2 Integration & Functional Tests
 
 In addition to the automated unit tests, several manual integration tests were conducted and documented below.
 
-### IT01 — YAML Round-Trip with Existing Level File
+### IT01 -- YAML Round-Trip with Existing Level File
 
 An existing level file from the game (`Level_6_players_4.yaml`) was loaded into the editor and immediately saved without modification. The output file was then loaded back and its grid dimensions and first-row tile codes were compared against the original. This confirmed the load-save cycle is lossless for all standard level structures.
 
-**Result:** ✅ Pass — grid dimensions, tile codes, and cameraSettings were preserved exactly.
+**Result:**  Pass -- grid dimensions, tile codes, and cameraSettings were preserved exactly.
 
-### IT02 — Custom Tag Preservation
+### IT02 -- Custom Tag Preservation
 
 A level file containing `!SpineAnimation`, `!MeshDeformAnimation`, and `!TweenAnimation` tagged nodes was loaded and saved. Manual inspection of the output confirmed all custom tags were preserved with their original tag names and data.
 
-**Result:** ✅ Pass — all three tag types round-tripped correctly.
+**Result:**  Pass -- all three tag types round-tripped correctly.
 
-### IT03 — Grid Hover IndexError Regression
+### IT03 -- Grid Hover IndexError Regression
 
 During development an `IndexError` was observed in the `on_grid_hover` callback when the mouse cursor moved outside the grid boundary:
 
@@ -1112,9 +1112,9 @@ IndexError: list index out of range
 
 The fix added bounds-checking before accessing `grid_data`. Post-fix testing involved hovering the cursor along all four grid edges and confirming no exceptions appeared in the console.
 
-**Result:** ✅ Pass — no exceptions raised on grid boundary hover after fix.
+**Result:**  Pass -- no exceptions raised on grid boundary hover after fix.
 
-### IT04 — objectDefinitions Key Regression
+### IT04 -- objectDefinitions Key Regression
 
 The game engine produced the following error when loading editor-generated files that omitted the `objectDefinitions` key:
 
@@ -1125,13 +1125,13 @@ in deserialized data for type 'cooperation.model.levels.CoOperationLevelDefiniti
 
 This was a serialisation regression introduced when LevelsShared.yaml content was removed from the output. The fix ensured `objectDefinitions: {}` was always included in saved files even when empty. Post-fix validation by loading a generated file into the game confirmed resolution.
 
-**Result:** ✅ Pass — game loaded generated levels successfully after fix.
+**Result:**  Pass -- game loaded generated levels successfully after fix.
 
-### IT05 — Undo/Redo Stack Exhaustion
+### IT05 -- Undo/Redo Stack Exhaustion
 
 The undo stack is capped at 50 states to prevent unbounded memory growth on large grids. This test populated the stack beyond 50 entries and confirmed the oldest entry was correctly discarded (FIFO eviction), and that subsequent undo operations did not produce index errors or incorrect state restorations.
 
-**Result:** ✅ Pass — stack eviction behaved correctly; 50 undos from state 75 correctly returned state 25.
+**Result:**  Pass -- stack eviction behaved correctly; 50 undos from state 75 correctly returned state 25.
 
 ---
 
@@ -1146,17 +1146,17 @@ Below is a screenshot of our trello board which can be found here: https://trell
 
 Our team managed to deliver a GUI-based level editor, eight hand-crafted levels, Python automation scripts for YAML validation and batch export, and a `skills.md` document designed to facilitate future AI training.
 
-The original requirement — to build an AI tool that generates levels autonomously — was not met. However, our team's systematic exploration of generative approaches, and the candid recognition of where those approaches failed, produced a clearer picture of what a functional AI generation tool would actually require: a larger corpus of example levels, programmatic access to the game engine for runtime validation, and a more constrained specification of what constitutes a "good" level for this particular game.
+The original requirement -- to build an AI tool that generates levels autonomously -- was not met. However, our team's systematic exploration of generative approaches, and the candid recognition of where those approaches failed, produced a clearer picture of what a functional AI generation tool would actually require: a larger corpus of example levels, programmatic access to the game engine for runtime validation, and a more constrained specification of what constitutes a "good" level for this particular game.
 
-The pivot to a GUI editor was a pragmatic decision, but it was also a demonstration of a valuable professional skill: recognising when a planned approach is not viable and redirecting effort productively. The resulting editor is not a compromise — it is a genuinely useful tool that reduces the manual YAML authoring burden, supports tile visualisation through GLB texture extraction, and integrates directly with the game's mod folder structure. The levels produced with it are ready to be evaluated and, if suitable, shipped alongside the base game.
+The pivot to a GUI editor was a pragmatic decision, but it was also a demonstration of a valuable professional skill: recognising when a planned approach is not viable and redirecting effort productively. The resulting editor is not a compromise -- it is a genuinely useful tool that reduces the manual YAML authoring burden, supports tile visualisation through GLB texture extraction, and integrates directly with the game's mod folder structure. The levels produced with it are ready to be evaluated and, if suitable, shipped alongside the base game.
 
-The development process using OpenCode illustrated both the potential and the practical limits of AI-assisted software development. AI tooling dramatically accelerated early prototyping and was effective at generating boilerplate-heavy code — the Tkinter layout, YAML constructor registrations, the camera settings dialog. Converging on correct behaviour for non-trivial features — texture rendering, include resolution, YAML output format — required precise, symptom-level human feedback.
+The development process using OpenCode illustrated both the potential and the practical limits of AI-assisted software development. AI tooling dramatically accelerated early prototyping and was effective at generating boilerplate-heavy code -- the Tkinter layout, YAML constructor registrations, the camera settings dialog. Converging on correct behaviour for non-trivial features -- texture rendering, include resolution, YAML output format -- required precise, symptom-level human feedback.
 
 ## Problems We Faced
 
 ### Hesitant Decision Making
 
-Our team struggled to settle on a technical approach until halfway through Semester 2. This hesitation is understandable in the context of a genuinely difficult problem — AI level generation is a research-level challenge that professional studios invest significant resources in — but it resulted in delays that compressed the available development time. In retrospect, an earlier commitment to a scoped, achievable deliverable would have produced a stronger final product.
+Our team struggled to settle on a technical approach until halfway through Semester 2. This hesitation is understandable in the context of a genuinely difficult problem -- AI level generation is a research-level challenge that professional studios invest significant resources in -- but it resulted in delays that compressed the available development time. In retrospect, an earlier commitment to a scoped, achievable deliverable would have produced a stronger final product.
 
 ### Technical Complexity of the Game Format
 
@@ -1164,7 +1164,7 @@ The game's YAML superset was more complex than anticipated. The custom tag const
 
 ### Absence of Runtime Access
 
-The impossibility of running levels programmatically — which effectively ruled out both the agentic testing concept and runtime-aware generation — was the most fundamental technical constraint our team encountered. Future work on AI-generated levels for this game would benefit significantly from a headless test runner or a documented game state API exposed by Mind Feast Games.
+The impossibility of running levels programmatically -- which effectively ruled out both the agentic testing concept and runtime-aware generation -- was the most fundamental technical constraint our team encountered. Future work on AI-generated levels for this game would benefit significantly from a headless test runner or a documented game state API exposed by Mind Feast Games.
 
 ---
 
@@ -1187,7 +1187,7 @@ The impossibility of running levels programmatically — which effectively ruled
 
 # Appendix: Personal Reflections
 
-## Oscar Kennedy — Personal Reflection
+## Oscar Kennedy -- Personal Reflection
 
 My primary contribution to this group project was the manual design and creation of six playable levels for Co-Operation Multi-Turn, a cooperative turn-based hospital puzzle game developed by Mind Feast Games. Beyond the level files themselves, I also figured out the file structure needed and necessary files needed to implement our levels smoothly into Co-Operation.
 
@@ -1195,14 +1195,14 @@ The work began on 1 December, when I created the first level for the project. At
 
 The levels themselves are defined using an ASCII-style grid where each cell is given a two-character coordinate, and a separate gridObjects section maps those coordinates to game objects. Patients are configured in a globalData section with health values, treatment needs, and optional spawn timings. The format is simple, but getting visual details right, particularly the foundation tiles that smooth the edges of floor areas, proved unexpectedly time-consuming. I spent a short 3 hours on my first level correcting the orientation and placement of these borders, not mentioning the 3 it took to figure everything out to reach that point. After repeatedly doing this though the time it took to create levels decreased significantly. This allowed for more of a focus on level design and difficulty adjustments.
 
-To bring structure to this process I developed an eight-step guide: player spawns first, then the floor plan, then items and beds, then patients, then barriers, then foundations, then background decorations. Each step produces a valid, loadable level file. This approach meant I could test the level in-game at any stage and catch issues early — for example, I identified a patient softlock risk at Step 6 of Level 2 and was able to resolve it by switching to two-tile-high glass barriers before the level was finalised. I continued and took the original 16 levels and stripped them of their levels to just leave their background to make the start of level making easier. When looking at the backgrounds you can visualize the size of the map you intend to make. As I got more skilled in this level design I went through my previous made levels improved them and manually created their background (excluding the buildings).
+To bring structure to this process I developed an eight-step guide: player spawns first, then the floor plan, then items and beds, then patients, then barriers, then foundations, then background decorations. Each step produces a valid, loadable level file. This approach meant I could test the level in-game at any stage and catch issues early -- for example, I identified a patient softlock risk at Step 6 of Level 2 and was able to resolve it by switching to two-tile-high glass barriers before the level was finalised. I continued and took the original 16 levels and stripped them of their levels to just leave their background to make the start of level making easier. When looking at the backgrounds you can visualize the size of the map you intend to make. As I got more skilled in this level design I went through my previous made levels improved them and manually created their background (excluding the buildings).
 
 Scaling each level across three player counts required more thought than I initially anticipated. Removing a player makes it so the remaining players have to spend more time moving across the map, so if the patients are unaffected when players are reduced can make most levels impossible to complete. For this I came up with multiple difficult reducing options: reduce patients spawning in each of the waves, increase starting health of patients, increase the amount of time until they ‘drop-in’. 
 Looking back at the project, the period of indecision in Semester 1 was the most significant obstacle we faced as a team. A large amount of early work was discarded when we changed direction, and that cost us time we could not recover. From a personal standpoint, the level design work was relatively self-contained, and I was able to make progress independently of those wider team decisions, which was fortunate.
 
 If we followed through with creating an AI generation the most valuable outcome of my work, besides the six levels themselves, is the documented step-by-step process. These files, combined with the base game's 16 existing levels, provide a structured examples for training an AI model to generate levels automatically. Further work I would’ve contributed to this would be to create a list of different situations where the foundational tiles would be laid out. This has been a significant source of contention throughout this project, having a directory laid out would have made progress significantly faster. I used a faux pas method of this by always keeping an old level I made open so I could call back to what rotation this foundation tile needed.
 
-## David Williams — Personal Reflection
+## David Williams -- Personal Reflection
 
 From taking part in this project, I learnt a couple of technical skills. First one being YAML syntax. This took a while to become proficient but once I understood it, I started making python scripts to automate certain level formatting and level generation (although this was discarded later in Semester 2). A couple of soft skills I developed on were leadership and teamwork. As I took a leadership role I managed and guided the group through each sprint. I had to manage tasks on Trello and assign them to individuals. I also developed my professional communication skills as I was the main point of contact with the client (Shaz Yousaf).
 
@@ -1210,7 +1210,7 @@ The main challenge that I overcome was the fact that the projects focus changed 
 
 I got on well with my groupmates. I was fortunate enough to have them selected and we have been friends since Year 1. We also happened to be in a flat together this year so if someone wasn't awake yet for the sprint meeting we could just knock on their door and they would be ready in time. This was something I really valued about this group as it was easy for us to keep each other accountable. Another thing is we are still all friends so the stress of this project did not break us.
 
-## Mervin Manuel — Personal Reflection
+## Mervin Manuel -- Personal Reflection
 
 I have been involved with this project in a variety of ways throughout both semesters. Alongside my development work, I acted as Secondary Group Admin alongside David, which meant helping to keep the group organised and on track toward our final deliverables. This included formatting and maintaining our GitHub page so that the repository was easy to navigate for all members, keeping an up-to-date meeting log so that decisions and action points were properly recorded, and generally making sure that communication between the group stayed consistent as the project evolved.
 
@@ -1220,20 +1220,20 @@ When it came to conceptualising our approach to level generation, we looked at a
 
 It was during this period that the idea for the level editor took shape. Oscar had been creating levels by hand, and watching that process made the problem immediately obvious. The workflow of manually editing YAML files was quite difficult to work with; the format demanded constant cross-referencing between the grid block, the gridObjects section, and the shared definitions file. There was no visual feedback, no way to see the tile layout taking shape as you edited, and every small mistake required careful line-by-line debugging. It was clear that the text editing approach was placing a significant cognitive burden on the creative process rather than supporting it.
 
-Oscar's detailed, step-by-step explanation of how he approached level creation was, in retrospect, essential to the editor becoming functional. He walked me through exactly how a level is constructed from the ground up: how you decide where to place the management tile, how you think about floor coverage, how you position patients and medicine cabinets relative to each other, and how the include system meant you did not need to redefine every shared asset in each file. Without that conversation, I would have been building the editor with a surface-level understanding of the format and almost certainly would have produced something that missed the practical needs of the designer of a given level. His explanation made ease of use the clear priority from the outset — not features for their own sake, but a tool that would get out of the way and let the creative decisions happen quickly.
+Oscar's detailed, step-by-step explanation of how he approached level creation was, in retrospect, essential to the editor becoming functional. He walked me through exactly how a level is constructed from the ground up: how you decide where to place the management tile, how you think about floor coverage, how you position patients and medicine cabinets relative to each other, and how the include system meant you did not need to redefine every shared asset in each file. Without that conversation, I would have been building the editor with a surface-level understanding of the format and almost certainly would have produced something that missed the practical needs of the designer of a given level. His explanation made ease of use the clear priority from the outset -- not features for their own sake, but a tool that would get out of the way and let the creative decisions happen quickly.
 
 I built the level editor using OpenCode, an AI-assisted coding tool, and the impact on my workflow was significant. What would have taken several weeks of iterative solo development was compressed considerably by being able to describe a requirement conversationally and receive a working implementation to test against. I could focus my energy on identifying problems with the output and articulating them precisely, rather than spending hours writing boilerplate Tkinter layout code or working through the PyYAML documentation from scratch. Features like undo and redo, the paint tool, and the GLB texture extraction for visual tile rendering all came together through that back-and-forth process. OpenCode was not a shortcut so much as a collaborator that dramatically reduced the distance between an idea and a testable prototype.
 
-The final editor supports visual tile painting, camera settings configuration, YAML round-trip saving with full custom tag support, and an undo stack — features that emerged directly from encountering shortcomings with the traditional text editing. I also completed one level using the tool myself, with the assistance of Harry serving as both a functional test and a contribution to the final deliverable, and wrote the README so that future developers could get up and running without needing to ask.
+The final editor supports visual tile painting, camera settings configuration, YAML round-trip saving with full custom tag support, and an undo stack -- features that emerged directly from encountering shortcomings with the traditional text editing. I also completed one level using the tool myself, with the assistance of Harry serving as both a functional test and a contribution to the final deliverable, and wrote the README so that future developers could get up and running without needing to ask.
 
 Overall, I am proud of what the editor became. It is a genuine tool rather than a proof of concept, and I believe it leaves the project in a much stronger position than an incomplete generation algorithm ever could have.
 
-## Harrison McDevitt — Personal Reflection
+## Harrison McDevitt -- Personal Reflection
 
-My contribution to the project centred on AI research and exploring alternative technical approaches to level creation. Early in Semester 1, I investigated whether large language models could generate valid level YAML directly. While models like GPT-4 could produce syntactically correct YAML, the outputs frequently contained semantic errors — missing object definitions, unreachable areas, and patients without corresponding treatment cabinets. This led me to explore an agentic testing approach: an AI agent that would play-test levels and report issues. The concept was sound, but the closed nature of the Unity engine meant there was no API for runtime validation.
+My contribution to the project centred on AI research and exploring alternative technical approaches to level creation. Early in Semester 1, I investigated whether large language models could generate valid level YAML directly. While models like GPT-4 could produce syntactically correct YAML, the outputs frequently contained semantic errors -- missing object definitions, unreachable areas, and patients without corresponding treatment cabinets. This led me to explore an agentic testing approach: an AI agent that would play-test levels and report issues. The concept was sound, but the closed nature of the Unity engine meant there was no API for runtime validation.
 
-I then turned to Lua as a lightweight scripting alternative. I built two tools: a level analyser that parses YAML and reports object statistics, and a level generator that creates blank, properly formatted level files with configurable dimensions. These scripts use the `lyaml` library and custom modules for grid parsing, object counting, and patient data extraction. The generator correctly handles the two-character coordinate system (`a–i`, `A–R` for columns; `1–9`, `A–R` for rows) and produces output ready for the GUI editor. Working in Lua was refreshing — the language's minimal footprint made it easy to reason about the level format without the overhead of a larger toolchain.
+I then turned to Lua as a lightweight scripting alternative. I built two tools: a level analyser that parses YAML and reports object statistics, and a level generator that creates blank, properly formatted level files with configurable dimensions. These scripts use the `lyaml` library and custom modules for grid parsing, object counting, and patient data extraction. The generator correctly handles the two-character coordinate system (`a–i`, `A–R` for columns; `1–9`, `A–R` for rows) and produces output ready for the GUI editor. Working in Lua was refreshing -- the language's minimal footprint made it easy to reason about the level format without the overhead of a larger toolchain.
 
-The pivot from generation to authoring was a difficult but necessary decision. I had invested significant time researching LLM prompting strategies and agentic architectures, but the practical barriers — lack of runtime access to the game engine, insufficient training data, and the complexity of encoding playability constraints — meant that a working generative system was not achievable within the project timeline. The pivot allowed us to deliver something of genuine value: a polished editor that accelerates human creativity rather than attempting to replace it.
+The pivot from generation to authoring was a difficult but necessary decision. I had invested significant time researching LLM prompting strategies and agentic architectures, but the practical barriers -- lack of runtime access to the game engine, insufficient training data, and the complexity of encoding playability constraints -- meant that a working generative system was not achievable within the project timeline. The pivot allowed us to deliver something of genuine value: a polished editor that accelerates human creativity rather than attempting to replace it.
 
-Looking back, the most valuable lesson was about matching ambition to available constraints. The agentic testing concept remains viable if the game engine ever exposes a headless testing API, and the Lua scripts provide a foundation for future automation work. My recommendation for future teams is to validate technical assumptions early — particularly around third-party API access — before committing to a research-heavy approach.
+Looking back, the most valuable lesson was about matching ambition to available constraints. The agentic testing concept remains viable if the game engine ever exposes a headless testing API, and the Lua scripts provide a foundation for future automation work. My recommendation for future teams is to validate technical assumptions early -- particularly around third-party API access -- before committing to a research-heavy approach.
