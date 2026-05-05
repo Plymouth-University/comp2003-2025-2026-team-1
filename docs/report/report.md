@@ -1111,18 +1111,18 @@ The impossibility of running levels programmatically — which effectively ruled
 
 # References
 
-- Shaker, N., Togelius, J. and Nelson, M.J. (2016) *Procedural Content Generation in Games*. Springer. Available at: http://pcgbook.com (Accessed: April 2025).
+- Shaker, N., Togelius, J. and Nelson, M.J. (2016) *Procedural Content Generation in Games*. Springer. Available at: http://pcgbook.com (Accessed: November 2025).
 - Guzdial, M. and Riedl, M. (2018) 'Game Level Generation from Gameplay Videos', in *Proceedings of the Twelfth AAAI Conference on Artificial Intelligence and Interactive Digital Entertainment (AIIDE-16)*. AAAI Press.
 - Summerville, A., Guzdial, M., Mateas, M. and Riedl, M. (2018) 'Learning Player Models and Level Generation from Player Experience', *IEEE Transactions on Computational Intelligence and AI in Games*, 10(1), pp. 61–72.
 - Togelius, J., Yannakakis, G.N., Stanley, K.O. and Browne, C. (2011) 'Search-based Procedural Content Generation: A Taxonomy and Survey', *IEEE Transactions on Computational Intelligence and AI in Games*, 3(3), pp. 172–186.
 - Brown, T.B. et al. (2020) 'Language Models are Few-Shot Learners', in *Advances in Neural Information Processing Systems*, 33, pp. 1877–1901. Available at: https://arxiv.org/abs/2005.14165.
-- Mind Feast Games (2025) *Co-Operation: Multi-Turn Documentation*. Available at: https://www.mindfeastgames.com/MultiTurn/Docs/ (Accessed: March 2025).
-- PyYAML (2023) *PyYAML Documentation*. Available at: https://pyyaml.org/wiki/PyYAMLDocumentation (Accessed: March 2025).
-- pygltflib (2023) *pygltflib: Python library for reading, writing and handling GLTF files*. Available at: https://gitlab.com/dodgyville/pygltflib (Accessed: April 2025).
+- Mind Feast Games (2025) *Co-Operation: Multi-Turn Documentation*. Available at: https://www.mindfeastgames.com/MultiTurn/Docs/ (Accessed: October 2025).
+- PyYAML (2023) *PyYAML Documentation*. Available at: https://pyyaml.org/wiki/PyYAMLDocumentation (Accessed: January 2026).
+- pygltflib (2023) *pygltflib: Python library for reading, writing and handling GLTF files*. Available at: https://gitlab.com/dodgyville/pygltflib (Accessed: April 2026).
 - Effenberger, T. and Šebesta, J. (2020) 'Procedural Level Generation for a Turn-Based Dungeon Crawler Using a Genetic Algorithm', in *Proceedings of the 15th International Joint Conference on Computer Vision, Imaging and Computer Graphics Theory and Applications (VISIGRAPP 2020)*.
 - Karth, I. and Smith, A.M. (2017) 'WaveFunctionCollapse is Constraint Solving in the Wild', in *Proceedings of the 12th International Conference on the Foundations of Digital Games (FDG 2017)*.
 - OpenAI (2023) *GPT-4 Technical Report*. arXiv:2303.08774. Available at: https://arxiv.org/abs/2303.08774.
-- Anthropic (2024) *Claude: AI-Assisted Development*. Available at: https://www.anthropic.com (Accessed: April 2025).
+- Anthropic (2024) *Claude: AI-Assisted Development*. Available at: https://www.anthropic.com (Accessed: April 2026).
 
 ---
 
