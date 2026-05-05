@@ -366,30 +366,95 @@ The third and most ambitious approach drew on large language models. Harrison in
 
 ## 3.3 David's Python Automation Scripts
 
-Alongside the GUI editor, David produced a set of Python automation scripts for batch processing and validation of level files. The scripts operate directly on YAML files and are intended for pipeline use rather than interactive editing.
+### Old Level Generation
 
-The primary script performs structural validation: it loads a level YAML, resolves includes, and checks for orphaned grid codes (codes appearing in the `grid` block with no corresponding `gridObjects` entry), codes referenced in `gridObjects` that have no `objectDefinitions` entry, and grid dimensions that do not match the declared size. Errors are printed with line-level context to aid manual correction.
+Me and Harry both went separate ways to try and find a solution to the "generating levels" problem. So we tried a more algorithmic approach. We thought if we could separate out different generative parts of level gen it would be easier to control and be more stable than using LLMs. I tried doing it in Python (see `scripts/archived/OldLevelGenDav.py`). I used Gemini (AI Model) to help me generate the structure of the file and add `pass` to all functions so that I could implement them one at a time. If you looked at that Python script you will see a lot of missing code and that's because Harry's Lua script worked well. So I worked on the next script.
 
-A secondary script handles batch export: given a directory of level files, it resolves all includes and produces standalone YAML files suitable for distribution without a separate `LevelsShared.yaml` dependency. This was used to prepare the eight hand-crafted levels for handoff to the client.
+### Current Python Script
+
+The next and final script I worked on, due to poor time management, was the `delete_blank.py`. You might be wondering what is the point of this script. Well as I learnt from making a level manually myself, it was a tedious process. You would make up a new gridObjects as you went along. This made the process of making a level quite a long process. To solve this, I created a `blank_level.yaml` that had all the gridObjects possible.
 
 ```python
-# Example: validate a single level file
-def validate_level(filepath):
-    data, warnings, errors = resolve_includes(filepath)
-    grid = parse_grid_string(data.get('grid', ''))
-    grid_objects = data.get('gridObjects', {})
-    object_definitions = data.get('objectDefinitions', {})
+grid: |
+  gm,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
 
-    # Check for orphaned codes
-    all_codes = set(code for row in grid for code in row if code != '__')
-    for code in all_codes:
-        if code not in grid_objects:
-            errors.append(f"Grid code '{code}' has no gridObjects entry")
+  __,__,__,__,__,__,__,__, a1,b1,c1,d1,e1,f1,g1,h1,i1, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, a2,b2,c2,d2,e2,f2,g2,h2,i2, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, a3,b3,c3,d3,e3,f3,g3,h3,i3, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, a4,b4,c4,d4,e4,f4,g4,h4,i4, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, a5,b5,c5,d5,e5,f5,g5,h5,i5, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, a6,b6,c6,d6,e6,f6,g6,h6,i6, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, a7,b7,c7,d7,e7,f7,g7,h7,i7, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, a8,b8,c8,d8,e8,f8,g8,h8,i8, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, a9,b9,c9,d9,e9,f9,g9,h9,i9, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, aA,bA,cA,dA,eA,fA,gA,hA,iA, __,__,__,__,__,
 
-    return warnings, errors
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
+  __,__,__,__,__,__,__,__, __,__,__,__,__,__,__,__,__, __,__,__,__,__,
 ```
 
-The accompanying `skills.md` file, written by Harry, documents the level format in structured prose intended for use as a system prompt when training or prompting AI models in a future generation pipeline. It covers the YAML schema, the two-character code convention, the include system, and the required keys for a loadable level file.
+This meant that down below in `gridObjects:` you could just had p1 for player or b_s for a bed and it would work right away.
+
+```python
+gridObjects:
+  a1: []
+  b1: []
+  c1: []
+  d1: []
+  e1: [p1]
+  f1: []
+  g1: []
+  h1: []
+  i1: []
+
+  a2: []
+  b2: []
+  c2: []
+  d2: []
+  e2: [p2]
+  f2: []
+  g2: []
+  h2: []
+  i2: []
+  ...
+```
+
+So what my script does is it iterates through the gridObjects and sees all the empty lists. Any that are empty it takes note of them and puts it in a list called deleted_keys. This will then go to another function which iterates through the grid and checks if any are from deleted_keys and if so it will replace them with a `"__"` to signify an empty cell.
+
+```python
+def delete_blank_grid(grid: str, deleted_keys: list):
+    """
+    Removes occurrences of deleted keys from the grid string by replacing them with an empty string.
+    Parameters:
+        grid (str): The original grid string.
+        deleted_keys (list): A list of keys that have been deleted from the grid_objects dictionary and need to be removed from the grid.
+    Returns:
+        str: The modified grid string with the deleted keys removed.
+    """
+
+    for key in deleted_keys:
+        if key in grid:
+            grid = grid.replace(key, '__')  # Replace the key with an 'empty' string in the grid
+
+    return grid
+```
+
+### SKILL.md
+
+The `SKILL.md` file made by Harry allows an AI model to use my python script `delete_blank.py`. If we had more time, we would make more scripts that could be implemented into `SKILL.md` and then an AI model could create a level using all these scripts. This is the "layered" approach we were going for but could not achieve in the end.
+
+---
 
 ## 3.4 The Agentic Approach - Mervin
 
