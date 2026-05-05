@@ -1083,6 +1083,13 @@ The undo stack is capped at 50 states to prevent unbounded memory growth on larg
 
 ---
 
+# Trello
+
+Below is a screenshot of our trello board which can be found here: https://trello.com/b/oFRRteUB/comp2003-team-1
+
+![All 6 sprints from Trello Board](images/trello-final.png)
+
+
 # Conclusion - Harry
 
 Our team managed to deliver a GUI-based level editor, eight hand-crafted levels, Python automation scripts for YAML validation and batch export, and a `skills.md` document designed to facilitate future AI training.
