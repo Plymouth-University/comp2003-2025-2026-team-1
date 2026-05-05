@@ -18,8 +18,8 @@ echo "Building PDF from $INPUT..."
 pandoc "$INPUT" \
     -o "$OUTPUT" \
     --standalone \
-    --toc \
-    --toc-depth=2 \
+    # --toc \
+    # --toc-depth=2 \
     --highlight-style=tango \
     --pdf-engine=lualatex \
     --pdf-engine-opt="--shell-escape" \

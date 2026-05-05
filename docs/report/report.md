@@ -27,8 +27,9 @@
    - 3.4 [The Pivot: From Generation to Authoring](#34-the-pivot-from-generation-to-authoring)
    - 3.5 [Level Editor Architecture](#35-level-editor-architecture)
    - 3.6 [Development Process with OpenCode](#36-development-process-with-opencode)
-   - 3.7 [UML Diagrams](#37-uml-diagrams)
-4. [Quality Assurance & Testing](#quality-assurance--testing)
+    - 3.7 [UML Diagrams](#37-uml-diagrams)
+    - 3.8 [Lua Scripts for Level Analysis & Generation](#38-lua-scripts-for-level-analysis--generation)
+ 4. [Quality Assurance & Testing](#quality-assurance--testing)
    - 4.1 [Unit Tests](#41-unit-tests)
    - 4.2 [Integration & Functional Tests](#42-integration--functional-tests)
 5. [Conclusion](#conclusion)
@@ -840,6 +841,56 @@ The accompanying `skills.md` file, written by Harry, documents the level format 
 
 ---
 
+## 3.8 Lua Scripts for Level Analysis & Generation
+
+As part of the AI research strand, Harrison developed a suite of Lua scripts for level analysis and generation. These scripts were designed to work with the game's YAML level format and provide lightweight tooling that does not depend on the Python ecosystem used by the main editor.
+
+### Level Analyser (`scripts/harry/analyse/`)
+
+The analyser script reads a level YAML file and produces a statistical summary of its contents. It uses the `lyaml` library to parse YAML and three custom modules (`grid.lua`, `objects.lua`, `patients.lua`) to extract structured information. The analyser reports:
+
+- Grid dimensions and active tile count
+- Object counts: players, beds, walls, patients, and cabinets
+- Patient details from `globalData`: health, treatment need, and spawn turn
+
+Example usage:
+```bash
+cd scripts/harry/analyse
+lua main.lua ../../levels/Step\ by\ Step\ making\ of\ Level\ 2/Level_2_players_4_Step1.yaml
+```
+
+The analyser was used during development to verify that hand-crafted levels matched the expected object counts and that patient wave distributions were consistent across variants.
+
+### Level Generator (`scripts/harry/generate/`)
+
+The generator script creates blank level YAML files with configurable grid dimensions. It constructs a properly formatted YAML file containing:
+- The `include` directive pointing to `LevelsShared.yaml`
+- Correct `sceneName` and `cameraSettings` blocks
+- A formatted `grid` block with header, playable area, and footer regions
+- A `gridObjects` section with player spawns (p1, p2) at the centre of the playable area
+- Initial wall placements on the north and west boundaries
+- Empty `objectDefinitions:`, `sounds:`, and `globalData:` sections
+
+The generator handles the two-character coordinate system correctly, mapping columns `a–i` (and `A–R` for extended grids) and rows `1–9` (and `A–R`). It outputs the YAML to stdout, allowing easy redirection to a file:
+
+```bash
+cd scripts/harry/generate
+lua main.lua --width 12 --height 8 > my_new_level.yaml
+```
+
+The default output is a 9×10 grid with p1 and p2 placed at the centre. The script validates that width and height do not exceed 34 (the practical limit of the two-character coordinate system).
+
+### Shared Modules (`scripts/harry/shared/`)
+
+Three utility modules support both scripts:
+- **`grid.lua`** — Grid dimension calculation and non-empty cell counting
+- **`objects.lua`** — Object reference counting and definition-based object counting
+- **`patients.lua`** — Patient data extraction and formatting from `globalData`
+
+These modules encapsulate the parsing logic and allow both tools to operate consistently on the same level format.
+
+---
+
 # Quality Assurance & Testing
 
 Given the absence of a formal test framework in the original codebase, testing was conducted both manually and through a series of targeted unit tests written against the editor's core logic components. Because the editor's UI is built on Tkinter — which is not available in the project's CI environment — UI-level testing was performed through manual inspection and recorded observations. The non-UI components (YAML handling, grid serialisation, undo/redo, and include resolution) were extracted and tested programmatically.
@@ -1062,4 +1113,10 @@ Overall, I am proud of what the editor became. It is a genuine tool rather than 
 
 ## Harrison McDevitt — Personal Reflection
 
-<!Harry add your personal reflection here - less than 1000 words>
+My contribution to the project centred on AI research and exploring alternative technical approaches to level creation. Early in Semester 1, I investigated whether large language models could generate valid level YAML directly. While models like GPT-4 could produce syntactically correct YAML, the outputs frequently contained semantic errors — missing object definitions, unreachable areas, and patients without corresponding treatment cabinets. This led me to explore an agentic testing approach: an AI agent that would play-test levels and report issues. The concept was sound, but the closed nature of the Unity engine meant there was no API for runtime validation.
+
+I then turned to Lua as a lightweight scripting alternative. I built two tools: a level analyser that parses YAML and reports object statistics, and a level generator that creates blank, properly formatted level files with configurable dimensions. These scripts use the `lyaml` library and custom modules for grid parsing, object counting, and patient data extraction. The generator correctly handles the two-character coordinate system (`a–i`, `A–R` for columns; `1–9`, `A–R` for rows) and produces output ready for the GUI editor. Working in Lua was refreshing — the language's minimal footprint made it easy to reason about the level format without the overhead of a larger toolchain.
+
+The pivot from generation to authoring was a difficult but necessary decision. I had invested significant time researching LLM prompting strategies and agentic architectures, but the practical barriers — lack of runtime access to the game engine, insufficient training data, and the complexity of encoding playability constraints — meant that a working generative system was not achievable within the project timeline. The pivot allowed us to deliver something of genuine value: a polished editor that accelerates human creativity rather than attempting to replace it.
+
+Looking back, the most valuable lesson was about matching ambition to available constraints. The agentic testing concept remains viable if the game engine ever exposes a headless testing API, and the Lua scripts provide a foundation for future automation work. My recommendation for future teams is to validate technical assumptions early — particularly around third-party API access — before committing to a research-heavy approach.
