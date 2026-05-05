@@ -364,7 +364,7 @@ The third and most ambitious approach drew on large language models. Harrison in
 
 > **LLM Generation Challenges:** When prompted to generate level YAML, language models produced structurally valid output but frequently introduced semantic errors — missing `objectDefinitions` entries for referenced codes, incorrect `include` directive syntax, and layout configurations that produced unreachable game areas. Correcting these errors required game-engine knowledge that could not be automated without a runtime validator.
 
-## 3.3 David's Python Automation Scripts
+## 3.3 David's Python Automation Scripts - Written by David
 
 ### Old Level Generation
 
@@ -453,6 +453,13 @@ def delete_blank_grid(grid: str, deleted_keys: list):
 ### SKILL.md
 
 The `SKILL.md` file made by Harry allows an AI model to use my python script `delete_blank.py`. If we had more time, we would make more scripts that could be implemented into `SKILL.md` and then an AI model could create a level using all these scripts. This is the "layered" approach we were going for but could not achieve in the end.
+
+### My Manually Created Level
+
+My level (Level 5) was designed to be unique. I noticed that there were no doughnut shaped levels with a courtyard in the middle. So I made it. I start with my `blank_level.yaml` and once I designed the level I finished by running my `delete_blank.py` on it and it removed all the orphaned grid codes.
+
+![Level 5 designed by David](images\Level_5_players_4_thumbnail.png)
+
 
 ---
 
