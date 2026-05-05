@@ -947,7 +947,7 @@ Transitions between modes are triggered by mouse button press and release events
 
 ---
 
-## 3.9 Lua Scripts for Level Analysis & Generation
+## 3.9 Lua Scripts for Level Analysis & Generation - Written by Harrison McDevitt
 
 As part of the AI research strand, Harrison developed a suite of Lua scripts for level analysis and generation. These scripts were designed to work with the game's YAML level format and provide lightweight tooling that does not depend on the Python ecosystem used by the main editor.
 
