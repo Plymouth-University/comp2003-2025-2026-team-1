@@ -680,6 +680,23 @@ class LevelEditor:
 
 **`GridObjectDialog`** is a modal `tk.Toplevel` presenting a scrollable listbox of the GridObjects assigned to a selected cell. It supports adding string-reference objects, adding inline dictionary definitions via YAML parsing, editing existing entries, reordering via up/down buttons, and removing entries.
 
+```plantuml
+@startuml GridObjectDialog Class Diagram
+class GridObjectDialog {
+    - parent
+    - cell_code
+    - grid_objects
+    - object_definitions
+    - game_assets_path
+    - result
+    - dialog : tk.Toplevel
+    + __init__(parent, cell_code, grid_objects, object_definitions, game_assets_path=None)
+    + setup_ui()
+    + load_current_objects()
+}
+@enduml
+```
+
 ```python
 class GridObjectDialog:
     """Dialog for editing GridObjects for a single cell (like RPG Maker event editor)"""
@@ -702,6 +719,21 @@ class GridObjectDialog:
 ```
 
 **`GameFolderBrowser`** encapsulates the logic for locating and validating the mod folder. It offers auto-detection across common Steam installation paths and a manual browse fallback. Once the folder is set, it resolves the locations of `LevelsShared.yaml` and the `art/3d` subfolder used for GLB texture extraction.
+
+```plantuml
+@startuml GameFolderBrowser Class Diagram
+class GameFolderBrowser {
+    - parent: tk.Widget
+    - editor: Editor
+    - game_path: tk.StringVar
+    
+    + __init__(parent: tk.Widget, editor: Editor)
+    + find_game_path(): str | None
+    + browse_for_game(): str | None
+    + load_game_structure(game_path: str): bool
+}
+@enduml
+```
 
 ```python
 class GameFolderBrowser:
